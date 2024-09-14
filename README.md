@@ -1,2 +1,2 @@
 # startup
-Startup applicatino for BYU CS 260
+Startup application for BYU CS 260
