@@ -23,7 +23,7 @@ The homepage will feature a dashboard displaying upcoming music plans and recent
 - Ability to add, update, or remove planned music listening sessions
 - Rating and review system for albums/tracks
 - Explore section suggesting new music
-- User-friendly interface with mobile responsiveness
+
 - Social sharing of reviews
 
 ### Technologies
@@ -39,4 +39,4 @@ I will use the required technologies in the following ways:
   - Retrieving album data and suggestions via a third-party API such as Spotify’s Web API.
 - **Authentication**: Users will be able to sign up and log in. Their credentials will be securely stored, and reviews and plans will be tied to their account.
 - **Database**: User data, including music plans and reviews, will be stored in a database.
-- **WebSocket**: Real-time updates will show user activity, like when someone posts a new review or updates their listening schedule.
+- **WebSocket**: Real-time updates will show user activity, like when someone posts a new review.
