@@ -10,8 +10,8 @@ This application allows users to plan their music listening schedule and record 
 Are you someone who enjoys discovering new music but finds it hard to keep track of what you’ve listened to or plan to listen to? The Music Review Planner lets you schedule your music listening plans, organize albums and tracks, and write reviews all in one place. With simple scheduling features and personalized reviews, you’ll never miss a track or forget what you thought of an album again!
 
 ### Design
-![My Image](Design 1.jpg)
-![My Image2](Design 2.jpg)
+![My Image](Design%201.jpg)
+![My Image2](Design%202.jpg)
 
 **Main features sketch:**
 1. **Music Scheduler** - Calendar view for planning when to listen to albums or tracks.
