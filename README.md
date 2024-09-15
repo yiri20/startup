@@ -1,3 +1,5 @@
+[my note](notes.md)
+
 # Music Review Planner
 
 This application allows users to plan their music listening schedule and record reviews for the albums or tracks they listen to. The platform provides a simple way to organize music discovery, track listening habits, and document thoughts or ratings, making it ideal for music enthusiasts and casual listeners alike.
