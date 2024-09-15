@@ -11,7 +11,7 @@ Are you someone who enjoys discovering new music but finds it hard to keep track
 
 ### Design
 ![My Image](Design 1.jpg)
-![My Image2](Design 2.png)
+![My Image2](Design 2.jpg)
 
 **Main features sketch:**
 1. **Music Scheduler** - Calendar view for planning when to listen to albums or tracks.
