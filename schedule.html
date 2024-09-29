@@ -31,8 +31,33 @@
       <p>Plan your music listening sessions here.</p>
       <!-- Placeholder for music scheduling form or calendar -->
       <div id="calendar">Music scheduling calendar goes here...
+        <br>
+        <div>
+          <label for="select">Genre: </label>
+          <select id="select" name="varSelect">
+            <option>Pop</option>
+            <option selected>R&B</option>
+            <option>Couontry</option>
+            <option>Rock</option> 
+            <option>Classical</option>
+            <option>Hip-Hop</option>
+          </select>
+        </div>
+
         <label for="datetime">DateTime: </label>
         <input type="datetime-local" name="varDatetime" id="datetime" />
+        <div>
+          <fieldset>
+            <legend>Notification</legend>
+            <label for="yes">Yes</label>
+            <input type="radio" id="yes" name="varNotification" value="yes" checked />
+            <label for="no">No</label>
+            <input type="radio" id="no" name="varNotification" value="no" />
+          </fieldset>
+        </div>
+      </div>
+      <div>
+        
       </div>
   </main>
 
