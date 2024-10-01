@@ -47,3 +47,23 @@ I will use the required technologies in the following ways:
 - **Database**: User data, including music plans and reviews, will be stored in a database.
 - **WebSocket**: Real-time updates will show user activity, like when someone posts a new review.
 >>>>>>> origin/main
+20% HTML pages for each component of your application
+ - riview page for ability to add, update, or remove planned music listening sessions and rating and review system for albums/tracks
+10% Proper use of HTML tags including BODY, NAV, MAIN, HEADER, FOOTER
+ - 
+10% Links between pages as necessary
+ - Home -> about, review, schedule, sign up
+    review->create, each review
+    schedule->
+10% Application textual content
+ - 
+10% Placeholder for 3rd party service calls
+ - spotify api and google calendar api will be used
+10% Application images
+ - 
+10% Login placeholder, including user name display
+ - If I click on the login button in the Home
+10% Database data placeholder showing content stored in the database
+ - 
+10% WebSocket data placeholder showing where realtime communication will go
+ - 

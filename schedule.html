@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <!-- Tell browsers not to scale the viewport automatically -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stats</title>
+    <title>Schedule</title>
     <link rel="icon" href="favicon.ico" />
   </head>
   <body>
@@ -30,7 +30,7 @@
       <h2>Music Scheduler</h2>
       <p>Plan your music listening sessions here.</p>
       <!-- Placeholder for music scheduling form or calendar -->
-      <div id="calendar">Music scheduling calendar goes here...
+      <div id="calendar">Music scheduling calendar goes here... => Google Callendar API
         <br>
         <div>
           <label for="select">Genre: </label>
@@ -43,7 +43,9 @@
             <option>Hip-Hop</option>
           </select>
         </div>
-
+        <div>
+          <button type="button">Choose an album</button> (Spotify API will be used)
+        </div>
         <label for="datetime">DateTime: </label>
         <input type="datetime-local" name="varDatetime" id="datetime" />
         <div>
