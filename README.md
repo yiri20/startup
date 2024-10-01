@@ -56,14 +56,14 @@ I will use the required technologies in the following ways:
     review->create, each review
     schedule->
 10% Application textual content
- - 
+ - In the main and about page
 10% Placeholder for 3rd party service calls
  - spotify api and google calendar api will be used for the schedule and the explore
 10% Application images
- -  
+ -  In the explore page, I added a placeholder image.
 10% Login placeholder, including user name display
  - If I click on the login button in the Home
 10% Database data placeholder showing content stored in the database
- - 
+ - Reviews and plans in review and schedule pages
 10% WebSocket data placeholder showing where realtime communication will go
- - 
+ - In the review page, I added a placeholder for live review section.
