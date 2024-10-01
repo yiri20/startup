@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Tell browsers not to scale the viewport automatically -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stats</title>
+    <link rel="icon" href="favicon.ico" />
+  </head>
+  <body>
+    <!-- Use header, main, and footer elements to give semantic structure -->
+    <header>
+      <h1><a href="index.html">Plan Your Music</a><sup>&reg;</sup></h1>
+
+      <!-- Navigation elements -->
+      <nav>
+        <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
+        <menu>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a href="review.html">Review</a></li>
+          <li><a href="about.html">About</a></li>
+        </menu>
+      </nav>
+
+      <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
+      <hr />
+    </header>
+
+    <main>
+      <h2>Music Scheduler</h2>
+      <p>Plan your music listening sessions here.</p>
+      <!-- Placeholder for music scheduling form or calendar -->
+      <div id="calendar">Music scheduling calendar goes here...
+        <br>
+        <div>
+          <label for="select">Genre: </label>
+          <select id="select" name="varSelect">
+            <option>Pop</option>
+            <option selected>R&B</option>
+            <option>Couontry</option>
+            <option>Rock</option> 
+            <option>Classical</option>
+            <option>Hip-Hop</option>
+          </select>
+        </div>
+
+        <label for="datetime">DateTime: </label>
+        <input type="datetime-local" name="varDatetime" id="datetime" />
+        <div>
+          <fieldset>
+            <legend>Notification</legend>
+            <label for="yes">Yes</label>
+            <input type="radio" id="yes" name="varNotification" value="yes" checked />
+            <label for="no">No</label>
+            <input type="radio" id="no" name="varNotification" value="no" />
+          </fieldset>
+        </div>
+      </div>
+      <div>
+        
+      </div>
+  </main>
+
+    <footer>
+      <hr />
+      <span class="text-reset">Jungil Bae</span>
+      <br />
+      <a href="https://github.com/yiri20/startup">GitHub</a>
+    </footer>
+  </body>
+</html>

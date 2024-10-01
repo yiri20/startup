@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+# simon-html
+
+This deliverable demonstrates the use of basic HTML elements for structure, basic formatting, input, output, links, and drawing.
+=======
 [my note](notes.md)
 
 # Music Review Planner
@@ -41,3 +46,4 @@ I will use the required technologies in the following ways:
 - **Authentication**: Users will be able to sign up and log in. Their credentials will be securely stored, and reviews and plans will be tied to their account.
 - **Database**: User data, including music plans and reviews, will be stored in a database.
 - **WebSocket**: Real-time updates will show user activity, like when someone posts a new review.
+>>>>>>> origin/main

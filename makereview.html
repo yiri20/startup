@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Review</title>
+    <link rel="icon" href="favicon.ico" />
+  </head>
+  <body>
+    <header>
+      <h1><a href="index.html">Plan Your Music</a><sup>&reg;</sup></h1>
+
+      <nav>
+        <menu>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="review.html">Review</a></li>
+            <li><a href="about.html">About</a></li>
+        </menu>
+      </nav>
+
+      <hr />
+    </header>
+
+
+    <main>
+      <section>
+        <h2>Submit a Review</h2>
+        <form>
+            <div>
+                <label for="artist">Artist</label>
+                <input type="text" id="artist" name="artist" />
+            </div>
+            <div>
+                <label for="album">Album</label>
+                <input type="text" id="album" name="album" />
+            </div>
+            <div>
+                <label for="track">Track</label>
+                <input type="text" id="track" name="track" />
+            </div>
+            <div>
+                <label for="review">Review</label>
+                <textarea id="review" name="review"></textarea>
+            </div>
+            <div>
+                <label for="rating">Rating: </label>
+                <input id="rating" name="rating"></textarea>
+            </div>
+            <dvi>
+                <label for="datetime">DateTime: </label>
+                <input type="datetime-local" name="varDatetime" id="datetime" />
+            </dvi>
+
+
+
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Submitted Reviews</h2>
+        <p>Real-time review updates will appear here using WebSocket.</p>
+      </section>
+    </main>
