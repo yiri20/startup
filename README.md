@@ -58,9 +58,9 @@ I will use the required technologies in the following ways:
 10% Application textual content
  - 
 10% Placeholder for 3rd party service calls
- - spotify api and google calendar api will be used
+ - spotify api and google calendar api will be used for the schedule and the explore
 10% Application images
- - 
+ -  
 10% Login placeholder, including user name display
  - If I click on the login button in the Home
 10% Database data placeholder showing content stored in the database
