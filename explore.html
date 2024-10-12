@@ -21,6 +21,7 @@
         font-size: 1.2em;
       }
       nav ul {
+        font-size: 1.2em;
         list-style-type: none; /* Remove bullets from menu */
         padding: 0;
         text-align: center;
@@ -52,30 +53,35 @@
     </style>
   </head>
   <body>
-    <header>
-      <h1><a href="index.html">Plan Your Music</a><sup>&reg;</sup></h1>
-
+    <header class="text-center py-4">
+      <h1><a href="index.html" class=" text-decoration-none"><b>Plan Your Music</b></h1>
       <nav>
-        <menu>
-          <li><a href="schedule.html">Schedule</a></li>
-          <li><a href="review.html">Review</a></li>
-          <li><a href="about.html">About</a></li>
-        </menu>
+        <ul class="nav justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="schedule.html">Schedule</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="Review.html">Review</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="about.html">About</a>
+          </li>
+        </ul>
       </nav>
     </header>
     <main>
-        <section id="trending-music">
-            <h2>Trending Music</h2>
-            <!-- Placeholder for fetching music suggestions -->
-            <img src="placeholder.jpg" alt="Placeholder for album art" />
-            <p>Suggested albums or tracks will be displayed here.</p>
-        </section>
+      <section id="trending-music" class="text-center">
+        <h2>Trending Music</h2>
+        <!-- Placeholder for fetching music suggestions -->
+        <img src="placeholder.jpg" alt="Placeholder for album art" style="width: 300px; height: auto;" />
+        <p>Suggested albums or tracks will be displayed here.</p>
+      </section>
     </main>
-        <footer>
-            <hr />
-            <span class="text-reset">Jungil Bae</span>
-            <br />
-            <a href="https://github.com/yiri20/startup">GitHub</a>
-          </footer>
-        </body>
-      </html>
+      <footer>
+        <hr />
+        <span class="text-reset">Jungil Bae</span>
+        <br />
+        <a href="https://github.com/yiri20/startup">GitHub</a>
+      </footer>
+    </body>
+</html>
