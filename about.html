@@ -40,6 +40,12 @@
         padding: 10px 0;
         text-align: center;
       }
+      footer a {
+        font-size: 1.5rem; /* Adjust this value to your preferred size */
+        font-weight: bold;
+        color: white; /* Keep the color consistent with the rest of the footer */
+        text-decoration: none; /* Remove underline for a cleaner look */
+      }
       .text-reset {
         color: white; /* Resets color for text in footer */
       }
@@ -52,8 +58,11 @@
         padding: 20px;
         font-size: 1.1rem; /* Slightly increase font size for readability */
       }
+      #resource ul {
+        list-style-type: disc; /* Ensure bullet points are displayed */
+        padding-left: 20px; /* Adds indentation for the bullets */
+      }
       #resource li {
-        list-style-type: none;
         padding: 5px 0;
       }
       #resource a {
@@ -101,11 +110,11 @@
       <hr/>
 
       <div id="resource">
-        <div><h3>Useful Resources</h3></div>
-        <div>
+        <h3>Useful Resources</h3>
+        <ul>
           <li><a href="https://rateyourmusic.com/">Rate Your Music</a></li>
           <li><a href="https://topsters.org/">Topster</a></li>
-        </div>
+        </ul>
       </div>
     </main>
 
@@ -113,7 +122,8 @@
       <hr />
       <span class="text-reset">Jungil Bae</span>
       <br />
-      <a href="https://github.com/yiri20/startup">GitHub</a>
+      <a href="https://github.com/yiri20/startup" class="text-reset text-decoration-none">GitHub</a>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
