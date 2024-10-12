@@ -56,6 +56,51 @@
     .text-reset {
       color: white; 
     }
+    main {
+        max-width: 600px; 
+        margin: 20px auto; 
+        padding: 20px; 
+        background-color: white; 
+        border-radius: 8px; 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    }
+    h2 {
+        font-weight: bold; 
+        margin-bottom: 20px;
+    }
+    form div {
+        margin-bottom: 15px; 
+    }
+    label {
+        display: block; 
+        margin-bottom: 5px; 
+        font-weight: bold; 
+    }
+    input[type="text"], 
+    input[type="datetime-local"], 
+    textarea {
+        width: 100%; 
+        padding: 10px; 
+        border: 1px solid #ced4da; 
+        border-radius: 4px; 
+        box-sizing: border-box; 
+    }
+    textarea {
+        resize: vertical; /* Allows vertical resizing only */
+        height: 100px; /* Default height */
+    }
+    button {
+        background-color: #0454a8; 
+        color: white; 
+        border: none; 
+        padding: 10px 15px; 
+        border-radius: 4px; 
+        cursor: pointer; 
+        font-size: 1em; 
+    }
+    button:hover {
+        background-color: #033f7a; /* Darken button color on hover */
+    }
   </style>
   <body>
     <header class="text-center py-4">
@@ -79,43 +124,41 @@
 
     <main>
       <section>
-        <h2>Submit a Review</h2>
-        <form>
-            <div>
-                <label for="artist">Artist</label>
-                <input type="text" id="artist" name="artist" />
-            </div>
-            <div>
-                <label for="album">Album</label>
-                <input type="text" id="album" name="album" />
-            </div>
-            <div>
-                <label for="track">Track</label>
-                <input type="text" id="track" name="track" />
-            </div>
-            <div>
-                <label for="review">Review</label>
-                <textarea id="review" name="review"></textarea>
-            </div>
-            <div>
-                <label for="rating">Rating: </label>
-                <input id="rating" name="rating"></textarea>
-            </div>
-            <dvi>
-                <label for="datetime">DateTime: </label>
-                <input type="datetime-local" name="varDatetime" id="datetime" />
-            </dvi>
-
-
-
-          <button type="submit">Submit</button>
-        </form>
+          <h2>Submit a Review</h2>
+          <form>
+              <div>
+                  <label for="artist">Artist</label>
+                  <input type="text" id="artist" name="artist" required />
+              </div>
+              <div>
+                  <label for="album">Album</label>
+                  <input type="text" id="album" name="album" required />
+              </div>
+              <div>
+                  <label for="track">Track</label>
+                  <input type="text" id="track" name="track" required />
+              </div>
+              <div>
+                  <label for="review">Review</label>
+                  <textarea id="review" name="review" required></textarea>
+              </div>
+              <div>
+                  <label for="rating">Rating: </label>
+                  <input type="text" id="rating" name="rating" required />
+              </div>
+              <div>
+                  <label for="datetime">DateTime: </label>
+                  <input type="datetime-local" name="varDatetime" id="datetime" required />
+              </div>
+              <button type="submit">Submit</button>
+          </form>
       </section>
 
       <section>
-        <h2>Submitted Reviews</h2>
-        <p>Real-time review updates will appear here using WebSocket.</p>
+          <h2>Submitted Reviews</h2>
+          <p>Real-time review updates will appear here using WebSocket.</p>
       </section>
+  </main>
       <footer>
         <hr />
         <span class="text-reset">Jungil Bae</span>
