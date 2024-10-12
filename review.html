@@ -8,64 +8,84 @@
       <!-- Bootstrap CSS -->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   </head>
+  <style>
+    table {
+         /* Ensure border-spacing works */
+        border-spacing: 10px; /* Adjust the spacing between cells */
+        width: 100%; /* Optional: Make table full width */
+    }
+
+    th, td {
+        background-color: #f8f9fa; /* Light background for cells */
+        padding: 10px; /* Padding inside the cells */
+        border: 1px solid #dee2e6; /* Optional: border for cells */
+        text-align: center; /* Center align text */
+    }
+  </style>
   <body>
     <header class="bg-light text-center py-4">
-      <h1><a href="index.html">Plan Your Music</a><sup>&reg;</sup></h1>
+      <h1><a href="index.html" class=" text-decoration-none">Plan Your Music</a><sup>&reg;</sup></h1>
       <nav>
         <ul class="nav justify-content-center">
           <li class="nav-item">
             <a class="nav-link" href="schedule.html">Schedule</a>
           </li>
-            <li><a href="schedule.html">Schedule</a></li>
-            <li><a href="explore.html">Explore</a></li>
-            <li><a href="about.html">About</a></li>
-        </menu>
+          <li>
+            <a class="nav-link" href="explore.html">Explore</a>
+          </li>
+          <li>
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+        </ul>
       </nav>
 
       <hr />
-    </header>
+      </header>
 
-    <main>
+    <main class="container my-5">
+      <h2 class="text-center">Album Reviews</h2>
+      <table class="table table-striped"></table>
       <table>
         <thead>
-          <tr>
-            <th>number</th>
-            <th>Album</th>
-            <th>Artist</th>
-            <th>Rating</th>
-            <th>Date</th>
+          <tr class="text-center">
+            <th scope="col">Number</th>
+            <th scope="col">Album</th>
+            <th scope="col">Artist</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Date</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>1</td>
-            <td><a href="review1.html">The Bends</a></td>
+            <td><a href="review1.html" class="text-decoration-none">The Bends</a></td>
             <td>Radiohead</td>
-            <td>4.5</td>
+            <td><b>4.5</b></td>
             <td>August 20, 2024</td>
           </tr>
           <tr>
             <td>2</td>
-            <td><a href="review2.html">In Rainbows</a></td>
+            <td><a href="review2.html" class="text-decoration-none">In Rainbows</a></td>
             <td>Radiohead</td>
-            <td>4.8</td>
+            <td><b>4.8</b></td>
             <td>September 2, 2024</td>
           </tr>
           <tr>
             <td>3</td>
-            <td><a href="review3.html">OK Computer</a></td>
+            <td><a href="review3.html" class="text-decoration-none">OK Computer</a></td>
             <td>Radiohead</td>
-            <td>5.0</td>
+            <td><b>5.0</b></td>
             <td>October 4, 2024</td>
           </tr>
         </tbody>
       </table>
-      <a href="makereview.html">Create</a>
-    <hr />
+      <div class="text-center my-4">
+        <a href="makereview.html" class="btn btn-primary">Create Review</a>
+      </div>
+      <hr />
       <section>
-        <h2>Live Music Reviews</h2>
-        <div id="live-reviews">
-          <!-- WebSocket data will be displayed here -->
+        <h2 class="text-center">Live Music Reviews</h2>
+        <div id="live-reviews" class="text-center">
           <p>Loading live reviews...</p>
         </div>
       </section>      
