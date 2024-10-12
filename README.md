@@ -53,8 +53,8 @@ I will use the required technologies in the following ways:
  - 
 10% Links between pages as necessary
  - Home -> about, review, schedule, sign up
-    review->create, each review
-    schedule->
+   review->create, each review
+   schedule->
 10% Application textual content
  - In the main and about page
 10% Placeholder for 3rd party service calls
@@ -67,3 +67,17 @@ I will use the required technologies in the following ways:
  - Reviews and plans in review and schedule pages
 10% WebSocket data placeholder showing where realtime communication will go
  - In the review page, I added a placeholder for live review section.
+
+Start Up CSS
+30% Header, footer, and main content body
+  
+20% Navigation elements
+  
+10% Responsive to window resizing
+  
+20% Application elements
+  
+10% Application text content
+  
+10% Application images
+  
