@@ -37,7 +37,7 @@
       footer {
         background-color: #0454a8; /* Matching footer color with header */
         color: white;
-        padding: 10px 0;
+        padding: 20px 0;
         text-align: center;
       }
       footer a {
@@ -60,7 +60,7 @@
       }
       #resource ul {
         list-style-type: disc; /* Ensure bullet points are displayed */
-        padding-left: 20px; /* Adds indentation for the bullets */
+        padding-left: 30px; /* Adds indentation for the bullets */
       }
       #resource li {
         padding: 5px 0;
@@ -72,8 +72,21 @@
       #resource a:hover {
         text-decoration: underline;
       }
+      #figure img {
+        width: 1200px; /* Adjust this value to set the desired width */
+        height: auto; /* Maintain aspect ratio */
+      }
+      figure {
+        text-align: center; /* Center the image and caption */
+        margin: 20px 0; /* Add some spacing around the figure */
+      }
+      figcaption {
+        font-style: italic; /* Optional: make the caption italic */
+        margin-top: 10px; /* Add space between the image and the caption */
+      }
       h3 {
         margin-top: 20px;
+        margin-left: 10px;
       }
     </style>
   </head>
@@ -96,7 +109,10 @@
       </header>
 
     <main>
-      <div id="picture" class="picture-box"><img width="1400px" src="topster.png" alt="random" /></div>
+      <figure id="figure">
+        <img src="topster.png" alt="Music genres and album rankings from Topster" />
+        <figcaption>This is my topster! Isn't it cool??</figcaption>
+      </figure>
 
       <p>
         Music holds a special place in everyone’s life—it can mean relaxation, inspiration, or even a form of self-expression. 
