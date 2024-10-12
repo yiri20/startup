@@ -60,6 +60,7 @@ I will use the required technologies in the following ways:
  - In the main and about page
 10% Placeholder for 3rd party service calls
  - spotify api and google calendar api will be used for the schedule and the explore
+
 10% Application images
  -  In the explore page, I added a placeholder image.
 
