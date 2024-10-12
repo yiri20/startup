@@ -24,6 +24,13 @@
     h2 {
       margin-top: 20px;
     }
+    hr {
+      width: 90%;
+      height: 1px; /* Set height to 3px for thickness */
+      background-color: #ffffff; /* Use a contrasting color (e.g., Bootstrap's warning color) */
+      margin: 20px auto; /* Center the hr and add top/bottom margin for spacing */
+      border-radius: 5px; /* Optional: add rounded corners */
+    }
     nav ul {
       font-size: 1.2em;
       list-style-type: none; /* Remove bullets from menu */
@@ -45,6 +52,12 @@
       padding: 10px 0;
       text-align: center;
     }
+    footer a {
+        font-size: 1.5rem; /* Adjust size for footer link */
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+    }
     .text-reset {
       color: white; /* Resets color for text in footer */
     }
@@ -53,6 +66,7 @@
 <body>
   <header class="text-center">
     <h1><a href="index.html"><b>Plan Your Music</b></h1>
+      <hr />
     <nav>
       <ul class="nav justify-content-center">
         <li class="nav-item">
