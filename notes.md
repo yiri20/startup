@@ -9,3 +9,5 @@ Use of <style>
 Set background color by using bg-
 .text-reset (boostrap)  
 font size change in style
+font-weight 
+adding a caption to the photo using <figure> and <figcaption>
