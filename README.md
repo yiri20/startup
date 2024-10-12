@@ -50,9 +50,7 @@ I will use the required technologies in the following ways:
 
 20% HTML pages for each component of your application
  - riview page for ability to add, update, or remove planned music listening sessions and rating and review system for albums/tracks
- - 
 10% Proper use of HTML tags including BODY, NAV, MAIN, HEADER, FOOTER
- - 
 10% Links between pages as necessary
  - Home -> about, review, schedule, sign up
  - review -> create, each review
