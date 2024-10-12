@@ -53,8 +53,8 @@ I will use the required technologies in the following ways:
  - 
 10% Links between pages as necessary
  - Home -> about, review, schedule, sign up
-   review->create, each review
-   schedule->
+ - review->create, each review
+ - schedule->
 10% Application textual content
  - In the main and about page
 10% Placeholder for 3rd party service calls
