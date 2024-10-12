@@ -5,21 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About</title>
     <link rel="icon" href="favicon.ico" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+      body {
+        background-color: #f8f9fa; /* Light background for readability */
+      }
+      header {
+        background-color: #0454a8; /* Bootstrap primary color */
+        color: white;
+        padding: 20px 0;
+        margin-bottom: 50px;
+      }
+      h1 a {
+        color: white; /* Ensure link is visible on header */
+        text-decoration: none; /* Remove underline */
+      }
+      nav ul {
+        list-style-type: none; /* Remove bullets from menu */
+        padding: 0;
+        text-align: center;
+      }
+      nav ul li {
+        display: inline;
+        margin: 0 15px;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      footer {
+        background-color: #0454a8; /* Matching footer color with header */
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+      }
+      .text-reset {
+        color: white; /* Resets color for text in footer */
+      }
+      .picture-box img {
+        max-width: 100%; /* Ensure image is responsive */
+        height: auto;
+        border-radius: 10px; /* Add rounded corners */
+      }
+      p {
+        padding: 20px;
+        font-size: 1.1rem; /* Slightly increase font size for readability */
+      }
+      #resource li {
+        list-style-type: none;
+        padding: 5px 0;
+      }
+      #resource a {
+        color: #0454a8; /* Link color to match the theme */
+        text-decoration: none;
+      }
+      #resource a:hover {
+        text-decoration: underline;
+      }
+      h3 {
+        margin-top: 20px;
+      }
+    </style>
   </head>
   <body>
-    <header>
-      <h1><a href="index.html">Plan Your Music</a><sup>&reg;</sup></h1>
-
+    <header class="text-center py-4">
+      <h1><a href="index.html" class=" text-decoration-none"><b>Plan Your Music</b></h1>
       <nav>
-        <menu>
-          <li><a href="schedule.html">Schedule</a></li>
-          <li><a href="review.html">Review</a></li>
-          <li><a href="about.html">About</a></li>
-        </menu>
+        <ul class="nav justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="schedule.html">Schedule</a>
+          </li>
+          <li>
+            <a class="nav-link text-white" href="explore.html">Explore</a>
+          </li>
+          <li>
+            <a class="nav-link text-white" href="review.html">Review</a>
+          </li>
+        </ul>
       </nav>
-
-      <hr />
-    </header>
+      </header>
 
     <main>
       <div id="picture" class="picture-box"><img width="1400px" src="topster.png" alt="random" /></div>
