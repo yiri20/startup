@@ -66,8 +66,10 @@ I will use the required technologies in the following ways:
 
 10% Login placeholder, including user name display
  - If I click on the login button in the Home
+
 10% Database data placeholder showing content stored in the database
  - Reviews and plans in review and schedule pages
+
 10% WebSocket data placeholder showing where realtime communication will go
  - In the review page, I added a placeholder for live review section.
 
