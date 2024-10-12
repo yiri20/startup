@@ -47,7 +47,7 @@ I will use the required technologies in the following ways:
 - **Database**: User data, including music plans and reviews, will be stored in a database.
 - **WebSocket**: Real-time updates will show user activity, like when someone posts a new review.
 >>>>>>> origin/main
-
+#### HTML Start Up
 20% HTML pages for each component of your application
  - riview page for ability to add, update, or remove planned music listening sessions and rating and review system for albums/tracks
 10% Proper use of HTML tags including BODY, NAV, MAIN, HEADER, FOOTER
@@ -73,7 +73,7 @@ I will use the required technologies in the following ways:
 10% WebSocket data placeholder showing where realtime communication will go
  - In the review page, I added a placeholder for live review section.
 
-Start Up CSS
+#### Start Up CSS
 30% Header, footer, and main content body
   
 20% Navigation elements
