@@ -17,6 +17,9 @@
       color: white;
       padding: 20px 0;
     }
+    h1 {
+      font-weight: bold;
+    }
     h1 a {
       color: white; /* Ensure link is visible on header */
       text-decoration: none; /* Remove underline */
@@ -32,23 +35,24 @@
       display: inline;
       margin: 0 15px;
     }
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    footer {
-      background-color: #0454a8; /* Matching footer color with header */
-      color: white;
-      padding: 10px 0;
-      text-align: center;
-    }
     hr {
       width: 90%;
       height: 1px; /* Set height to 3px for thickness */
       background-color: #ffffff; /* Use a contrasting color (e.g., Bootstrap's warning color) */
       margin: 20px auto; /* Center the hr and add top/bottom margin for spacing */
       border-radius: 5px; /* Optional: add rounded corners */
+    }
+    footer {
+        background-color: #0454a8; /* Matching footer color with header */
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+    }
+    footer a {
+      font-size: 1.5rem; /* Adjust this value to your preferred size */
+      font-weight: bold;
+      color: white; /* Keep the color consistent with the rest of the footer */
+      text-decoration: none; /* Remove underline for a cleaner look */
     }
     .text-reset {
       color: white; /* Resets color for text in footer */
@@ -67,7 +71,7 @@
   </style>
   <body>
     <header class="text-center py-4">
-      <h1><a href="index.html" class=" text-decoration-none"><b>Plan Your Music</b></h1>
+      <h1><a href="index.html" class=" text-decoration-none">Plan Your Music</h1>
         <hr />
       <nav>
         <ul class="nav justify-content-center">

@@ -2,22 +2,102 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- Tell browsers not to scale the viewport automatically -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PYM</title>
     <link rel="icon" href="favicon.ico" />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+      }
+      /* Header */
+      header {
+        text-align: center; /* Center-aligns text in the header */
+      }
+      hr {
+        border: 2px solid #020f1c; 
+        margin: 20px 0; 
+      }
+      h1 a {
+        color: #0454a8; 
+        text-decoration: none; 
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+      footer a {
+        font-size: 1.5rem; 
+        color: rgb(1, 62, 102);
+        text-decoration: none;
+      }
+      main {
+        max-width: 600px; 
+        margin: 0 auto; 
+        padding: 20px; 
+        text-align: left; 
+      }
+      /*adding space*/
+      form {
+        margin-top: 20px; 
+      }
+      div {
+        margin-bottom: 15px; 
+      }
+      span {
+        display: block; 
+        margin-bottom: 5px; 
+      }
+      input[type="text"],
+      /*ID & Password input with button*/
+      input[type="password"] {
+        width: 100%; 
+        padding: 10px; 
+        border: 1px solid #ced4da; 
+        border-radius: 4px; 
+        box-sizing: border-box; 
+      }
+      button {
+        background-color: #0454a8; 
+        color: white; 
+        border: none; 
+        padding: 10px 15px; 
+        border-radius: 4px; 
+        cursor: pointer; /* Pointer cursor on hover */
+        font-size: 1em; 
+      }
+      button:hover {
+        background-color: #033f7a; /* Darken button color on hover */
+      }
+      fieldset {
+        border: 1px solid #ced4da; 
+        padding: 10px; 
+        border-radius: 4px; 
+        background-color: #f8f9fa; 
+      }
+      legend {
+          font-weight: bold; 
+      }
+    </style>
   </head>
+
+  <header class="bg-light text-center py-4">
+    <h1>
+        <a href="index.html" class="text-decoration-none">Plan Your Music</a>
+    </h1>
+    <hr />
+  </header>
+
+
   <main>
     <h1>Create your account</h1>
-    <form method="get" action="play.html">
+    <form method="get" action="index.html">
       <div>
         <span>E-mail</span>
-        <input type="text" placeholder="sample@email.com" />      
+        <input type="text" placeholder="sample@email.com" required/>      
         <button type="submit">Verify</button>
       </div>
       <div>
         <span>Password</span>
-        <input type="password" placeholder="password" />
+        <input type="password" placeholder="password" required/>
       </div>
       <button type="submit">Create</button>
 
