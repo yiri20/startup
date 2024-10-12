@@ -55,6 +55,7 @@ I will use the required technologies in the following ways:
  - Home -> about, review, schedule, sign up
  - review -> create, each review
  - schedule
+
 10% Application textual content
  - In the main and about page
 10% Placeholder for 3rd party service calls
