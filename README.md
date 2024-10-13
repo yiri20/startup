@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 [my note](notes.md)
 
 # Music Review Planner
