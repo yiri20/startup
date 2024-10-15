@@ -13,7 +13,7 @@ font-weight
 adding a caption to the photo using <figure> and <figcaption>
 <br>
 In the following code, what does the link element do? <br>
-The <link> element links external resources, typically used to link CSS files to the HTML document. <be>
+The <link> element links external resources, typically used to link CSS files to the HTML document. <br>
 <br>
 In the following code, what does a div tag do?<br>
 The <div> tag is a block-level container used to group elements and apply styles or layout properties.<br>
@@ -51,7 +51,7 @@ Inline (display: inline;).<br>
 How would you use CSS to change all the div elements to have a background color of red?<br>
 <br>
 css<br>
-코드 복사<br>
+<br>
 div {<br>
   background-color: red;<br>
 }<br>
