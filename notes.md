@@ -85,11 +85,11 @@ document.getElementById("byu").style.color = "green";<br>
 What is the opening HTML tag for a paragraph, ordered list, unordered list, second level heading, first level heading, third level heading?<br>
 <br>
 Paragraph: <p><br>
-Ordered list: <ol><br>
-Unordered list: <ul><br>
-Second level heading: <h2><br>
-First level heading: <h1><br>
-Third level heading: <h3><br>
+Ordered list: "<ol><be>"
+Unordered list: "<ul><be>"
+Second level heading: "<h2><be>"
+First level heading: "<h1><be>"
+Third level heading: "<h3><be>"
 How do you declare the document type to be html?<br>
 <!DOCTYPE html><br>
 <br>
