@@ -58,7 +58,7 @@ div {<br>
 How would you display an image with a hyperlink in HTML?<br>
 <br>
 html<br>
-코드 복사<br>
+<br>
 <a href="URL"><img src="image.jpg" alt="description"></a><br>
 In the CSS box model, what is the ordering of the box layers starting at the inside and working out?<br>
 Content → Padding → Border → Margin.<br>
@@ -67,10 +67,10 @@ Given the following HTML, what CSS would you use to set the text "trouble" to gr
 Apply a class or ID to "trouble" and set the text color to green using CSS:<br>
 <br>
 html<br>
-코드 복사<br>
+<br>
 <span id="trouble">trouble</span>double<br>
 css<br>
-코드 복사<br>
+<br>
 #trouble {<br>
   color: green;<br>
 }<br>
@@ -80,7 +80,7 @@ It depends on the code provided, but typically a for loop iterates through a set
 How would you use JavaScript to select an element with the id of “byu” and change the text color of that element to green?<br>
 <br>
 javascript<br>
-코드 복사<br>
+<br>
 document.getElementById("byu").style.color = "green";<br>
 What is the opening HTML tag for a paragraph, ordered list, unordered list, second level heading, first level heading, third level heading?<br>
 <br>
@@ -98,25 +98,25 @@ Examples:<br>
 <br>
 if statement:<br>
 javascript<br>
-코드 복사<br>
+<br>
 if (condition) { }<br>
 else { }<br>
 for loop:<br>
 javascript<br>
-코드 복사<br>
+<br>
 for (let i = 0; i < limit; i++) { }<br>
 while loop:<br>
 javascript<br>
-코드 복사<br>
+<br>
 while (condition) { }<br>
 switch statement:<br>
 javascript<br>
-코드 복사<br>
+<br>
 switch(expression) { case value: break; }<br>
 What is the correct syntax for creating a javascript object?<br>
 <br>
 javascript<br>
-코드 복사<br>
+<br>
 let obj = {<br>
   key: value,<br>
   method: function() { }<br>
@@ -130,7 +130,7 @@ If you want to include JavaScript on an HTML page, which tag do you use?<br>
 Given the following HTML, what JavaScript could you use to set the text "animal" to "crow" and leave the "fish" text unaffected?<br>
 <br>
 javascript<br>
-코드 복사<br>
+<br>
 document.getElementById("animal").textContent = "crow";<br>
 Which of the following correctly describes JSON?<br>
 JSON (JavaScript Object Notation) is a lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate.<br>
