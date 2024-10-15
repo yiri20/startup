@@ -90,6 +90,7 @@ Unordered list: "<ul><be>"
 Second level heading: "<h2><be>"
 First level heading: "<h1><be>"
 Third level heading: "<h3><be>"
+<br> </h3>
 How do you declare the document type to be html?<br>
 <!DOCTYPE html><br>
 <br>
