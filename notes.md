@@ -193,3 +193,7 @@ Text selection	When text is selected
 You can also add event listeners directly in the HTML. For example, here is a onclick handler that is attached to a button.
 
 <button onclick='alert("clicked")'>click me</button>
+
+![image](https://github.com/user-attachments/assets/f3995532-d8e6-4d5d-bff0-db4f456a8d03)
+
+![image](https://github.com/user-attachments/assets/7889d426-1263-4778-91ac-c6be4b84b1b1)
