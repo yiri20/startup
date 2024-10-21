@@ -175,3 +175,21 @@ Port 443, 80, 22 is reserved for which protocol?<br>
 22: SSH<br>
 What will the following code using Promises output when executed?<br>
 It depends on the promise code provided, but typically promises either resolve successfully or reject with an error.<br>
+Event Listeners
+All DOM elements support the ability to attach a function that gets called when an event occurs on the element. These functions are called event listeners. Here is an example of an event listener that gets called when an element gets clicked.
+
+const submitDataEl = document.querySelector('#submitData');
+submitDataEl.addEventListener('click', function (event) {
+  console.log(event.type);
+});
+There are lots of possible events that you can add a listener to. This includes things like mouse, keyboard, scrolling, animation, video, audio, WebSocket, and clipboard events. You can see the full list on MDN. Here are a few of the more commonly used events.
+
+Event Category	Description
+Clipboard	Cut, copied, pasted
+Focus	An element gets focus
+Keyboard	Keys are pressed
+Mouse	Click events
+Text selection	When text is selected
+You can also add event listeners directly in the HTML. For example, here is a onclick handler that is attached to a button.
+
+<button onclick='alert("clicked")'>click me</button>
