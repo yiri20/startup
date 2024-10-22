@@ -142,6 +142,7 @@ javascript<br>
 <br>
 switch(expression) { case value: break; }<br>
 What is the correct syntax for creating a javascript object?<br>
+  
 ![image](https://github.com/user-attachments/assets/90bc00a8-a647-47b3-9888-6e5ae44567b4)
   
 ![image](https://github.com/user-attachments/assets/3380d337-a6b5-403d-8e13-5e07922b6136)
