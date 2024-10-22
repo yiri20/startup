@@ -73,10 +73,14 @@ How would you display an image with a hyperlink in HTML?<br>
 html<br>
 <br>
 <a href="URL"><img src="image.jpg" alt="description"></a><br>
+![image](https://github.com/user-attachments/assets/fea5a7c0-9be4-4052-8b80-59adec3b6d38)
+
 In the CSS box model, what is the ordering of the box layers starting at the inside and working out?<br>
 Content → Padding → Border → Margin.<br>
 <br>
-Given the following HTML, what CSS would you use to set the text "trouble" to green and leave the "double" text unaffected?<br>
+Given the following HTML, what CSS would you use to set the text "trouble" to green and leave the "double" text unaffected?<be>
+![image](https://github.com/user-attachments/assets/3bcc7750-ffad-486a-96a8-3d88215e6c84)
+
 Apply a class or ID to "trouble" and set the text color to green using CSS:<br>
 <br>
 html<br>
@@ -90,7 +94,9 @@ css<br>
 What will the following code output when executed using a for loop and console.log?<br>
 It depends on the code provided, but typically a for loop iterates through a set of values and prints them using console.log().<br>
 <br>
-How would you use JavaScript to select an element with the id of “byu” and change the text color of that element to green?<br>
+How would you use JavaScript to select an element with the id of “byu” and change the text color of that element to green?<be>
+![image](https://github.com/user-attachments/assets/ddfee271-69b9-4e81-9930-1372b819e2f3)
+
 <br>
 javascript<br>
 <br>
