@@ -22,21 +22,34 @@ In the following code, what is the difference between the #title and .grid selec
 #title targets an element with the specific id="title", while .grid targets all elements with the class class="grid".<br>
 <br>
 In the following code, what is the difference between padding and margin?<br>
+![image](https://github.com/user-attachments/assets/07aafd00-8ac5-4f20-88af-c6f752b870c7)
+
 Padding is the space between the content and the element's border, while margin is the space outside the element's border.<br>
 <br>
 Given this HTML and this CSS how will the images be displayed using flex?<br>
 Depending on the CSS flex properties (justify-content, align-items, etc.), the images will be laid out according to the defined flexbox rules.<br>
 <br>
-What does the following padding CSS do?<br>
+What does the following padding CSS do?<be>
+![image](https://github.com/user-attachments/assets/57832566-f90f-4b76-b489-bd0146a64678)
+
 The CSS padding property adds space inside the element’s border, around the content. The specific padding values determine how much space is added to each side.<br>
 <br>
-What does the following code using arrow syntax function declaration do?<br>
+What does the following code using arrow syntax function declaration do?<be>
+![image](https://github.com/user-attachments/assets/ac25afa5-9240-4040-b239-cf904b86a27d)
+
+![image](https://github.com/user-attachments/assets/554d0df6-2f41-4a53-8408-1f50c222004d)
+
 Arrow function syntax defines a function. If used in an expression, it will return the output of the function body.<br>
 <br>
-What does the following code using map with an array output?<br>
+What does the following code using map with an array output?<be>
+![image](https://github.com/user-attachments/assets/f23eca03-c6f1-47ef-b17e-3812daa97d9a)
+![image](https://github.com/user-attachments/assets/244932f7-9f86-44fd-938a-73f461b89c3a)
+
 The map() function returns a new array with the results of applying the callback function to each element of the array.<br>
 <br>
-What does the following code output using getElementByID and addEventListener?<br>
+What does the following code output using getElementByID and addEventListener?<be>
+![image](https://github.com/user-attachments/assets/271500f8-7ffa-4654-be55-90a751438b87)
+
 getElementById selects an element by its ID, and addEventListener attaches an event handler to respond to a specified event (like a click).<br>
 <br>
 What does the following line of Javascript do using a # selector?<br>
@@ -251,4 +264,8 @@ Detailed file information (permissions, ownership, size, modification time, etc.
 
 ![image](https://github.com/user-attachments/assets/0000ff32-f5aa-4611-ba0f-aabe57f983fa)
 
+![image](https://github.com/user-attachments/assets/fd3a034c-ed30-4b24-83f7-f3b6b8322983)
 
+![image](https://github.com/user-attachments/assets/48ffabae-7e62-4a6f-bd28-e21993676d12)
+
+![image](https://github.com/user-attachments/assets/95155802-adf5-43c9-b074-47407e0a45a5)
