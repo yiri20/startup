@@ -55,7 +55,15 @@ getElementById selects an element by its ID, and addEventListener attaches an ev
 What does the following line of Javascript do using a # selector?<br>
 The #selector in JavaScript selects an element by its id. For example, document.querySelector("#id") selects the element with id="id".<br>
 <br>
-Which of the following are true? (mark all that are true about the DOM)<br>
+Which of the following are true? (mark all that are true about the DOM)<be>
+![image](https://github.com/user-attachments/assets/d5a06229-43cc-41e9-9c1e-1ff92410a0b1)
+
+![image](https://github.com/user-attachments/assets/7bca84d5-6232-472e-978f-cda1c7aed09d)
+
+![image](https://github.com/user-attachments/assets/3f425803-74d3-45d1-8a7b-8d5b876bade2)
+
+![image](https://github.com/user-attachments/assets/ca808fdc-aee0-40b9-b4f6-a28b9de1f688)
+
 Likely answers involve the nature of the DOM as a tree structure, the ability to modify it with JavaScript, and its representation of the HTML document.<br>
 <br>
 By default, the HTML span element has a default CSS display property value of:<br>
