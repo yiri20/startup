@@ -197,3 +197,46 @@ You can also add event listeners directly in the HTML. For example, here is a on
 ![image](https://github.com/user-attachments/assets/f3995532-d8e6-4d5d-bff0-db4f456a8d03)
 
 ![image](https://github.com/user-attachments/assets/7889d426-1263-4778-91ac-c6be4b84b1b1)
+
+![image](https://github.com/user-attachments/assets/a32dbebf-1d2b-4ca7-ac47-9a98ae1d09fd)
+
+![image](https://github.com/user-attachments/assets/ea03f02f-43d1-43db-89c7-e8b088d55c90)
+
+![image](https://github.com/user-attachments/assets/6772686a-3af3-44ac-9431-8304e86171e3)
+
+![image](https://github.com/user-attachments/assets/6cb9c0f6-6d01-478c-96f1-357935158785)
+
+
+When the -la parameter is specified for the ls command in the console (Unix-based systems like Linux or macOS), the following is true:
+
+-l (long listing format): This option displays detailed information about each file or directory. The output includes:
+
+File type and permissions
+Number of hard links
+Owner of the file
+Group the file belongs to
+File size
+Last modification date and time
+File or directory name
+-a (all files): This option includes hidden files in the listing (files or directories whose names start with a dot .). Without this option, hidden files are not shown.
+
+Combined Effect:
+When ls -la is used, it lists all files (including hidden ones) in the current directory with detailed information about each file.
+
+Example output of ls -la:
+sql
+drwxr-xr-x  2 user group 4096 Oct 13 10:15 .
+drwxr-xr-x 10 user group 4096 Oct 13 09:00 ..
+-rw-r--r--  1 user group   45 Oct 13 10:10 .hiddenfile
+-rw-r--r--  1 user group  512 Oct 13 10:15 file1.txt
+-rwxr-xr-x  1 user group 2048 Oct 13 10:14 script.sh
+So, ls -la shows:
+
+All files, including hidden ones.
+Detailed file information (permissions, ownership, size, modification time, etc.).
+
+![image](https://github.com/user-attachments/assets/add433ab-c579-4df7-ba29-03bd4e12990b)
+
+![image](https://github.com/user-attachments/assets/d6f71df6-9fdc-4f08-8454-cb8b8e76c0b3)
+
+
