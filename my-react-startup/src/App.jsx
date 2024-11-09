@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Review from './review/Review';
+import Review from './review/review';
 import Review1 from './review/Review1';
 import Review2 from './review/Review2';
 import Review3 from './review/Review3';
 import MakeReview from './review/MakeReview';
-import Explore from './explore/Explore';
-import About from './about/About';
-import Login from './login/Login';
+import Explore from './explore/explore';
+import About from './about/about';
+import Login from './login/login';
 import SignIn from './login/SignIn';
 
 export default function App() {
