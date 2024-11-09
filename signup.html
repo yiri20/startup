@@ -1,115 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PYM</title>
-    <link rel="icon" href="favicon.ico" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-      body {
-        background-color: #f8f9fa;
-      }
-      /* Header */
-      header {
-        text-align: center; 
-      }
-      hr {
-        border: 2px solid #020f1c; 
-        margin: 20px 0; 
-      }
-      h1 a {
-        color: #0454a8; 
-        text-decoration: none; 
-        font-size: 1.2em;
-        font-weight: bold;
-      }
-      footer a {
-        font-size: 1.5rem; 
-        color: rgb(1, 62, 102);
-        text-decoration: none;
-      }
-      main {
-        max-width: 600px; 
-        margin: 0 auto; 
-        padding: 20px; 
-        text-align: left; 
-      }
-      /*adding space*/
-      form {
-        margin-top: 20px; 
-      }
-      div {
-        margin-bottom: 15px; 
-      }
-      span {
-        display: block; 
-        margin-bottom: 5px; 
-      }
-      input[type="text"],
-      /*ID & Password input with button*/
-      input[type="password"] {
-        width: 100%; 
-        padding: 10px; 
-        border: 1px solid #ced4da; 
-        border-radius: 4px; 
-        box-sizing: border-box; 
-      }
-      button {
-        background-color: #0454a8; 
-        color: white; 
-        border: none; 
-        padding: 10px 15px; 
-        border-radius: 4px; 
-        cursor: pointer; /* Pointer cursor on hover */
-        font-size: 1em; 
-      }
-      button:hover {
-        background-color: #033f7a; /* Darken button color on hover */
-      }
-      fieldset {
-        border: 1px solid #ced4da; 
-        padding: 10px; 
-        border-radius: 4px; 
-        background-color: #f8f9fa; 
-      }
-      legend {
-          font-weight: bold; 
-      }
-    </style>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account | PYM</title>
+  <link rel="icon" href="favicon.ico">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    hr {
+      border: 2px solid #020f1c;
+      margin: 20px 0;
+    }
+    h1 a {
+      color: #0454a8;
+      text-decoration: none;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    nav ul {
+      font-size: 1.2em;
+      list-style-type: none;
+      padding: 0;
+      text-align: center;
+    }
+    nav ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+    nav a, footer a {
+      color: #0454a8;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover, footer a:hover {
+      color: #ff9800;
+    }
+    main {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      text-align: center;
+    }
+    .form-container {
+      text-align: left;
+      margin-top: 20px;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      margin-bottom: 15px;
+    }
+    button {
+      background-color: #0454a8;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #033f7a;
+    }
+    fieldset {
+      border: 1px solid #ced4da;
+      padding: 15px;
+      border-radius: 4px;
+      background-color: #f8f9fa;
+      margin-top: 20px;
+    }
+    legend {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
 
-  <header class="bg-light text-center py-4">
-    <h1>
-        <a href="index.html" class="text-decoration-none">Plan Your Music</a>
-    </h1>
-    <hr />
-  </header>
+<!-- Header -->
+<header class="bg-light text-center py-4">
+  <h1><a href="index.html">Plan Your Music</a></h1>
+  <hr>
+  <nav>
+    <ul class="nav justify-content-center">
+      <li class="nav-item"><a class="nav-link" href="schedule.html">Schedule</a></li>
+      <li class="nav-item"><a class="nav-link" href="review.html">Review</a></li>
+      <li class="nav-item"><a class="nav-link" href="explore.html">Explore</a></li>
+      <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+    </ul>
+  </nav>
+  <hr>
+</header>
 
-
-  <main>
-    <h1>Create your account</h1>
-    <form method="get" action="index.html">
+<!-- Main Content -->
+<main>
+  <h2>Create Your Account</h2>
+  <div class="form-container">
+    <form id="signup-form">
       <div>
-        <span>E-mail</span>
-        <input type="text" placeholder="sample@email.com" required/>      
-        <button type="submit">Verify</button>
+        <label for="email">E-mail</label>
+        <input type="email" id="email" class="form-control" placeholder="sample@email.com" required>
+        <button type="button" class="btn btn-secondary mt-2">Verify</button>
       </div>
       <div>
-        <span>Password</span>
-        <input type="password" placeholder="password" required/>
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
       </div>
-      <button type="submit">Create</button>
+      <button type="submit" class="btn btn-primary w-100">Create Account</button>
 
-      <fieldset>
+      <fieldset class="mt-4">
         <legend>Agreement</legend>
-        <p>
-          Do you want to receive a promotion email?
-        </p>
-        <label for="yes">yes</label>
-        <input type="radio" id="yes" name="varYes" value="yes" checked />
-        <label for="no">no</label>
-        <input type="radio" id="no" name="varYes" value="no" />
+        <p>Do you want to receive promotional emails?</p>
+        <div class="form-check">
+          <input type="radio" id="promo-yes" name="promo" value="yes" class="form-check-input" checked>
+          <label for="promo-yes" class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" id="promo-no" name="promo" value="no" class="form-check-input">
+          <label for="promo-no" class="form-check-label">No</label>
+        </div>
       </fieldset>
     </form>
-  </main>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-light text-center py-3">
+  <hr>
+  <span>Jungil Bae</span><br>
+  <a href="https://github.com/yiri20/startup" class="text-decoration-none">GitHub</a>
+  <br>
+  <a href="about.html" class="text-decoration-none"><b>About Us</b></a>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Handle form submission
+  const form = document.getElementById('signup-form');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    alert('Your account has been created successfully!');
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
