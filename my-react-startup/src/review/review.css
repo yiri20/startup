@@ -1,10 +1,32 @@
 .container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  h2 {
+    color: #0454a8;
+  }
+  
+  .review-content {
     margin-top: 20px;
   }
-  .table {
-    margin: 20px auto;
+  
+  .review-content h3 {
+    margin-bottom: 10px;
   }
-  .text-center {
-    text-align: center;
+  
+  .review-content p {
+    margin-bottom: 5px;
+  }
+  
+  .btn-primary {
+    background-color: #0454a8;
+    border-color: #0454a8;
+  }
+  
+  .btn-primary:hover {
+    background-color: #033f7a;
+    border-color: #033f7a;
   }
   
