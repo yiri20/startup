@@ -1,13 +1,11 @@
 import React from 'react';
-import './about.css';
+import './About.css';
 
-export function About() {
+export default function About() {
   return (
-    <main className='container-fluid text-center bg-secondary'>
-      <h2>About Us</h2>
-      <p>Your music journey starts here!</p>
-      <img src='/placeholder.jpg' alt='Music' />
-      <blockquote>"Music is the language of the soul."</blockquote>
-    </main>
+    <div className="about-container">
+      <h1>About Music Planner</h1>
+      <p>Plan your music listening sessions and reviews!</p>
+    </div>
   );
 }
