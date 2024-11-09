@@ -1,0 +1,150 @@
+/* General Styles */
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1, h2, h3 {
+    color: #0454a8;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: #0454a8;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    margin: 0 15px;
+  }
+  
+  .navbar a:hover {
+    color: #ff9800;
+  }
+  
+  /* Main Content */
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .table th {
+    background-color: #0454a8;
+    color: white;
+  }
+  
+  .table a {
+    text-decoration: none;
+    color: #0454a8;
+  }
+  
+  .table a:hover {
+    color: #ff9800;
+  }
+  
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    padding: 10px 15px;
+    margin-top: 20px;
+    background-color: #0454a8;
+    color: white;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: #033f7a;
+  }
+  
+  /* Form Elements */
+  input[type="text"], input[type="password"], input[type="email"], input[type="datetime-local"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: #0454a8;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .footer a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .footer a:hover {
+    color: #ff9800;
+  }
+  
+  /* Miscellaneous */
+  hr {
+    border: 2px solid #020f1c;
+    margin: 20px auto;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-reset {
+    color: inherit;
+  }
+  
+  /* Adjustments for responsiveness */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .table {
+      font-size: 0.9em;
+    }
+  
+    .btn {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+  

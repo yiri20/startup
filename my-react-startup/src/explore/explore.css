@@ -1,0 +1,61 @@
+/* Explore.css */
+
+.container-fluid {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  header {
+    background-color: #0454a8;
+    padding: 20px 0;
+    margin-bottom: 30px;
+  }
+  
+  header h1 a {
+    color: white;
+    font-size: 1.5em;
+    text-decoration: none;
+  }
+  
+  .header-divider {
+    width: 90%;
+    height: 2px;
+    background-color: #ffffff;
+    margin: 20px auto;
+  }
+  
+  .navbar a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .navbar a:hover {
+    color: #ff9800;
+  }
+  
+  .album-art {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    margin: 20px 0;
+  }
+  
+  footer {
+    background-color: #0454a8;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: auto;
+  }
+  
+  footer a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  footer a:hover {
+    color: #ff9800;
+  }
+  
