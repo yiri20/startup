@@ -1,0 +1,30 @@
+footer {
+    background-color: #0454a8;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    border-top: 2px solid #020f1c;
+  }
+  
+  footer hr {
+    border: 2px solid #ffffff;
+    width: 90%;
+    margin: 20px auto;
+    border-radius: 5px;
+  }
+  
+  footer a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+  }
+  
+  footer a:hover {
+    color: #ff9800;
+  }
+  
+  .text-reset {
+    color: white;
+  }
+  

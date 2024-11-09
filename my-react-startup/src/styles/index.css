@@ -1,0 +1,13 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+hr {
+  border: 1px solid #020f1c;
+}
+
+a {
+  text-decoration: none;
+}

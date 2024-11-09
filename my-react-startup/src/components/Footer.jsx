@@ -1,24 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import './Footer.css';
 
-export default function Footer() {
+function Footer() {
   return (
-    <footer className="bg-light text-center py-3">
+    <footer>
       <hr />
-      <span className="text-reset">Jungil Bae</span>
-      <br />
-      <a
-        href="https://github.com/yiri20/startup"
-        className="text-decoration-none"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        GitHub
+      <span className="text-reset">Jungil Bae</span><br />
+      <a href="https://github.com/yiri20/startup" className="text-reset text-decoration-none">
+        <i className="fab fa-github social-icon"></i> GitHub
       </a>
-      <br />
-      <Link to="/about" className="text-decoration-none">
-        <b>About Us</b>
-      </Link>
     </footer>
   );
 }
+
+export default Footer;

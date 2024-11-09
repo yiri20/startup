@@ -1,0 +1,48 @@
+body {
+  background-color: #f8f9fa;
+}
+
+h1 a {
+  font-size: 1.2em;
+  color: white; /* Make header text white */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+header {
+  background-color: #0454a8;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+hr {
+  width: 90%;
+  height: 2px;
+  background-color: #ffffff;
+  margin: 20px auto;
+  border-radius: 5px;
+}
+
+nav ul {
+  font-size: 1.2em;
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav a {
+  color: white; /* Make navigation links white */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #ff9800;
+  text-decoration: underline;
+}
