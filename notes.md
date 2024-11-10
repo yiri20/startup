@@ -291,3 +291,5 @@ Detailed file information (permissions, ownership, size, modification time, etc.
 ![image](https://github.com/user-attachments/assets/6868fcfe-e85a-48e6-b8d9-d441a0621a4d)
 
 ![image](https://github.com/user-attachments/assets/d50ad11b-e4e7-4107-be5f-d807fe0572d5)
+
+![image](https://github.com/user-attachments/assets/7b92443d-1bc9-4d52-861e-5aebd11ff903)
