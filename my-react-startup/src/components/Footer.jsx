@@ -1,16 +1,16 @@
 import React from 'react';
 import './Footer.css';
 
-function Footer() {
+const Footer = () => {
   return (
-    <footer>
+    <footer className="footer">
       <hr />
-      <span className="text-reset">Jungil Bae</span><br />
-      <a href="https://github.com/yiri20/startup" className="text-reset text-decoration-none">
-        <i className="fab fa-github social-icon"></i> GitHub
-      </a>
+      <span>Jungil Bae</span><br />
+      <a href="https://github.com/yiri20/startup">GitHub</a>
+      <br />
+      <a href="/about">About Us</a>
     </footer>
   );
-}
+};
 
 export default Footer;

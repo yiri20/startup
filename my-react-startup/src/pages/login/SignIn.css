@@ -1,0 +1,54 @@
+.form-container {
+  text-align: left;
+  margin-top: 20px;
+}
+
+textarea {
+  resize: vertical;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+/* Buttons */
+button {
+  background-color: #0454a8;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #033f7a;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  margin-top: 10px;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Fieldset for Agreement */
+fieldset {
+  border: 1px solid #ced4da;
+  padding: 15px;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  margin-top: 20px;
+}
+
+legend {
+  font-weight: bold;
+}
+
+.form-check-label {
+  margin-left: 5px;
+}

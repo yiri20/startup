@@ -1,14 +1,3 @@
-body {
-  background-color: #f8f9fa;
-}
-
-h1 a {
-  font-size: 1.2em;
-  color: white; /* Make header text white */
-  text-decoration: none;
-  font-weight: bold;
-}
-
 header {
   background-color: #0454a8;
   color: white;
@@ -16,7 +5,14 @@ header {
   text-align: center;
 }
 
-hr {
+header h1 a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+header hr {
   width: 90%;
   height: 2px;
   background-color: #ffffff;
@@ -25,10 +21,10 @@ hr {
 }
 
 nav ul {
-  font-size: 1.2em;
   list-style-type: none;
   padding: 0;
   text-align: center;
+  font-size: 1.2em;
 }
 
 nav ul li {
@@ -37,12 +33,134 @@ nav ul li {
 }
 
 nav a {
-  color: white; /* Make navigation links white */
+  color: white;
   text-decoration: none;
   font-weight: bold;
 }
 
 nav a:hover {
   color: #ff9800;
-  text-decoration: underline;
+}
+
+footer {
+  background-color: #0454a8;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+footer a:hover {
+  color: #ff9800;
+}
+
+button {
+  background-color: #0454a8;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #033f7a;
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="datetime-local"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+a.back-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #0454a8;
+}
+
+a.back-link:hover {
+  color: #ff9800;
+}
+
+table {
+  border-spacing: 10px;
+  width: 100%;
+}
+
+th, td {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  text-align: center;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f1f1f1;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+.card {
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  background-color: white;
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.container-fluid {
+  padding: 0 20px;
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+.my-5 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.py-4 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }

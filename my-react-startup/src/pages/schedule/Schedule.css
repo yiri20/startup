@@ -1,0 +1,21 @@
+button {
+  background-color: #0454a8;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #033f7a;
+}
+
+#confirmation-message {
+  display: block;
+  margin-top: 20px;
+}
+
+.text-center .btn-primary {
+  margin-top: 20px;
+}

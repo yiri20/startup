@@ -1,9 +1,6 @@
-/* Body background */
-body {
-  background-color: #f8f9fa;
-}
 
-/* Header styling */
+
+/* Header styles */
 header {
   background-color: #0454a8;
   color: white;
@@ -38,47 +35,69 @@ nav ul li {
   margin: 0 15px;
 }
 
-nav a {
+nav a, footer a {
   color: white;
   text-decoration: none;
   font-weight: bold;
 }
 
-nav a:hover {
+nav a:hover, footer a:hover {
   color: #ff9800;
 }
 
-/* Main content section */
+/* Main content area */
 main {
   max-width: 800px;
-  margin: 20px auto;
+  margin: 30px auto;
   padding: 20px;
   text-align: left;
-}
-
-section h2 {
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-/* Album image placeholder */
-.album-placeholder {
-  display: block;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 300px;
-  height: auto;
+  background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table styling */
+table {
+  border-spacing: 10px;
+  width: 100%;
+}
+
+th, td {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  text-align: center;
+}
+
+/* Button styling for "Create Review" */
+.btn-primary {
+  background-color: #0454a8;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #033f7a;
+}
+
+/* Back link styling */
+.back-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #0454a8;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: #ff9800;
 }
 
 /* Footer styling */
 footer {
   background-color: #0454a8;
   color: white;
+  padding: 20px 0;
   text-align: center;
-  padding: 10px 0;
 }
 
 footer a {
@@ -89,8 +108,4 @@ footer a {
 
 footer a:hover {
   color: #ff9800;
-}
-
-.text-reset {
-  color: white;
 }

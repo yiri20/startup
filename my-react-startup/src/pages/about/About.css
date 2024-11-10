@@ -1,0 +1,44 @@
+/* Ensure container is properly aligned */
+.container {
+  margin-top: 100px; /* Space to avoid overlapping with navbar */
+  padding-bottom: 50px;
+  text-align: left; /* Left-align all text */
+}
+
+/* Styling for the figure and image */
+#figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto;
+}
+
+#figure figcaption {
+  text-align: center; /* Center-align caption only */
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* Resource section styling */
+#resource {
+  margin-top: 30px;
+}
+
+#resource ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+#resource ul li {
+  padding: 5px 0;
+}
+
+#resource a {
+  color: #0454a8;
+  text-decoration: none;
+}
+
+#resource a:hover {
+  text-decoration: underline;
+}

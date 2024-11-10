@@ -1,7 +1,7 @@
 import React from 'react';
 import './review.css';
 
-const Review1 = () => {
+const Review3 = () => {
   return (
     <>
       {/* Header */}
@@ -20,27 +20,18 @@ const Review1 = () => {
 
       {/* Main Content */}
       <main className="container my-5">
-        <h2 className="text-center">Review: The Bends by Radiohead</h2>
+        <h2 className="text-center">Review: OK Computer by Radiohead</h2>
         <p><strong>Artist:</strong> Radiohead</p>
-        <p><strong>Album:</strong> The Bends</p>
-        <p><strong>Rating:</strong> 4.5 / 5</p>
-        <p><strong>Date Reviewed:</strong> August 20, 2024</p>
+        <p><strong>Album:</strong> OK Computer</p>
+        <p><strong>Rating:</strong> 5.0 / 5</p>
+        <p><strong>Date Reviewed:</strong> October 4, 2024</p>
         <p>
-          "The Bends" is an iconic album that marked Radiohead's transition from their early grunge-inspired sound to a more expansive and emotional style. Songs like "Street Spirit (Fade Out)" and "Fake Plastic Trees" showcase the band's ability to blend intricate instrumentation with deeply personal lyrics.
+          "OK Computer" is often regarded as one of the greatest albums of all time, pushing the boundaries of rock music with its experimental soundscapes and thought-provoking lyrics. Tracks like "Paranoid Android" and "Karma Police" remain iconic, showcasing Radiohead’s ability to blend complex themes with accessible melodies.
         </p>
         <a href="/review" className="back-link">&larr; Back to All Reviews</a>
       </main>
-
-      {/* Footer */}
-      <footer>
-        <hr />
-        <span className="text-reset">Jungil Bae</span><br />
-        <a href="https://github.com/yiri20/startup" className="text-decoration-none">GitHub</a>
-        <br />
-        <a href="/about" className="text-decoration-none"><b>About Us</b></a>
-      </footer>
     </>
   );
 };
 
-export default Review1;
+export default Review3;

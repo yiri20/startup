@@ -1,0 +1,70 @@
+.home-header {
+  color: #0454a8; /* Ensure heading color is as intended */
+  text-decoration: none;
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+hr {
+  border: 2px solid #020f1c;
+  margin: 20px 0;
+}
+
+h1 a {
+  color: #0454a8;
+  text-decoration: none;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.nav {
+  font-size: 1.2em;
+}
+
+.nav-item {
+  display: inline;
+  margin: 0 15px;
+}
+
+.nav-link {
+  color: #0454a8;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-link:hover,
+footer a:hover {
+  color: #ff9800;
+}
+
+.btn-primary {
+  background-color: #0454a8;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #033f7a;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+footer {
+  background-color: #f8f9fa;
+  color: #0454a8;
+}

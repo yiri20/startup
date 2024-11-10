@@ -1,22 +1,10 @@
 import React from 'react';
 import './review.css';
 
+
 const Review = () => {
   return (
     <>
-      <header className="text-center py-4">
-        <h1><a href="/">Plan Your Music</a></h1>
-        <hr />
-        <nav>
-          <ul className="nav justify-content-center">
-            <li className="nav-item"><a className="nav-link text-white" href="/schedule">Schedule</a></li>
-            <li className="nav-item"><a className="nav-link text-white" href="/explore">Explore</a></li>
-            <li className="nav-item"><a className="nav-link text-white" href="/about">About</a></li>
-          </ul>
-        </nav>
-        <hr />
-      </header>
-
       <main className="container my-5">
         <h2 className="text-center">Album Reviews</h2>
         <table className="table table-striped table-hover">
@@ -57,14 +45,6 @@ const Review = () => {
           <a href="/makereview" className="btn btn-primary">Create Review</a>
         </div>
       </main>
-
-      <footer>
-        <hr />
-        <span className="text-reset">Jungil Bae</span><br />
-        <a href="https://github.com/yiri20/startup">GitHub</a>
-        <br />
-        <a href="/about" className="text-decoration-none"><b>About Us</b></a>
-      </footer>
     </>
   );
 };

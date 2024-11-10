@@ -1,43 +1,75 @@
-.navbar {
+header {
     background-color: #0454a8;
     color: white;
-    text-align: center;
     padding: 20px 0;
+    text-align: center;
   }
-  
-  .navbar h1 a {
+
+.navbar {
+    background-color: #0454a8;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Title Styling */
+.navbar h1 {
+    margin: 0;
+}
+
+.navbar h1 a {
     color: white;
     text-decoration: none;
-    font-size: 1.5em;
+    font-size: 2.5em;
     font-weight: bold;
-  }
-  
-  .navbar hr {
+}
+
+/* Horizontal line styling */
+.navbar hr {
     border: 2px solid #ffffff;
+    margin: 10px auto;
     width: 90%;
-    margin: 20px auto;
     border-radius: 5px;
-  }
-  
-  nav ul {
+}
+
+/* Navigation bar styling */
+nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+nav ul {
     list-style-type: none;
     padding: 0;
-    text-align: center;
-  }
-  
-  nav ul li {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+nav ul li {
     display: inline;
-    margin: 0 15px;
-  }
-  
-  nav a {
-    color: white;
+}
+
+nav a,
+.navbar .nav-link {
+    color: white !important;
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s;
-  }
-  
-  nav a:hover {
-    color: #ffdd57;
-  }
-  
+    font-size: 1.2em;
+}
+
+nav a:hover,
+.navbar .nav-link:hover {
+    color: #ff9800 !important;
+}
+
+/* Main content should have margin to avoid overlap */
+.container {
+    margin-top: 30px; /* Add margin to push content below the navbar */
+}

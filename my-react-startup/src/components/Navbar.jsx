@@ -1,30 +1,23 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import './Navbar.css';
+import { Link } from 'react-router-dom';
+import './Navbar.css'; // Make sure this is correct and exists
 
-function Navbar() {
+const Navbar = () => {
   return (
-    <header className="text-center py-4 bg-primary">
-      <h1>
-        <NavLink to="/" className="text-white text-decoration-none"><b>Plan Your Music</b></NavLink>
-      </h1>
+    <header className="navbar">
+      <h1><Link to="/">Plan Your Music</Link></h1>
       <hr />
       <nav>
         <ul className="nav justify-content-center">
-          <li className="nav-item">
-            <NavLink className="nav-link text-white" to="/schedule">Schedule</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link text-white" to="/explore">Explore</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link text-white" to="/review">Review</NavLink>
-          </li>
+          <li className="nav-item"><Link to="/schedule" className="nav-link">Schedule</Link></li>
+          <li className="nav-item"><Link to="/explore" className="nav-link">Explore</Link></li>
+          <li className="nav-item"><Link to="/review" className="nav-link">Review</Link></li>
+          <li className="nav-item"><Link to="/about" className="nav-link">About</Link></li>
         </ul>
       </nav>
       <hr />
     </header>
   );
-}
+};
 
 export default Navbar;
