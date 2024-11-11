@@ -71,14 +71,19 @@ I will use the required technologies in the following ways:
 #### Start Up CSS
 30% Header, footer, and main content body
   - In every HTML file, I applied CSS style.
+    
 20% Navigation elements
   - I also applied CSS style to navigation elements setting alignment and looking.
+    
 10% Responsive to window resizing
   - Using Bootstrap and the specified CSS properties (e.g., container-fluid, flexible navigation, and input fields) ensures that the application is responsive and adjusts appropriately to different screen sizes.
+    
 20% Application elements
   - schedule.html: Includes a calendar and options to select genre and datetime.
   - makereview.html: Contains a form for submitting reviews with relevant fields (artist, album, track, review, rating, and datetime).
+    
 10% Application text content
   - I added application text content in the headings, labels, and instructions to provide users with the necessary information to interact with the application effectively.
+    
 10% Application images
   - In about.html, I added the application image.
