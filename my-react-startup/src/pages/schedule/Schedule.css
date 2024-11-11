@@ -1,21 +1,115 @@
-button {
-  background-color: #0454a8;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
+/* Container styling */
+.schedule-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-button:hover {
+/* Title and description */
+.schedule-title {
+  color: #0454a8;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.schedule-description {
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Form styling */
+.schedule-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* Input and Select styling */
+.schedule-input,
+.schedule-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+.schedule-input:focus,
+.schedule-select:focus {
+  border-color: #0454a8;
+  box-shadow: 0 0 5px rgba(4, 84, 168, 0.3);
+}
+
+/* Fieldset styling */
+fieldset {
+  border: none;
+  padding: 0;
+}
+
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  gap: 5px;
+}
+
+.radio-option input {
+  margin-right: 5px;
+}
+
+/* Button styling */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.schedule-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.schedule-btn-primary {
+  background-color: #0454a8;
+  border: none;
+  color: white;
+}
+
+.schedule-btn-primary:hover {
   background-color: #033f7a;
 }
 
-#confirmation-message {
-  display: block;
-  margin-top: 20px;
+.schedule-btn-secondary {
+  background-color: #6c757d;
+  border: none;
+  color: white;
 }
 
-.text-center .btn-primary {
-  margin-top: 20px;
+.schedule-btn-secondary:hover {
+  background-color: #5a6268;
 }

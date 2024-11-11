@@ -1,0 +1,42 @@
+.review-details-container {
+    width: 80%;
+    max-width: 800px;
+    margin: 30px auto;
+    text-align: left; /* Align text to the left */
+  }
+  
+  .review-content {
+    margin-top: 20px;
+  }
+  
+  .review-content h3 {
+    color: #0454a8;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .review-content p {
+    margin: 10px 0;
+    line-height: 1.6;
+  }
+  
+  hr {
+    border: 1px solid #d3d3d3;
+  }
+  
+  .back-button-container {
+    margin-top: 40px;
+    text-align: right; /* Align button to the right */
+  }
+  
+  .btn-primary {
+    background-color: #0454a8;
+    border: none;
+    font-weight: bold;
+    padding: 10px 20px;
+  }
+  
+  .btn-primary:hover {
+    background-color: #033f7a;
+  }
+  

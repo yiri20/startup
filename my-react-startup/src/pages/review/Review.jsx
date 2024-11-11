@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './review.css';
 
 const Review = () => {
@@ -73,13 +74,18 @@ const Review = () => {
             {reviews.map((review) => (
               <tr key={review.id}>
                 <td>{review.id}</td>
-                <td>{review.album}</td>
+                <td>
+                  <Link to={`/review${review.id}`} className="text-decoration-none">
+                    {review.album}
+                  </Link>
+                </td>
                 <td>{review.artist}</td>
                 <td>{review.rating}</td>
                 <td>{review.date}</td>
               </tr>
             ))}
           </tbody>
+
         </table>
 
         {/* Create Review Form */}

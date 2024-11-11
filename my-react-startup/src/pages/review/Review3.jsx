@@ -1,36 +1,26 @@
 import React from 'react';
-import './review.css';
+import { Link } from 'react-router-dom';
+import './ReviewDetail.css';
 
 const Review3 = () => {
   return (
-    <>
-      {/* Header */}
-      <header className="text-center py-4">
-        <h1><a href="/" className="text-decoration-none">Plan Your Music</a></h1>
-        <hr />
-        <nav>
-          <ul className="nav justify-content-center">
-            <li className="nav-item"><a className="nav-link text-white" href="/schedule">Schedule</a></li>
-            <li className="nav-item"><a className="nav-link text-white" href="/explore">Explore</a></li>
-            <li className="nav-item"><a className="nav-link text-white" href="/about">About</a></li>
-          </ul>
-        </nav>
-        <hr />
-      </header>
-
-      {/* Main Content */}
-      <main className="container my-5">
-        <h2 className="text-center">Review: OK Computer by Radiohead</h2>
-        <p><strong>Artist:</strong> Radiohead</p>
-        <p><strong>Album:</strong> OK Computer</p>
-        <p><strong>Rating:</strong> 5.0 / 5</p>
-        <p><strong>Date Reviewed:</strong> October 4, 2024</p>
+    <div className="review-details-container">
+      <h2>OK Computer - Radiohead</h2>
+      <hr />
+      <section className="review-content">
+        <h3>Review</h3>
         <p>
-          "OK Computer" is often regarded as one of the greatest albums of all time, pushing the boundaries of rock music with its experimental soundscapes and thought-provoking lyrics. Tracks like "Paranoid Android" and "Karma Police" remain iconic, showcasing Radiohead’s ability to blend complex themes with accessible melodies.
+          "OK Computer" is an iconic album that solidified Radiohead's place in music history. Its themes of alienation and technology are still relevant today, making it a timeless masterpiece.
         </p>
-        <a href="/review" className="back-link">&larr; Back to All Reviews</a>
-      </main>
-    </>
+        <p><strong>Rating:</strong> 5/5</p>
+        <p><strong>Date:</strong> October 4, 2024</p>
+      </section>
+
+      {/* "Back to Reviews" button at the bottom */}
+      <div className="back-button-container">
+        <Link to="/review" className="btn btn-primary">Back to Reviews</Link>
+      </div>
+    </div>
   );
 };
 
