@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
-import About from './pages/about/about';
-import Explore from './pages/explore/explore';
-import Review from './pages/review/review';
+import About from './pages/about/About';
+import Explore from './pages/explore/Explore';
+import Review from './pages/review/Review';
 import Schedule from './pages/schedule/Schedule';
 import SignIn from './pages/login/SignIn';
-import Login from './pages/login/Login';
+import Login from './pages/login/login';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import './styles/App.css';
