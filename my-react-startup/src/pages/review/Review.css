@@ -1,58 +1,117 @@
-/* Container styling */
+/* Main container for the entire review page */
 .container {
-  margin-top: 100px; /* Space to avoid overlapping with navbar */
-  padding-bottom: 50px;
+  max-width: 900px;
+  margin: 50px auto; /* Center the container horizontally */
+  padding: 20px;
 }
 
-/* Heading Styling */
-h2.text-center {
-  color: #0454a8;
-  margin-bottom: 30px;
-  font-weight: bold;
-}
-
-/* Table Styling */
+/* Styling for the album review table */
 .table {
   width: 100%;
-  border-collapse: collapse;
+  margin-top: 30px;
 }
 
 .table th {
   background-color: #0454a8;
   color: white;
-  padding: 15px;
   text-align: center;
 }
 
-.table td {
-  padding: 15px;
-  text-align: center;
-  border-bottom: 1px solid #dee2e6;
+.table-hover tbody tr:hover {
+  background-color: #f1f1f1;
 }
 
-.table a {
-  color: #0454a8;
+.text-decoration-none {
   text-decoration: none;
 }
 
-.table a:hover {
-  text-decoration: underline;
-  color: #ff9800;
-}
-
-/* Button styling for 'Create Review' link */
+/* Button styling */
 .btn-primary {
   background-color: #0454a8;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  border-color: #0454a8;
+  padding: 10px 20px;
+  font-weight: bold;
 }
 
 .btn-primary:hover {
   background-color: #033f7a;
 }
 
-.text-center {
+/* Styling for the Create Review button */
+.create-review-button {
+  margin-top: 30px;
+}
+
+/* Create Review Form Container Styling */
+/* Create Review Form Container Styling */
+.create-review-container {
+  max-width: 800px; /* Increased width */
+  margin: 50px auto; /* Center the container horizontally */
+  padding: 30px; /* Increased padding for better spacing */
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+  width: 100%;
+}
+
+/* Centering the entire main content area */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh; /* Center vertically within viewport */
+}
+
+/* Styling for the form elements */
+form label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+form input[type="number"] {
+  max-width: 120px; /* Limit width for rating input */
+}
+
+form button {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: white;
+  padding: 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #218838;
+}
+
+/* Placeholder styling for the form */
+::placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+  .create-review-container {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .table th, .table td {
+    font-size: 0.9rem;
+  }
 }
