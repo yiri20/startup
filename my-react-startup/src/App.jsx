@@ -27,12 +27,24 @@ function App() {
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
+          
         </Routes>
       </div>
       
       {/* Footer appears on all pages */}
       <Footer />
     </Router>
+  );
+}
+
+function NotFound() {
+  return (
+    <div className="container-fluid bg-secondary text-center" style={{ marginTop: '50px' }}>
+      <h2>404 - Page Not Found</h2>
+      <p>The page you are looking for does not exist.</p>
+    </div>
   );
 }
 
