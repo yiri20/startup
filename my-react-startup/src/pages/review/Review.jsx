@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './review.css';
 
 const Review = () => {
@@ -37,6 +36,8 @@ const Review = () => {
     review: ''
   });
 
+  const [isFormVisible, setIsFormVisible] = useState(false);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewReview({ ...newReview, [name]: value });
@@ -52,6 +53,7 @@ const Review = () => {
       };
       setReviews([...reviews, newEntry]);
       setNewReview({ album: '', artist: '', rating: '', review: '' });
+      setIsFormVisible(false); // Close the form after submitting
     }
   };
 
@@ -74,86 +76,97 @@ const Review = () => {
             {reviews.map((review) => (
               <tr key={review.id}>
                 <td>{review.id}</td>
-                <td>
-                  <Link to={`/review${review.id}`} className="text-decoration-none">
-                    {review.album}
-                  </Link>
-                </td>
+                <td><a href={`/review${review.id}`} className="text-decoration-none">{review.album}</a></td>
                 <td>{review.artist}</td>
                 <td>{review.rating}</td>
                 <td>{review.date}</td>
               </tr>
             ))}
           </tbody>
-
         </table>
 
-        {/* Create Review Form */}
-        <div className="create-review-container my-5">
-          <h3 className="text-center">Create a New Review</h3>
-          <form onSubmit={handleSubmit}>
-            {/* Album Input */}
-            <div className="mb-3">
-              <label className="form-label">Album</label>
-              <input
-                type="text"
-                className="form-control"
-                name="album"
-                value={newReview.album}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-
-            {/* Artist Input */}
-            <div className="mb-3">
-              <label className="form-label">Artist</label>
-              <input
-                type="text"
-                className="form-control"
-                name="artist"
-                value={newReview.artist}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-
-            {/* Rating Input */}
-            <div className="d-flex align-items-center mb-3">
-              <label className="form-label me-3">Rating (0 to 5):</label>
-              <input
-                type="number"
-                className="form-control w-auto"
-                placeholder="Max 5"
-                name="rating"
-                value={newReview.rating}
-                onChange={handleInputChange}
-                min="0"
-                max="5"
-                step="0.1"
-                required
-              />
-            </div>
-
-            {/* Review Textarea */}
-            <div className="mb-3">
-              <label className="form-label">Review</label>
-              <textarea
-                className="form-control"
-                rows="4"
-                name="review"
-                value={newReview.review}
-                onChange={handleInputChange}
-                required
-              ></textarea>
-            </div>
-
-            {/* Submit Button */}
-            <button type="submit" className="btn btn-success w-100">
-              Submit Review
-            </button>
-          </form>
+        {/* Toggle Button */}
+        <div className="text-center my-4">
+          <button
+            className={`btn ${isFormVisible ? 'btn-secondary' : 'btn-primary'}`}
+            onClick={() => setIsFormVisible(!isFormVisible)}
+          >
+            {isFormVisible ? 'Hide Review Form' : 'Create Review'}
+          </button>
         </div>
+
+        {/* Create Review Form */}
+        {isFormVisible && (
+          <div className="create-review-container my-5">
+            <h3 className="text-center">Create a New Review</h3>
+            <form onSubmit={handleSubmit}>
+              {/* Album Input */}
+              <div className="mb-3">
+                <label className="form-label">Album</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="album"
+                  value={newReview.album}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+
+              {/* Artist Input */}
+              <div className="mb-3">
+                <label className="form-label">Artist</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="artist"
+                  value={newReview.artist}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+
+              {/* Rating Input */}
+              <div className="d-flex align-items-center mb-3">
+                <label className="form-label me-3">Rating (0 to 5):</label>
+                <input
+                  type="number"
+                  className="form-control w-auto"
+                  placeholder="Max 5"
+                  name="rating"
+                  value={newReview.rating}
+                  onChange={handleInputChange}
+                  min="0"
+                  max="5"
+                  step="0.1"
+                  required
+                />
+              </div>
+
+              {/* Review Textarea */}
+              <div className="mb-3">
+                <label className="form-label">Review</label>
+                <textarea
+                  className="form-control"
+                  rows="4"
+                  name="review"
+                  value={newReview.review}
+                  onChange={handleInputChange}
+                  required
+                ></textarea>
+              </div>
+
+              {/* Submit Button */}
+              <button
+                className={`btn toggle-button ${isFormVisible ? 'btn-secondary' : 'btn-primary'}`}
+                onClick={() => setIsFormVisible(!isFormVisible)}
+              >
+                {isFormVisible ? 'Hide Review Form' : 'Create Review'}
+              </button>
+
+            </form>
+          </div>
+        )}
       </main>
     </>
   );

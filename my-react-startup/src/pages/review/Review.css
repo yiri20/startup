@@ -1,117 +1,166 @@
-/* Main container for the entire review page */
-.container {
+/* Container for the entire review page */
+.review-container {
   max-width: 900px;
-  margin: 50px auto; /* Center the container horizontally */
+  margin: 30px auto;
   padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Styling for the album review table */
-.table {
+/* Table container for better responsiveness */
+.table-container {
+  overflow-x: auto;
+}
+
+/* Table styling */
+.table-striped {
+  border-collapse: collapse;
   width: 100%;
-  margin-top: 30px;
 }
 
-.table th {
+.table-striped th,
+.table-striped td {
+  text-align: center;
+  padding: 15px;
+  border: 1px solid #ddd;
+}
+
+.table-striped th {
   background-color: #0454a8;
   color: white;
-  text-align: center;
+  font-weight: bold;
 }
 
-.table-hover tbody tr:hover {
+.table-striped tr:hover {
   background-color: #f1f1f1;
 }
 
-.text-decoration-none {
+/* Links in the table */
+.table-striped a {
+  color: #0454a8;
   text-decoration: none;
 }
 
+.table-striped a:hover {
+  color: #ff9800;
+}
+
+/* Container for the form */
+.create-review-container {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Form header */
+.create-review-container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0454a8;
+}
+
+/* Form label styling */
+.form-label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Form control inputs */
+.form-control {
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+  border-color: #0454a8;
+  box-shadow: 0 0 5px rgba(4, 84, 168, 0.5);
+}
+
+/* Number input styling */
+input[type="number"] {
+  max-width: 100px;
+  text-align: center;
+}
+
+/* Textarea styling */
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
 /* Button styling */
+.btn {
+  padding: 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Primary button (Save) */
 .btn-primary {
   background-color: #0454a8;
-  border-color: #0454a8;
-  padding: 10px 20px;
-  font-weight: bold;
+  color: white;
+  border: none;
+  margin-right: 10px;
 }
 
 .btn-primary:hover {
   background-color: #033f7a;
 }
 
-/* Styling for the Create Review button */
-.create-review-button {
+/* Secondary button (Clear) */
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Button for folding/unfolding form */
+.toggle-button {
+  margin-top: 20px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Back button styling */
+.back-button-container {
+  text-align: center;
   margin-top: 30px;
 }
 
-/* Create Review Form Container Styling */
-/* Create Review Form Container Styling */
-.create-review-container {
-  max-width: 800px; /* Increased width */
-  margin: 50px auto; /* Center the container horizontally */
-  padding: 30px; /* Increased padding for better spacing */
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 100%;
-}
-
-/* Centering the entire main content area */
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 80vh; /* Center vertically within viewport */
-}
-
-/* Styling for the form elements */
-form label {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-form input,
-form textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ced4da;
-  border-radius: 5px;
-}
-
-form input[type="number"] {
-  max-width: 120px; /* Limit width for rating input */
-}
-
-form button {
-  background-color: #28a745;
-  border-color: #28a745;
+.back-button-container .btn {
+  background-color: #0454a8;
   color: white;
-  padding: 12px;
-  border-radius: 5px;
-  font-weight: bold;
-  width: 100%;
-  transition: background-color 0.3s ease;
 }
 
-form button:hover {
-  background-color: #218838;
+.back-button-container .btn:hover {
+  background-color: #033f7a;
 }
 
-/* Placeholder styling for the form */
-::placeholder {
-  color: #6c757d;
-  opacity: 1;
-}
-
-/* Responsive Design for smaller screens */
+/* Responsive styles */
 @media (max-width: 768px) {
+  .review-container {
+    width: 95%;
+    padding: 10px;
+  }
+
   .create-review-container {
-    max-width: 90%;
+    width: 100%;
     padding: 15px;
   }
 
-  .table th, .table td {
-    font-size: 0.9rem;
+  input[type="number"] {
+    width: 100%;
   }
 }
