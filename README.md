@@ -87,3 +87,36 @@ I will use the required technologies in the following ways:
     
 10% Application images
   - In about.html, I added the application image.
+
+#### Start Up React
+10% Application Converted to Use React
+-  The entire project has been converted to use React.
+-  It utilizes React components, React Router, and React Hooks throughout the application.
+
+10% Bundled Using Vite
+-  The application is bundled using Vite for fast build times and an efficient development environment.
+
+50% Multiple React Components Implementing All App Functionality
+  - The project is structured into multiple React components, each responsible for specific sections:
+  -   Home.jsx: Landing page with navigation to login and signup.
+  -   About.jsx: Information about the app and resources.
+  -   Explore.jsx: Displays trending music (placeholder).
+  -   Review.jsx: Handles listing and creating album reviews.
+  -   Review1.jsx, Review2.jsx, Review3.jsx: Displays detailed individual reviews.
+  -   Schedule.jsx: Allows users to schedule music listening sessions.
+  -   SignIn.jsx: Handles user sign-up.
+  -   Login.jsx: Manages user login.
+  -   Navbar.jsx: Top navigation bar.
+  -   Footer.jsx: Footer section.
+  -   NotFound.jsx: Handles invalid routes (404 error).
+
+20% React Router
+used extensively to navigate between different pages:
+-  The main routes are set up in App.jsx using <Routes> and <Route>.
+-  Links are used for navigation between components (e.g., reviews, schedule, about).
+
+20% React Hooks
+-  React Hooks (useState) are used for managing state in multiple components:
+-    Review.jsx: Manages the state of reviews and handles form submissions for adding new reviews.
+-    Schedule.jsx: Manages form inputs for scheduling sessions (genre, date, notification).
+-    SignIn.jsx: Manages the state of sign-up form inputs (email, password, promotional emails).
