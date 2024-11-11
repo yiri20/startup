@@ -71,14 +71,48 @@ I will use the required technologies in the following ways:
 #### Start Up CSS
 30% Header, footer, and main content body
   - In every HTML file, I applied CSS style.
+    
 20% Navigation elements
   - I also applied CSS style to navigation elements setting alignment and looking.
+    
 10% Responsive to window resizing
   - Using Bootstrap and the specified CSS properties (e.g., container-fluid, flexible navigation, and input fields) ensures that the application is responsive and adjusts appropriately to different screen sizes.
+    
 20% Application elements
   - schedule.html: Includes a calendar and options to select genre and datetime.
   - makereview.html: Contains a form for submitting reviews with relevant fields (artist, album, track, review, rating, and datetime).
+    
 10% Application text content
   - I added application text content in the headings, labels, and instructions to provide users with the necessary information to interact with the application effectively.
+    
 10% Application images
   - In about.html, I added the application image.
+
+#### Start Up React
+10% Bundled Using Vite
+-  The application is bundled using Vite for fast build times and an efficient development environment.
+
+50% Multiple React Components Implementing All App Functionality
+  - The project is structured into multiple React components, each responsible for specific sections:
+  -   Home.jsx: Landing page with navigation to login and signup.
+  -   About.jsx: Information about the app and resources.
+  -   Explore.jsx: Displays trending music (placeholder).
+  -   Review.jsx: Handles listing and creating album reviews.
+  -   Review1.jsx, Review2.jsx, Review3.jsx: Displays detailed individual reviews.
+  -   Schedule.jsx: Allows users to schedule music listening sessions.
+  -   SignIn.jsx: Handles user sign-up.
+  -   Login.jsx: Manages user login.
+  -   Navbar.jsx: Top navigation bar.
+  -   Footer.jsx: Footer section.
+  -   NotFound.jsx: Handles invalid routes (404 error).
+
+20% React Router
+used extensively to navigate between different pages:
+-  The main routes are set up in App.jsx using <Routes> and <Route>.
+-  Links are used for navigation between components (e.g., reviews, schedule, about).
+
+20% React Hooks
+-  React Hooks (useState) are used for managing state in multiple components:
+-    Review.jsx: Manages the state of reviews and handles form submissions for adding new reviews.
+-    Schedule.jsx: Manages form inputs for scheduling sessions (genre, date, notification).
+-    SignIn.jsx: Manages the state of sign-up form inputs (email, password, promotional emails).
