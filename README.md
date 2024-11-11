@@ -89,10 +89,6 @@ I will use the required technologies in the following ways:
   - In about.html, I added the application image.
 
 #### Start Up React
-10% Application Converted to Use React
--  The entire project has been converted to use React.
--  It utilizes React components, React Router, and React Hooks throughout the application.
-
 10% Bundled Using Vite
 -  The application is bundled using Vite for fast build times and an efficient development environment.
 
