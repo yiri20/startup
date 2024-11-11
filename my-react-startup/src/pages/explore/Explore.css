@@ -1,3 +1,15 @@
+/* Container styling for the Explore page */
+.container {
+  margin-top: 100px; /* Space to avoid overlapping with navbar */
+  padding-bottom: 50px;
+  text-align: center;
+}
+
+/* Section styling */
+#trending-music {
+  margin-top: 30px;
+}
+
 /* Album image placeholder */
 .album-placeholder {
   display: block;
@@ -7,4 +19,18 @@
   height: auto;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styling */
+h2 {
+  color: #0454a8;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Text styling for the description */
+.text-center {
+  color: #333;
+  font-size: 1.1rem;
+  line-height: 1.5;
 }

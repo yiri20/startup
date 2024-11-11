@@ -1,19 +1,25 @@
+/* Footer Styling */
 .footer {
-    background-color: #0454a8;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-  }
-  
-  .footer a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.2rem;
-  }
-  
-  .footer a:hover {
-    color: #ff9800;
-  }
+  background-color: #0454a8;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  width: 100%;
+}
+
+.footer hr {
+  border: 2px solid #ffffff;
+  margin: 10px auto;
+  width: 90%;
+  border-radius: 5px;
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.footer a:hover {
+  color: #ff9800;
+}

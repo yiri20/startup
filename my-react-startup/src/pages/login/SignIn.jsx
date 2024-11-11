@@ -9,7 +9,6 @@ const SignIn = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     alert('Your account has been created successfully!');
-    // Reset form fields after submission
     setEmail('');
     setPassword('');
     setPromo('yes');
@@ -17,13 +16,11 @@ const SignIn = () => {
 
   return (
     <div className="signin-page">
-
-      {/* Main Form Section */}
-      <main className="container">
+      <div className="signin-container">
         <h2>Create Your Account</h2>
         <form onSubmit={handleSubmit} className="form-container">
-          <div>
-            <label htmlFor="email">E-mail</label>
+          <div className="mb-4">
+            <label htmlFor="email" className="form-label">E-mail</label>
             <input
               type="email"
               id="email"
@@ -33,11 +30,10 @@ const SignIn = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <button type="button" className="btn btn-secondary mt-2">Verify</button>
+            <button type="button" className="btn btn-secondary mt-2 w-100">Verify</button>
           </div>
-
-          <div>
-            <label htmlFor="password">Password</label>
+          <div className="mb-4">
+            <label htmlFor="password" className="form-label">Password</label>
             <input
               type="password"
               id="password"
@@ -48,8 +44,7 @@ const SignIn = () => {
               required
             />
           </div>
-
-          <fieldset className="mt-4">
+          <fieldset className="mb-4">
             <legend>Agreement</legend>
             <p>Do you want to receive promotional emails?</p>
             <div className="form-check">
@@ -77,11 +72,9 @@ const SignIn = () => {
               <label htmlFor="promo-no" className="form-check-label">No</label>
             </div>
           </fieldset>
-
           <button type="submit" className="btn btn-primary w-100">Create Account</button>
         </form>
-      </main>
-
+      </div>
     </div>
   );
 };

@@ -1,38 +1,44 @@
 /* Login Form Styling */
-.container {
-  max-width: 400px;
-  background-color: #ffffff;
+.login-container {
+  max-width: 500px;
+  margin: 50px auto;
   padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  margin: 20px auto;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
 }
 
-.form-control {
+.login-container h2 {
   margin-bottom: 20px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ced4da;
+  color: #0454a8;
 }
 
-.form-control:focus {
-  border-color: #0454a8;
-  box-shadow: 0 0 5px rgba(4, 84, 168, 0.5);
-}
-
-.btn-primary {
+.login-container button {
+  width: 120px;
+  margin: 10px;
   background-color: #0454a8;
-  border-color: #0454a8;
-  padding: 10px;
-  width: 100%;
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 5px;
   font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.btn-primary:hover {
+.login-container button:hover {
   background-color: #033f7a;
 }
 
-/* Signup Link Styling */
+.login-container .btn-secondary {
+  background-color: #6c757d;
+}
+
+.login-container .btn-secondary:hover {
+  background-color: #5a6268;
+}
+
 .signup-link {
   text-align: center;
   margin-top: 15px;
@@ -40,8 +46,6 @@
 
 .signup-link a {
   color: #0454a8;
-  text-decoration: none;
-  font-weight: bold;
 }
 
 .signup-link a:hover {

@@ -1,11 +1,12 @@
+/* Navbar Styling */
 header {
     background-color: #0454a8;
     color: white;
     padding: 20px 0;
     text-align: center;
   }
-
-.navbar {
+  
+  .navbar {
     background-color: #0454a8;
     padding: 20px 0;
     text-align: center;
@@ -14,62 +15,54 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-/* Title Styling */
-.navbar h1 {
+  }
+  
+  .navbar h1 {
     margin: 0;
-}
-
-.navbar h1 a {
+  }
+  
+  .navbar h1 a {
     color: white;
     text-decoration: none;
     font-size: 2.5em;
     font-weight: bold;
-}
-
-/* Horizontal line styling */
-.navbar hr {
+  }
+  
+  .navbar hr {
     border: 2px solid #ffffff;
     margin: 10px auto;
     width: 90%;
     border-radius: 5px;
-}
-
-/* Navigation bar styling */
-nav {
+  }
+  
+  nav {
     display: flex;
     justify-content: center;
     width: 100%;
-}
-
-nav ul {
+  }
+  
+  nav ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
     display: flex;
     justify-content: center;
     gap: 2rem;
-}
-
-nav ul li {
+  }
+  
+  nav ul li {
     display: inline;
-}
-
-nav a,
-.navbar .nav-link {
+  }
+  
+  nav a,
+  .navbar .nav-link {
     color: white !important;
     text-decoration: none;
     font-weight: bold;
-    font-size: 1.2em;
-}
-
-nav a:hover,
-.navbar .nav-link:hover {
+  }
+  
+  nav a:hover,
+  .navbar .nav-link:hover {
     color: #ff9800 !important;
-}
-
-/* Main content should have margin to avoid overlap */
-.container {
-    margin-top: 30px; /* Add margin to push content below the navbar */
-}
+  }
+  

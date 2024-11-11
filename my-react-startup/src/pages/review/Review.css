@@ -1,111 +1,58 @@
+/* Container styling */
+.container {
+  margin-top: 100px; /* Space to avoid overlapping with navbar */
+  padding-bottom: 50px;
+}
 
+/* Heading Styling */
+h2.text-center {
+  color: #0454a8;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
 
-/* Header styles */
-header {
+/* Table Styling */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
   background-color: #0454a8;
   color: white;
-  padding: 20px 0;
+  padding: 15px;
   text-align: center;
 }
 
-h1 a {
-  color: white;
-  text-decoration: none;
-  font-size: 1.2em;
-  font-weight: bold;
-}
-
-/* Horizontal line styling */
-hr {
-  border: 2px solid #ffffff;
-  margin: 20px auto;
-  border-radius: 5px;
-}
-
-/* Navigation bar styling */
-nav ul {
-  list-style-type: none;
-  padding: 0;
+.table td {
+  padding: 15px;
   text-align: center;
-  font-size: 1.2em;
+  border-bottom: 1px solid #dee2e6;
 }
 
-nav ul li {
-  display: inline;
-  margin: 0 15px;
-}
-
-nav a, footer a {
-  color: white;
+.table a {
+  color: #0454a8;
   text-decoration: none;
-  font-weight: bold;
 }
 
-nav a:hover, footer a:hover {
+.table a:hover {
+  text-decoration: underline;
   color: #ff9800;
 }
 
-/* Main content area */
-main {
-  max-width: 800px;
-  margin: 30px auto;
-  padding: 20px;
-  text-align: left;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Table styling */
-table {
-  border-spacing: 10px;
-  width: 100%;
-}
-
-th, td {
-  background-color: #f8f9fa;
-  padding: 10px;
-  border: 1px solid #dee2e6;
-  text-align: center;
-}
-
-/* Button styling for "Create Review" */
+/* Button styling for 'Create Review' link */
 .btn-primary {
   background-color: #0454a8;
   border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .btn-primary:hover {
   background-color: #033f7a;
 }
 
-/* Back link styling */
-.back-link {
-  display: inline-block;
-  margin-top: 20px;
-  font-weight: bold;
-  color: #0454a8;
-  text-decoration: none;
-}
-
-.back-link:hover {
-  color: #ff9800;
-}
-
-/* Footer styling */
-footer {
-  background-color: #0454a8;
-  color: white;
-  padding: 20px 0;
+.text-center {
   text-align: center;
-}
-
-footer a {
-  color: white;
-  font-size: 1.2rem;
-  text-decoration: none;
-}
-
-footer a:hover {
-  color: #ff9800;
 }
