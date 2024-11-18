@@ -4,7 +4,7 @@ import Home from './pages/home/Home';
 import About from './pages/about/About';
 import Explore from './pages/explore/Explore';
 import Review from './pages/review/Review';
-import ReviewDetail from './pages/review/ReviewDetail'; // Import ReviewDetail component
+import ReviewDetail from './pages/review/ReviewDetail'; // Import the ReviewDetail component
 import Schedule from './pages/schedule/Schedule';
 import SignIn from './pages/login/SignIn';
 import Login from './pages/login/Login';
@@ -22,7 +22,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/review" element={<Review />} />
-          <Route path="/review/:id" element={<ReviewDetail />} /> {/* Dynamic route for review details */}
+          <Route path="/review/:reviewId" element={<ReviewDetail />} /> {/* Dynamic route */}
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/login" element={<Login />} />
