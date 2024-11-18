@@ -1,42 +1,55 @@
 .review-details-container {
-    width: 80%;
-    max-width: 800px;
-    margin: 30px auto;
-    text-align: left; /* Align text to the left */
-  }
-  
-  .review-content {
-    margin-top: 20px;
-  }
-  
-  .review-content h3 {
-    color: #0454a8;
-    font-weight: bold;
-    margin-bottom: 15px;
-  }
-  
-  .review-content p {
-    margin: 10px 0;
-    line-height: 1.6;
-  }
-  
-  hr {
-    border: 1px solid #d3d3d3;
-  }
-  
-  .back-button-container {
-    margin-top: 40px;
-    text-align: right; /* Align button to the right */
-  }
-  
-  .btn-primary {
-    background-color: #0454a8;
-    border: none;
-    font-weight: bold;
-    padding: 10px 20px;
-  }
-  
-  .btn-primary:hover {
-    background-color: #033f7a;
-  }
-  
+  width: 80%;
+  max-width: 800px;
+  margin: 30px auto;
+  text-align: center; /* Center-align content */
+}
+
+.album-title {
+  font-size: 2.5rem; /* Larger font for album title */
+  font-weight: bold;
+  color: #0454a8;
+  margin-bottom: 10px;
+}
+
+.artist-name {
+  font-size: 1.5rem; /* Slightly larger font for artist name */
+  color: #6c757d; /* Subtle gray color */
+  margin-bottom: 20px;
+}
+
+.review-content {
+  margin-top: 20px;
+  text-align: left; /* Align the review content to the left */
+}
+
+.review-content h3 {
+  color: #0454a8;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.review-content p {
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+hr {
+  border: 1px solid #d3d3d3;
+}
+
+.back-button-container {
+  margin-top: 40px;
+  text-align: right; /* Align button to the right */
+}
+
+.btn-primary {
+  background-color: #0454a8;
+  border: none;
+  font-weight: bold;
+  padding: 10px 20px;
+}
+
+.btn-primary:hover {
+  background-color: #033f7a;
+}

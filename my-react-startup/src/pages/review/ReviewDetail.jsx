@@ -1,28 +1,44 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import './review.css';
+import { useParams, useNavigate } from 'react-router-dom';
+import './ReviewDetail.css';
 
-const reviewsData = [
-  { id: 1, album: 'The Bends', artist: 'Radiohead', rating: 4.5, date: 'August 20, 2024' },
-  { id: 2, album: 'In Rainbows', artist: 'Radiohead', rating: 4.8, date: 'September 2, 2024' },
-  { id: 3, album: 'OK Computer', artist: 'Radiohead', rating: 5.0, date: 'October 4, 2024' },
-];
+const ReviewDetail = ({ reviews }) => {
+  const { id } = useParams(); // Extract the ID from the URL
+  const navigate = useNavigate();
 
-const ReviewDetail = () => {
-  const { id } = useParams();
-  const review = reviewsData.find((r) => r.id === parseInt(id));
+  // Find the specific review by ID
+  const review = reviews.find((review) => review.id === id);
 
   if (!review) {
-    return <h2>Review not found</h2>;
+    // If review not found, display 404
+    return (
+      <div className="container text-center my-5">
+        <h2>404 - Review Not Found</h2>
+        <p>The review you're looking for doesn't exist.</p>
+        <button className="btn btn-primary" onClick={() => navigate('/review')}>
+          Back to Reviews
+        </button>
+      </div>
+    );
   }
 
   return (
-    <main className="container my-5">
-      <h2>{review.album} Review</h2>
-      <p><strong>Artist:</strong> {review.artist}</p>
-      <p><strong>Rating:</strong> {review.rating}</p>
-      <p><strong>Date:</strong> {review.date}</p>
-    </main>
+    <div className="review-details-container">
+      <h2 className="album-title">{review.album}</h2>
+      <p className="artist-name">{review.artist}</p>
+      <hr />
+      <div className="review-content">
+        <h3>Review</h3>
+        <p>{review.review}</p>
+        <p><strong>Rating:</strong> {review.rating}/5</p>
+        <p><strong>Date:</strong> {review.date}</p>
+      </div>
+      <div className="back-button-container">
+        <button className="btn btn-primary" onClick={() => navigate('/review')}>
+          Back to Reviews
+        </button>
+      </div>
+    </div>
   );
 };
 

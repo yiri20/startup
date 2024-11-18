@@ -60,11 +60,16 @@ app.get('/api/reviews/:id', (req, res) => {
 // 3. Create a new review
 app.post('/api/reviews', (req, res) => {
   const { album, artist, track, review, rating } = req.body;
+
+  if (!album || !artist || !review || !rating) {
+    return res.status(400).json({ message: 'All fields are required' });
+  }
+
   const newReview = {
     id: uuidv4(),
     album,
     artist,
-    track,
+    track: track || 'N/A', // Optional field
     review,
     rating,
     date: new Date().toLocaleDateString(),
@@ -72,7 +77,7 @@ app.post('/api/reviews', (req, res) => {
 
   reviews.push(newReview);
   saveData({ reviews }); // Save the updated reviews to the JSON file
-  res.json(newReview);
+  res.status(201).json(newReview);
 });
 
 // 4. Serve static frontend files
