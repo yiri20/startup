@@ -1,59 +1,74 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './review.css';
 
 const Review = () => {
-  const [reviews, setReviews] = useState([
-    {
-      id: 1,
-      album: 'The Bends',
-      artist: 'Radiohead',
-      rating: 4.5,
-      date: 'August 20, 2024',
-      review: 'A timeless classic with deep emotional resonance.'
-    },
-    {
-      id: 2,
-      album: 'In Rainbows',
-      artist: 'Radiohead',
-      rating: 4.8,
-      date: 'September 2, 2024',
-      review: 'A beautiful blend of electronic and rock sounds.'
-    },
-    {
-      id: 3,
-      album: 'OK Computer',
-      artist: 'Radiohead',
-      rating: 5.0,
-      date: 'October 4, 2024',
-      review: 'A groundbreaking album that defined a generation.'
-    }
-  ]);
-
+  const [reviews, setReviews] = useState([]); // Reviews fetched from the backend
   const [newReview, setNewReview] = useState({
     album: '',
     artist: '',
     rating: '',
-    review: ''
-  });
-
+    review: '',
+  }); // For creating new reviews
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [error, setError] = useState(null); // For error handling
 
+  // Fetch reviews from the backend on component load
+  useEffect(() => {
+    fetch('/api/reviews')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch reviews');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Fetched reviews:', data); // Debugging
+        setReviews(data.reviews || []); // Ensure reviews array is used
+      })
+      .catch((err) => {
+        console.error('Error fetching reviews:', err);
+        setError('Failed to load reviews. Please try again later.');
+      });
+  }, []);
+
+  // Handle form inputs
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewReview({ ...newReview, [name]: value });
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (newReview.album && newReview.artist && newReview.rating && newReview.review) {
       const newEntry = {
         ...newReview,
-        id: reviews.length + 1,
-        date: new Date().toLocaleDateString()
+        date: new Date().toLocaleDateString(), // Add date
       };
-      setReviews([...reviews, newEntry]);
-      setNewReview({ album: '', artist: '', rating: '', review: '' });
-      setIsFormVisible(false); // Close the form after submitting
+
+      // Post the new review to the backend
+      fetch('/api/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newEntry),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to submit review');
+          }
+          return response.json();
+        })
+        .then((createdReview) => {
+          console.log('Created review:', createdReview); // Debugging
+          setReviews([...reviews, createdReview]); // Update local state
+          setNewReview({ album: '', artist: '', rating: '', review: '' }); // Reset form
+          setIsFormVisible(false); // Close form
+        })
+        .catch((err) => {
+          console.error('Error submitting review:', err);
+          setError('Failed to submit review. Please try again later.');
+        });
     }
   };
 
@@ -61,6 +76,10 @@ const Review = () => {
     <>
       <main className="container my-5">
         <h2 className="text-center">Album Reviews</h2>
+
+        {/* Error Display */}
+        {error && <div className="alert alert-danger text-center">{error}</div>}
+
         {/* Reviews Table */}
         <table className="table table-striped table-hover">
           <thead>
@@ -73,15 +92,27 @@ const Review = () => {
             </tr>
           </thead>
           <tbody>
-            {reviews.map((review) => (
-              <tr key={review.id}>
-                <td>{review.id}</td>
-                <td><a href={`/review${review.id}`} className="text-decoration-none">{review.album}</a></td>
-                <td>{review.artist}</td>
-                <td>{review.rating}</td>
-                <td>{review.date}</td>
+            {reviews.length > 0 ? (
+              reviews.map((review, index) => (
+                <tr key={review.id || index}>
+                  <td>{index + 1}</td>
+                  <td>
+                    <a href={`/review${review.id || index}`} className="text-decoration-none">
+                      {review.album}
+                    </a>
+                  </td>
+                  <td>{review.artist}</td>
+                  <td>{review.rating}</td>
+                  <td>{review.date}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className="text-center">
+                  No reviews available. Add your first review!
+                </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
 
@@ -157,13 +188,9 @@ const Review = () => {
               </div>
 
               {/* Submit Button */}
-              <button
-                className={`btn toggle-button ${isFormVisible ? 'btn-secondary' : 'btn-primary'}`}
-                onClick={() => setIsFormVisible(!isFormVisible)}
-              >
-                {isFormVisible ? 'Hide Review Form' : 'Create Review'}
+              <button type="submit" className="btn btn-primary">
+                Submit Review
               </button>
-
             </form>
           </div>
         )}

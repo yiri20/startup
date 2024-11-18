@@ -1,0 +1,29 @@
+{
+    "reviews": [
+      {
+        "id": "unique-id-1",
+        "album": "The Bends",
+        "artist": "Radiohead",
+        "rating": 4.5,
+        "review": "A timeless classic with deep emotional resonance.",
+        "date": "2024-08-20"
+      },
+      {
+        "id": "unique-id-2",
+        "album": "In Rainbows",
+        "artist": "Radiohead",
+        "rating": 4.8,
+        "review": "A beautiful blend of electronic and rock sounds.",
+        "date": "2024-09-02"
+      },
+      {
+        "id": "unique-id-3",
+        "album": "OK Computer",
+        "artist": "Radiohead",
+        "rating": 5.0,
+        "review": "A groundbreaking album that defined a generation.",
+        "date": "2024-10-04"
+      }
+    ]
+  }
+  

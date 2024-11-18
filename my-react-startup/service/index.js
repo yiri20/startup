@@ -9,61 +9,125 @@ app.use(cors());
 app.use(express.json()); // For parsing JSON requests
 
 // In-memory data for now (will use a database later)
-let users = {};
-let reviews = [];
+let reviews = [
+  {
+    id: uuidv4(),
+    album: 'The Bends',
+    artist: 'Radiohead',
+    rating: 4.5,
+    review: 'A timeless classic with deep emotional resonance.',
+    date: '2024-08-20',
+  },
+  {
+    id: uuidv4(),
+    album: 'In Rainbows',
+    artist: 'Radiohead',
+    rating: 4.8,
+    review: 'A beautiful blend of electronic and rock sounds.',
+    date: '2024-09-02',
+  },
+  {
+    id: uuidv4(),
+    album: 'OK Computer',
+    artist: 'Radiohead',
+    rating: 5.0,
+    review: 'A groundbreaking album that defined a generation.',
+    date: '2024-10-04',
+  }
+];
 let schedules = [];
+let users = {};
 
-// Endpoints
-// 1. Fetch all reviews
+// API Endpoints
+// --- Reviews ---
 app.get('/api/reviews', (_req, res) => {
   res.json({ reviews });
 });
 
-// 2. Create a new review
 app.post('/api/reviews', (req, res) => {
-  const { artist, album, track, review, rating, date } = req.body;
-  const newReview = { id: uuidv4(), artist, album, track, review, rating, date };
+  const { album, artist, rating, review, date } = req.body;
+
+  if (!album || !artist || !rating || !review) {
+    return res.status(400).json({ message: 'All fields are required' });
+  }
+
+  const newReview = {
+    id: uuidv4(),
+    album,
+    artist,
+    rating,
+    review,
+    date: date || new Date().toLocaleDateString(),
+  };
+
   reviews.push(newReview);
   res.json(newReview);
 });
 
-// 3. Fetch all schedules
+// --- Schedules ---
 app.get('/api/schedules', (_req, res) => {
   res.json({ schedules });
 });
 
-// 4. Add a new schedule
 app.post('/api/schedules', (req, res) => {
   const { genre, date, notification } = req.body;
-  const newSchedule = { id: uuidv4(), genre, date, notification };
+
+  if (!genre || !date) {
+    return res.status(400).json({ message: 'Genre and date are required' });
+  }
+
+  const newSchedule = {
+    id: uuidv4(),
+    genre,
+    date,
+    notification: notification || false,
+  };
+
   schedules.push(newSchedule);
   res.json(newSchedule);
 });
 
-// 5. User authentication (register and login)
+// --- Authentication ---
 app.post('/api/auth/register', (req, res) => {
   const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required' });
+  }
+
   if (users[email]) {
     return res.status(409).json({ message: 'User already exists' });
   }
-  const user = { email, password, id: uuidv4() };
-  users[email] = user;
-  res.json({ id: user.id });
+
+  const newUser = { id: uuidv4(), email, password };
+  users[email] = newUser;
+  res.json({ id: newUser.id, email: newUser.email });
 });
 
 app.post('/api/auth/login', (req, res) => {
   const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required' });
+  }
+
   const user = users[email];
   if (user && user.password === password) {
-    return res.json({ id: user.id });
+    return res.json({ id: user.id, email: user.email });
   }
+
   res.status(401).json({ message: 'Invalid credentials' });
 });
 
-// 6. Serve static frontend files
+// Serve static frontend files
 app.use(express.static('public'));
+
+// Fallback for undefined routes
+app.use((_req, res) => {
+  res.status(404).json({ message: 'Endpoint not found' });
+});
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
