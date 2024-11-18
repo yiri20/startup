@@ -120,6 +120,7 @@ used extensively to navigate between different pages:
 #### Start Up Service
 40% - Create an HTTP service using Node.js and Express
 
+
 Implemented Backend Service:
 - Created an HTTP service using Node.js and Express to handle backend logic.
 - Added endpoints for managing reviews (/api/reviews), schedules (/api/schedules), user authentication (/api/auth), and the explore feature (/api/explore).
