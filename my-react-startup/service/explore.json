@@ -1,0 +1,24 @@
+[
+    {
+      "id": "1",
+      "title": "OK Computer",
+      "artist": "Radiohead",
+      "image": "https://via.placeholder.com/150",
+      "description": "A groundbreaking album with timeless tracks."
+    },
+    {
+      "id": "2",
+      "title": "The Bends",
+      "artist": "Radiohead",
+      "image": "https://via.placeholder.com/150",
+      "description": "A soulful, emotional classic."
+    },
+    {
+      "id": "3",
+      "title": "In Rainbows",
+      "artist": "Radiohead",
+      "image": "https://via.placeholder.com/150",
+      "description": "A beautiful mix of electronic and rock elements."
+    }
+  ]
+  
