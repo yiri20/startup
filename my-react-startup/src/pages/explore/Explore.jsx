@@ -3,10 +3,9 @@ import './Explore.css';
 
 const Explore = () => {
   const [exploreItems, setExploreItems] = useState([]);
-  const [loading, setLoading] = useState(true); // Loader state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch explore data
     fetch('/api/explore')
       .then((response) => {
         if (!response.ok) {
@@ -16,11 +15,11 @@ const Explore = () => {
       })
       .then((data) => {
         setExploreItems(data.explore || []);
-        setLoading(false); // Data is loaded
+        setLoading(false);
       })
       .catch((err) => {
         console.error('Error fetching explore data:', err);
-        setLoading(false); // End loader even on error
+        setLoading(false);
       });
   }, []);
 
