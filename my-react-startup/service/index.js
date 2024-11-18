@@ -11,38 +11,37 @@ const port = process.argv[2] || 4000;
 app.use(cors());
 app.use(express.json()); // For parsing JSON requests
 
-// Path to the data file
+// Paths for data files
 const DATA_FILE = path.join(__dirname, 'data.json');
+const EXPLORE_FILE = path.join(__dirname, 'explore.json');
 
-// Helper function to load data from the JSON file
-function loadData() {
+// Helper function to load data from JSON file
+function loadData(filePath, fallbackData = []) {
   try {
-    if (fs.existsSync(DATA_FILE)) {
-      const data = fs.readFileSync(DATA_FILE, 'utf-8');
+    if (fs.existsSync(filePath)) {
+      const data = fs.readFileSync(filePath, 'utf-8');
       return JSON.parse(data);
     }
-    return { reviews: [] };
+    return fallbackData;
   } catch (err) {
-    console.error('Error reading data file:', err);
-    return { reviews: [] };
+    console.error(`Error reading ${filePath}:`, err);
+    return fallbackData;
   }
 }
 
-// Helper function to save data to the JSON file
-function saveData(data) {
+// Helper function to save data to JSON file
+function saveData(filePath, data) {
   try {
-    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
   } catch (err) {
-    console.error('Error writing data file:', err);
+    console.error(`Error writing to ${filePath}:`, err);
   }
 }
 
 // Load initial data
-let { reviews } = loadData();
-let schedules = [];
-
-// In-memory data for explore (can later use a database or external API)
-const exploreData = [
+let { reviews } = loadData(DATA_FILE, { reviews: [] });
+let schedules = loadData(DATA_FILE).schedules || [];
+let exploreData = loadData(EXPLORE_FILE, [
   {
     id: '1',
     title: 'OK Computer',
@@ -64,9 +63,7 @@ const exploreData = [
     image: 'https://via.placeholder.com/150',
     description: 'A beautiful mix of electronic and rock elements.',
   },
-];
-
-// Endpoints
+]);
 
 // Reviews Endpoints
 app.get('/api/reviews', (_req, res) => {
@@ -100,7 +97,7 @@ app.post('/api/reviews', (req, res) => {
   };
 
   reviews.push(newReview);
-  saveData({ reviews });
+  saveData(DATA_FILE, { reviews, schedules }); // Save the updated reviews to the JSON file
   res.status(201).json(newReview);
 });
 
@@ -111,20 +108,28 @@ app.get('/api/schedules', (_req, res) => {
 
 app.post('/api/schedules', (req, res) => {
   const { genre, date, notification } = req.body;
+
+  if (!genre || !date) {
+    return res.status(400).json({ message: 'Genre and date are required' });
+  }
+
   const newSchedule = {
     id: uuidv4(),
     genre,
     date,
     notification,
   };
+
   schedules.push(newSchedule);
-  res.json(newSchedule);
+  saveData(DATA_FILE, { reviews, schedules }); // Save updated schedules
+  res.status(201).json(newSchedule);
 });
 
 app.delete('/api/schedules/:id', (req, res) => {
   const scheduleIndex = schedules.findIndex((s) => s.id === req.params.id);
   if (scheduleIndex !== -1) {
     schedules.splice(scheduleIndex, 1);
+    saveData(DATA_FILE, { reviews, schedules }); // Save updated schedules
     res.json({ message: 'Schedule deleted' });
   } else {
     res.status(404).json({ message: 'Schedule not found' });
@@ -134,6 +139,37 @@ app.delete('/api/schedules/:id', (req, res) => {
 // Explore Endpoints
 app.get('/api/explore', (_req, res) => {
   res.json({ explore: exploreData });
+});
+
+app.post('/api/explore', (req, res) => {
+  const { title, artist, image, description } = req.body;
+
+  if (!title || !artist || !description) {
+    return res.status(400).json({ message: 'Title, artist, and description are required' });
+  }
+
+  const newExploreItem = {
+    id: uuidv4(),
+    title,
+    artist,
+    image: image || 'https://via.placeholder.com/150', // Default image if not provided
+    description,
+  };
+
+  exploreData.push(newExploreItem);
+  saveData(EXPLORE_FILE, exploreData); // Save updated explore data
+  res.status(201).json(newExploreItem);
+});
+
+app.delete('/api/explore/:id', (req, res) => {
+  const exploreIndex = exploreData.findIndex((item) => item.id === req.params.id);
+  if (exploreIndex !== -1) {
+    exploreData.splice(exploreIndex, 1);
+    saveData(EXPLORE_FILE, exploreData); // Save updated explore data
+    res.json({ message: 'Explore item deleted' });
+  } else {
+    res.status(404).json({ message: 'Explore item not found' });
+  }
 });
 
 // Serve static frontend files

@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Explore.css';
 
 const Explore = () => {
-  const [items, setItems] = useState([]);
-  const [error, setError] = useState(null);
+  const [exploreItems, setExploreItems] = useState([]);
+  const [loading, setLoading] = useState(true); // Loader state
 
   useEffect(() => {
+    // Fetch explore data
     fetch('/api/explore')
       .then((response) => {
         if (!response.ok) {
@@ -13,16 +14,30 @@ const Explore = () => {
         }
         return response.json();
       })
-      .then((data) => setItems(data.explore || []))
-      .catch((err) => setError(err.message));
+      .then((data) => {
+        setExploreItems(data.explore || []);
+        setLoading(false); // Data is loaded
+      })
+      .catch((err) => {
+        console.error('Error fetching explore data:', err);
+        setLoading(false); // End loader even on error
+      });
   }, []);
+
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <div className="loader"></div>
+        <p>Loading Explore Items...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="explore-container">
       <h2 className="explore-title">Explore Trending Music</h2>
-      {error && <div className="error">{error}</div>}
       <div className="explore-grid">
-        {items.map((item) => (
+        {exploreItems.map((item) => (
           <div key={item.id} className="explore-card">
             <img src={item.image} alt={item.title} className="explore-image" />
             <h3 className="explore-item-title">{item.title}</h3>
