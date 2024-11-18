@@ -4,34 +4,34 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev:frontend": "vite", 
-    "dev:backend": "nodemon service/index.js", 
-    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"", 
-    "build": "vite build", 
-    "start": "node service/index.js", 
+    "dev:frontend": "vite",
+    "dev:backend": "nodemon service/index.js",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "build": "vite build",
+    "start": "node service/index.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
-    "express": "^4.18.2", 
+    "express": "^4.18.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0",
-    "uuid": "^9.0.0" 
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.3",
-    "concurrently": "^8.2.0",
+    "concurrently": "^8.2.2",
     "eslint": "^9.13.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.11.0",
-    "nodemon": "^3.0.1", 
+    "nodemon": "^3.0.1",
     "vite": "^5.4.10"
   }
 }
