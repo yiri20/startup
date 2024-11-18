@@ -10,7 +10,7 @@ const Review3 = () => {
       <section className="review-content">
         <h3>Review</h3>
         <p>
-          "OK Computer" is an iconic album that solidified Radiohead's place in music history. Its themes of alienation and technology are still relevant today, making it a timeless masterpiece.
+        "OK Computer" is an iconic album that solidified Radiohead's place in music history. Its themes of alienation and technology are still relevant today, making it a timeless masterpiece.
         </p>
         <p><strong>Rating:</strong> 5/5</p>
         <p><strong>Date:</strong> October 4, 2024</p>

@@ -10,7 +10,7 @@ const Review1 = () => {
       <section className="review-content">
         <h3>Review</h3>
         <p>
-          "In Rainbows" is a masterpiece that showcases Radiohead's ability to blend electronic sounds with rock. The album was initially released as a "pay-what-you-want" download, making it a revolutionary release.
+        "The Bends" is a quintessential album that marked Radiohead's transition from their grunge-inspired roots to a more sophisticated and emotionally resonant sound. With iconic tracks like "Fake Plastic Trees" and "Street Spirit (Fade Out)," the album explores themes of alienation, self-reflection, and human vulnerability. Its lush instrumentation and Thom Yorke's haunting vocals make it a timeless masterpiece that resonates with listeners on a deeply emotional level.
         </p>
         <p><strong>Rating:</strong> 4.8/5</p>
         <p><strong>Date:</strong> September 2, 2024</p>
