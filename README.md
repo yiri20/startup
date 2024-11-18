@@ -119,36 +119,73 @@ used extensively to navigate between different pages:
 
 #### Start Up Service
 40% - Create an HTTP service using Node.js and Express
+
 Implemented Backend Service:
+
 Created an HTTP service using Node.js and Express to handle backend logic.
+
 Added endpoints for managing reviews (/api/reviews), schedules (/api/schedules), user authentication (/api/auth), and the explore feature (/api/explore).
+
 Integrated iTunes API:
+
 The /api/explore endpoint fetches trending music data using the iTunes Search API and returns formatted results.
+
+
 10% - Frontend served up using Express static middleware
+
 Static Middleware:
+
 Configured Express to serve the frontend React application by using the express.static middleware.
+
 Deployed the production build of the React app to AWS, ensuring all routes (/, /login, /schedule, etc.) are handled seamlessly via Express.
+
+
 10% - Your frontend calls third-party service endpoints
+
 Third-Party API Integration:
+
 The frontend uses the iTunes Search API via the backend's /api/explore endpoint to display trending music albums on the Explore page.
+
 Utilized fetch to call the /api/explore endpoint and dynamically render data in the React app.
+
+
 20% - Your backend provides service endpoints
+
 Custom Backend Endpoints:
+
 Developed multiple backend endpoints:
+
 /api/reviews for creating and fetching album reviews.
+
 /api/schedules for managing music listening schedules.
+
 /api/auth for user authentication (signup and login).
+
 /api/explore for fetching music data using the iTunes API.
+
 All endpoints support proper HTTP methods (GET, POST, DELETE) and error handling.
+
+
 20% - Your frontend calls your service endpoints
+
 Frontend-Backend Integration:
+
 The React frontend communicates with the backend service through API calls:
+
 Explore Page:
+
 Fetches trending music data using the /api/explore endpoint.
+
 Review Page:
+
 Fetches and posts reviews using the /api/reviews endpoint.
+
 Schedule Page:
+
 Fetches, creates, and deletes schedules using the /api/schedules endpoint.
+
 Authentication:
+
 Handles user signup and login through the /api/auth endpoints.
+
 
