@@ -1,133 +1,89 @@
 const express = require('express');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 const port = process.argv[2] || 4000;
 
+// Middleware
 app.use(cors());
 app.use(express.json()); // For parsing JSON requests
 
-// In-memory data for now (will use a database later)
-let reviews = [
-  {
-    id: uuidv4(),
-    album: 'The Bends',
-    artist: 'Radiohead',
-    rating: 4.5,
-    review: 'A timeless classic with deep emotional resonance.',
-    date: '2024-08-20',
-  },
-  {
-    id: uuidv4(),
-    album: 'In Rainbows',
-    artist: 'Radiohead',
-    rating: 4.8,
-    review: 'A beautiful blend of electronic and rock sounds.',
-    date: '2024-09-02',
-  },
-  {
-    id: uuidv4(),
-    album: 'OK Computer',
-    artist: 'Radiohead',
-    rating: 5.0,
-    review: 'A groundbreaking album that defined a generation.',
-    date: '2024-10-04',
-  }
-];
-let schedules = [];
-let users = {};
+// Path to the data file
+const DATA_FILE = path.join(__dirname, 'data.json');
 
-// API Endpoints
-// --- Reviews ---
+// Helper function to load data from the JSON file
+function loadData() {
+  try {
+    if (fs.existsSync(DATA_FILE)) {
+      const data = fs.readFileSync(DATA_FILE, 'utf-8');
+      return JSON.parse(data);
+    }
+    return { reviews: [] };
+  } catch (err) {
+    console.error('Error reading data file:', err);
+    return { reviews: [] };
+  }
+}
+
+// Helper function to save data to the JSON file
+function saveData(data) {
+  try {
+    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+  } catch (err) {
+    console.error('Error writing data file:', err);
+  }
+}
+
+// Load initial data
+let { reviews } = loadData();
+
+// Endpoints
+
+// 1. Fetch all reviews
 app.get('/api/reviews', (_req, res) => {
   res.json({ reviews });
 });
 
-app.post('/api/reviews', (req, res) => {
-  const { album, artist, rating, review, date } = req.body;
-
-  if (!album || !artist || !rating || !review) {
-    return res.status(400).json({ message: 'All fields are required' });
+// 2. Fetch a single review by ID
+app.get('/api/reviews/:id', (req, res) => {
+  const review = reviews.find((r) => r.id === req.params.id);
+  if (review) {
+    res.json(review);
+  } else {
+    res.status(404).json({ message: 'Review not found' });
   }
+});
 
+// 3. Create a new review
+app.post('/api/reviews', (req, res) => {
+  const { album, artist, track, review, rating } = req.body;
   const newReview = {
     id: uuidv4(),
     album,
     artist,
-    rating,
+    track,
     review,
-    date: date || new Date().toLocaleDateString(),
+    rating,
+    date: new Date().toLocaleDateString(),
   };
 
   reviews.push(newReview);
+  saveData({ reviews }); // Save the updated reviews to the JSON file
   res.json(newReview);
 });
 
-// --- Schedules ---
-app.get('/api/schedules', (_req, res) => {
-  res.json({ schedules });
-});
-
-app.post('/api/schedules', (req, res) => {
-  const { genre, date, notification } = req.body;
-
-  if (!genre || !date) {
-    return res.status(400).json({ message: 'Genre and date are required' });
-  }
-
-  const newSchedule = {
-    id: uuidv4(),
-    genre,
-    date,
-    notification: notification || false,
-  };
-
-  schedules.push(newSchedule);
-  res.json(newSchedule);
-});
-
-// --- Authentication ---
-app.post('/api/auth/register', (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ message: 'Email and password are required' });
-  }
-
-  if (users[email]) {
-    return res.status(409).json({ message: 'User already exists' });
-  }
-
-  const newUser = { id: uuidv4(), email, password };
-  users[email] = newUser;
-  res.json({ id: newUser.id, email: newUser.email });
-});
-
-app.post('/api/auth/login', (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ message: 'Email and password are required' });
-  }
-
-  const user = users[email];
-  if (user && user.password === password) {
-    return res.json({ id: user.id, email: user.email });
-  }
-
-  res.status(401).json({ message: 'Invalid credentials' });
-});
-
-// Serve static frontend files
+// 4. Serve static frontend files
 app.use(express.static('public'));
 
-// Fallback for undefined routes
-app.use((_req, res) => {
-  res.status(404).json({ message: 'Endpoint not found' });
+// Catch-all handler to serve index.html for React Router paths
+app.get('*', (_req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Listening on port ${port}`);
 });
