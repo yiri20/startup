@@ -1,4 +1,4 @@
-/* Login Form Styling */
+/* Login Page Styling */
 .login-container {
   max-width: 500px;
   margin: 50px auto;
@@ -14,38 +14,56 @@
   color: #0454a8;
 }
 
-.login-container button {
-  width: 120px;
-  margin: 10px;
+.alert {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+button {
   background-color: #0454a8;
   border: none;
   color: white;
-  padding: 12px;
+  padding: 10px;
+  margin-top: 20px;
   border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.login-container button:hover {
+button:hover {
   background-color: #033f7a;
 }
 
-.login-container .btn-secondary {
-  background-color: #6c757d;
-}
-
-.login-container .btn-secondary:hover {
-  background-color: #5a6268;
-}
-
 .signup-link {
-  text-align: center;
   margin-top: 15px;
 }
 
 .signup-link a {
   color: #0454a8;
+  text-decoration: none;
 }
 
 .signup-link a:hover {
