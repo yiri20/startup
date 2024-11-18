@@ -3,6 +3,7 @@ const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios'); // For making API requests
 
 const app = express();
 const port = process.argv[2] || 4000;
@@ -13,7 +14,7 @@ app.use(express.json()); // For parsing JSON requests
 
 // Paths for data files
 const DATA_FILE = path.join(__dirname, 'data.json');
-const EXPLORE_FILE = path.join(__dirname, 'explore.json');
+const USERS_FILE = path.join(__dirname, 'users.json');
 
 // Helper function to load data from JSON file
 function loadData(filePath, fallbackData = []) {
@@ -41,32 +42,7 @@ function saveData(filePath, data) {
 // Load initial data
 let { reviews } = loadData(DATA_FILE, { reviews: [] });
 let schedules = loadData(DATA_FILE).schedules || [];
-let exploreData = loadData(EXPLORE_FILE, [
-  {
-    id: '1',
-    title: 'OK Computer',
-    artist: 'Radiohead',
-    image: 'https://via.placeholder.com/150',
-    description: 'A groundbreaking album with timeless tracks.',
-  },
-  {
-    id: '2',
-    title: 'The Bends',
-    artist: 'Radiohead',
-    image: 'https://via.placeholder.com/150',
-    description: 'A soulful, emotional classic.',
-  },
-  {
-    id: '3',
-    title: 'In Rainbows',
-    artist: 'Radiohead',
-    image: 'https://via.placeholder.com/150',
-    description: 'A beautiful mix of electronic and rock elements.',
-  },
-]);
-
-// User data for authentication
-let users = {};
+let users = loadData(USERS_FILE, {});
 
 // Authentication Endpoints
 app.post('/api/auth/register', (req, res) => {
@@ -80,14 +56,15 @@ app.post('/api/auth/register', (req, res) => {
     return res.status(409).json({ message: 'User already exists' });
   }
 
-  const user = {
+  const newUser = {
     id: uuidv4(),
     email,
     password, // In production, use hashed passwords!
   };
 
-  users[email] = user;
-  res.status(201).json({ id: user.id, email: user.email });
+  users[email] = newUser;
+  saveData(USERS_FILE, users);
+  res.status(201).json({ id: newUser.id, email: newUser.email });
 });
 
 app.post('/api/auth/login', (req, res) => {
@@ -177,39 +154,30 @@ app.delete('/api/schedules/:id', (req, res) => {
   }
 });
 
-// Explore Endpoints
-app.get('/api/explore', (_req, res) => {
-  res.json({ explore: exploreData });
-});
-
-app.post('/api/explore', (req, res) => {
-  const { title, artist, image, description } = req.body;
-
-  if (!title || !artist || !description) {
-    return res.status(400).json({ message: 'Title, artist, and description are required' });
-  }
-
-  const newExploreItem = {
-    id: uuidv4(),
-    title,
-    artist,
-    image: image || 'https://via.placeholder.com/150', // Default image if not provided
-    description,
-  };
-
-  exploreData.push(newExploreItem);
-  saveData(EXPLORE_FILE, exploreData); // Save updated explore data
-  res.status(201).json(newExploreItem);
-});
-
-app.delete('/api/explore/:id', (req, res) => {
-  const exploreIndex = exploreData.findIndex((item) => item.id === req.params.id);
-  if (exploreIndex !== -1) {
-    exploreData.splice(exploreIndex, 1);
-    saveData(EXPLORE_FILE, exploreData); // Save updated explore data
-    res.json({ message: 'Explore item deleted' });
-  } else {
-    res.status(404).json({ message: 'Explore item not found' });
+// Explore Endpoints using iTunes API
+app.get('/api/explore', async (_req, res) => {
+  try {
+    const response = await axios.get(
+      'https://itunes.apple.com/search',
+      {
+        params: {
+          term: 'music',
+          entity: 'album',
+          limit: 10,
+        },
+      }
+    );
+    const albums = response.data.results.map((album) => ({
+      id: album.collectionId,
+      title: album.collectionName,
+      artist: album.artistName,
+      image: album.artworkUrl100,
+      description: `Released: ${new Date(album.releaseDate).toLocaleDateString()}`,
+    }));
+    res.json({ explore: albums });
+  } catch (error) {
+    console.error('Error fetching data from iTunes API:', error.message);
+    res.status(500).json({ message: 'Failed to fetch explore data' });
   }
 });
 

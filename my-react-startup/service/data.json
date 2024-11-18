@@ -1,29 +1,38 @@
 {
-    "reviews": [
-      {
-        "id": "reviewunique-id-1",
-        "album": "The Bends",
-        "artist": "Radiohead",
-        "rating": 4.5,
-        "review": "\"The Bends\" is a quintessential album that marked Radiohead's transition from their grunge-inspired roots to a more sophisticated and emotionally resonant sound. With iconic tracks like \"Fake Plastic Trees\" and \"Street Spirit (Fade Out),\" the album explores themes of alienation, self-reflection, and human vulnerability. Its lush instrumentation and Thom Yorke's haunting vocals make it a timeless masterpiece that resonates with listeners on a deeply emotional level.",
-        "date": "2024-08-20"
-      },
-      {
-        "id": "reviewunique-id-2",
-        "album": "In Rainbows",
-        "artist": "Radiohead",
-        "rating": 4.8,
-        "review": "\"In Rainbows\" is a masterpiece that showcases Radiohead's ability to blend electronic sounds with rock. The album was initially released as a \"pay-what-you-want\" download, making it a revolutionary release.",
-        "date": "2024-09-02"
-      },
-      {
-        "id": "reviewunique-id-3",
-        "album": "OK Computer",
-        "artist": "Radiohead",
-        "rating": 5.0,
-        "review": "\"OK Computer\" is an iconic album that solidified Radiohead's place in music history. Its themes of alienation and technology are still relevant today, making it a timeless masterpiece.",
-        "date": "2024-10-04"
-      }
-    ]
-  }
-  
+  "reviews": [
+    {
+      "id": "reviewunique-id-1",
+      "album": "The Bends",
+      "artist": "Radiohead",
+      "rating": 4.5,
+      "review": "\"The Bends\" is a quintessential album that marked Radiohead's transition from their grunge-inspired roots to a more sophisticated and emotionally resonant sound. With iconic tracks like \"Fake Plastic Trees\" and \"Street Spirit (Fade Out),\" the album explores themes of alienation, self-reflection, and human vulnerability. Its lush instrumentation and Thom Yorke's haunting vocals make it a timeless masterpiece that resonates with listeners on a deeply emotional level.",
+      "date": "2024-08-20"
+    },
+    {
+      "id": "reviewunique-id-2",
+      "album": "In Rainbows",
+      "artist": "Radiohead",
+      "rating": 4.8,
+      "review": "\"In Rainbows\" is a masterpiece that showcases Radiohead's ability to blend electronic sounds with rock. The album was initially released as a \"pay-what-you-want\" download, making it a revolutionary release.",
+      "date": "2024-09-02"
+    },
+    {
+      "id": "reviewunique-id-3",
+      "album": "OK Computer",
+      "artist": "Radiohead",
+      "rating": 5,
+      "review": "\"OK Computer\" is an iconic album that solidified Radiohead's place in music history. Its themes of alienation and technology are still relevant today, making it a timeless masterpiece.",
+      "date": "2024-10-04"
+    },
+    {
+      "id": "bfd8c2a2-7380-409f-bc77-98a406631164",
+      "album": "sdfadf",
+      "artist": "asdfasdf",
+      "track": "N/A",
+      "review": "asdafd",
+      "rating": "0.2",
+      "date": "2024. 11. 18."
+    }
+  ],
+  "schedules": []
+}
