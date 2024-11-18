@@ -1,6 +1,6 @@
 /* Container styling */
 .schedule-container {
-  max-width: 600px;
+  max-width: 700px;
   margin: 40px auto;
   padding: 30px;
   background-color: #f8f9fa;
@@ -12,7 +12,7 @@
 /* Title and description */
 .schedule-title {
   color: #0454a8;
-  font-size: 2em;
+  font-size: 2.2em;
   margin-bottom: 20px;
 }
 
@@ -39,7 +39,7 @@
   margin-bottom: 8px;
 }
 
-/* Input and Select styling */
+/* Input styling */
 .schedule-input,
 .schedule-select {
   width: 100%;
@@ -54,37 +54,7 @@
   box-shadow: 0 0 5px rgba(4, 84, 168, 0.3);
 }
 
-/* Fieldset styling */
-fieldset {
-  border: none;
-  padding: 0;
-}
-
-.radio-group {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  justify-content: center;
-}
-
-.radio-option {
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-  gap: 5px;
-}
-
-.radio-option input {
-  margin-right: 5px;
-}
-
 /* Button styling */
-.button-group {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-}
-
 .schedule-btn {
   width: 100%;
   padding: 12px;
@@ -112,4 +82,31 @@ fieldset {
 
 .schedule-btn-secondary:hover {
   background-color: #5a6268;
+}
+
+/* List of schedules */
+.schedules-list {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.schedules-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.schedules-list li {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.schedules-list li button {
+  padding: 5px 10px;
+  font-size: 0.9em;
 }

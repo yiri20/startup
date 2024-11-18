@@ -92,3 +92,34 @@ app.get('*', (_req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+let schedules = [];
+
+// Fetch all schedules
+app.get('/api/schedules', (_req, res) => {
+  res.json({ schedules });
+});
+
+// Add a new schedule
+app.post('/api/schedules', (req, res) => {
+  const { genre, date, notification } = req.body;
+  const newSchedule = {
+    id: uuidv4(),
+    genre,
+    date,
+    notification,
+  };
+  schedules.push(newSchedule);
+  res.json(newSchedule);
+});
+
+// Delete a schedule by ID
+app.delete('/api/schedules/:id', (req, res) => {
+  const scheduleIndex = schedules.findIndex((s) => s.id === req.params.id);
+  if (scheduleIndex !== -1) {
+    schedules.splice(scheduleIndex, 1);
+    res.json({ message: 'Schedule deleted' });
+  } else {
+    res.status(404).json({ message: 'Schedule not found' });
+  }
+});

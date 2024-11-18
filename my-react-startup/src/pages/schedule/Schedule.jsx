@@ -1,18 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Schedule.css';
 
 const Schedule = () => {
-  const [genre, setGenre] = useState('R&B');
-  const [datetime, setDatetime] = useState('');
-  const [notification, setNotification] = useState('yes');
+  const [schedules, setSchedules] = useState([]); // For storing schedules from the backend
+  const [newSchedule, setNewSchedule] = useState({
+    genre: 'R&B',
+    datetime: '',
+    notification: true,
+  });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    alert('Schedule saved successfully!');
-    // Reset fields
-    setGenre('R&B');
-    setDatetime('');
-    setNotification('yes');
+  // Fetch schedules from the backend when the component loads
+  useEffect(() => {
+    fetch('/api/schedules')
+      .then((response) => response.json())
+      .then((data) => setSchedules(data.schedules || []))
+      .catch((err) => console.error('Failed to fetch schedules:', err));
+  }, []);
+
+  // Handle form inputs
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setNewSchedule((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  };
+
+  // Submit the new schedule to the backend
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch('/api/schedules', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newSchedule),
+    })
+      .then((response) => response.json())
+      .then((createdSchedule) => {
+        setSchedules((prev) => [...prev, createdSchedule]); // Add new schedule to the list
+        setNewSchedule({ genre: 'R&B', datetime: '', notification: true }); // Reset the form
+      })
+      .catch((err) => console.error('Failed to create schedule:', err));
+  };
+
+  // Delete a schedule
+  const handleDelete = (id) => {
+    fetch(`/api/schedules/${id}`, { method: 'DELETE' })
+      .then(() => {
+        setSchedules((prev) => prev.filter((schedule) => schedule.id !== id));
+      })
+      .catch((err) => console.error('Failed to delete schedule:', err));
   };
 
   return (
@@ -25,8 +61,9 @@ const Schedule = () => {
           <label htmlFor="genre" className="form-label">Genre:</label>
           <select
             id="genre"
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
+            name="genre"
+            value={newSchedule.genre}
+            onChange={handleInputChange}
             className="schedule-select"
           >
             <option value="Pop">Pop</option>
@@ -45,43 +82,49 @@ const Schedule = () => {
           <input
             type="datetime-local"
             id="datetime"
-            value={datetime}
-            onChange={(e) => setDatetime(e.target.value)}
+            name="datetime"
+            value={newSchedule.datetime}
+            onChange={handleInputChange}
             className="schedule-input"
+            required
           />
         </div>
 
-        <fieldset className="form-group">
-          <legend className="form-label">Notification</legend>
-          <div className="radio-group">
-            <label className="radio-option">
-              <input
-                type="radio"
-                name="notification"
-                value="yes"
-                checked={notification === 'yes'}
-                onChange={() => setNotification('yes')}
-              />
-              Yes
-            </label>
-            <label className="radio-option">
-              <input
-                type="radio"
-                name="notification"
-                value="no"
-                checked={notification === 'no'}
-                onChange={() => setNotification('no')}
-              />
-              No
-            </label>
-          </div>
-        </fieldset>
-
-        <div className="button-group">
-          <button type="submit" className="schedule-btn schedule-btn-primary">Save</button>
-          <button type="reset" className="schedule-btn schedule-btn-secondary">Clear</button>
+        <div className="form-group">
+          <label htmlFor="notification" className="form-label">Notification:</label>
+          <input
+            type="checkbox"
+            id="notification"
+            name="notification"
+            checked={newSchedule.notification}
+            onChange={handleInputChange}
+          />
         </div>
+
+        <button type="submit" className="schedule-btn schedule-btn-primary">Save</button>
       </form>
+
+      <div className="schedules-list">
+        <h3>Scheduled Sessions</h3>
+        {schedules.length > 0 ? (
+          <ul>
+            {schedules.map((schedule) => (
+              <li key={schedule.id}>
+                <strong>{schedule.genre}</strong> on <em>{schedule.datetime}</em>{' '}
+                {schedule.notification && <span>(Notification enabled)</span>}
+                <button
+                  className="schedule-btn schedule-btn-secondary"
+                  onClick={() => handleDelete(schedule.id)}
+                >
+                  Delete
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No scheduled sessions yet. Add one!</p>
+        )}
+      </div>
     </div>
   );
 };
