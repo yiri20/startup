@@ -5,19 +5,39 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [promo, setPromo] = useState('yes');
+  const [message, setMessage] = useState(''); // To display success or error messages
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    alert('Your account has been created successfully!');
-    setEmail('');
-    setPassword('');
-    setPromo('yes');
+
+    try {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        setMessage('Your account has been created successfully!');
+        setEmail('');
+        setPassword('');
+        setPromo('yes');
+      } else if (response.status === 409) {
+        setMessage('User already exists. Please log in.');
+      } else {
+        setMessage('An error occurred. Please try again.');
+      }
+    } catch (err) {
+      console.error('Error during registration:', err);
+      setMessage('Failed to create account. Please check your connection.');
+    }
   };
 
   return (
     <div className="signin-page">
       <div className="signin-container">
         <h2>Create Your Account</h2>
+        {message && <div className="alert">{message}</div>}
         <form onSubmit={handleSubmit} className="form-container">
           <div className="mb-4">
             <label htmlFor="email" className="form-label">E-mail</label>
@@ -30,7 +50,6 @@ const SignIn = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <button type="button" className="btn btn-secondary mt-2 w-100">Verify</button>
           </div>
           <div className="mb-4">
             <label htmlFor="password" className="form-label">Password</label>
