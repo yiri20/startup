@@ -23,15 +23,6 @@
       "rating": 5,
       "review": "\"OK Computer\" is an iconic album that solidified Radiohead's place in music history. Its themes of alienation and technology are still relevant today, making it a timeless masterpiece.",
       "date": "2024-10-04"
-    },
-    {
-      "id": "bfd8c2a2-7380-409f-bc77-98a406631164",
-      "album": "sdfadf",
-      "artist": "asdfasdf",
-      "track": "N/A",
-      "review": "asdafd",
-      "rating": "0.2",
-      "date": "2024. 11. 18."
     }
   ],
   "schedules": []
