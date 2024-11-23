@@ -23,3 +23,5 @@ yarn-error.log*
 # Temporary files
 *.tmp
 *.log
+
+/service/dbConfig.json
