@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const User = require('./models/User');
 const axios = require('axios');
@@ -15,6 +16,7 @@ dotenv.config();
 // Set up Express app
 const app = express();
 const port = process.env.PORT || 4000;
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 // Middleware
 app.use(cors());
@@ -76,7 +78,7 @@ app.post('/api/auth/register', async (req, res) => {
       password: hashedPassword,
     });
 
-      await newUser.save();
+    await newUser.save();
     res.status(201).json({ id: newUser._id, email: newUser.email });
   } catch (error) {
     console.error('Error during registration:', error);
@@ -104,12 +106,39 @@ app.post('/api/auth/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials. Please try again.' });
     }
 
-    res.status(200).json({ id: user._id, email: user.email });
+    // Generate JWT
+    const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET, { expiresIn: '1h' });
+
+    res.status(200).json({ token });
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'An error occurred. Please try again later.' });
   }
 });
+
+app.post('/api/auth/logout', (req, res) => {
+  // Since JWT is stateless, the frontend can simply remove the token.
+  // Alternatively, you could keep track of blacklisted tokens to prevent misuse.
+  res.status(200).json({ message: 'Logout successful' });
+});
+
+// Middleware to authenticate JWT tokens
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ message: 'Access token is missing or invalid' });
+  }
+
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ message: 'Invalid token' });
+    }
+    req.user = user;
+    next();
+  });
+}
 
 // Reviews Endpoints
 app.get('/api/reviews', async (_req, res) => {
@@ -122,7 +151,7 @@ app.get('/api/reviews', async (_req, res) => {
   }
 });
 
-app.post('/api/reviews', async (req, res) => {
+app.post('/api/reviews', authenticateToken, async (req, res) => {
   const { album, artist, rating, review } = req.body;
 
   if (!album || !artist || !rating || !review) {
@@ -156,7 +185,7 @@ app.get('/api/schedules', async (_req, res) => {
   }
 });
 
-app.post('/api/schedules', async (req, res) => {
+app.post('/api/schedules', authenticateToken, async (req, res) => {
   const { genre, datetime, notification } = req.body;
 
   if (!genre || !datetime) {
@@ -177,7 +206,7 @@ app.post('/api/schedules', async (req, res) => {
   }
 });
 
-app.delete('/api/schedules/:id', async (req, res) => {
+app.delete('/api/schedules/:id', authenticateToken, async (req, res) => {
   try {
     const result = await Schedule.findByIdAndDelete(req.params.id);
     if (!result) {
