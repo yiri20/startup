@@ -249,11 +249,11 @@ app.get('/api/explore', async (_req, res) => {
 });
 
 // Serve static frontend files
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../')));
 
 // Catch-all handler for React Router paths
 app.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+  res.sendFile(path.join(__dirname, '../index.html'));
 });
 
 // Start the server

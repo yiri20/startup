@@ -1,45 +1,120 @@
-import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import './ReviewDetail.css';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const ReviewDetail = ({ reviews }) => {
-  const { id } = useParams(); // Extract the ID from the URL
+const CreateReview = () => {
+  const [album, setAlbum] = useState('');
+  const [artist, setArtist] = useState('');
+  const [rating, setRating] = useState('');
+  const [review, setReview] = useState('');
   const navigate = useNavigate();
 
-  // Find the specific review by ID
-  const review = reviews.find((review) => review.id === id);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  if (!review) {
-    // If review not found, display 404
-    return (
-      <div className="container text-center my-5">
-        <h2>404 - Review Not Found</h2>
-        <p>The review you're looking for doesn't exist.</p>
-        <button className="btn btn-primary" onClick={() => navigate('/review')}>
-          Back to Reviews
-        </button>
-      </div>
-    );
-  }
+    // Create a new review object
+    const newReview = {
+      album,
+      artist,
+      rating,
+      review,
+      date: new Date().toLocaleDateString(), // Add today's date
+    };
+
+    // Send the new review to the backend
+    fetch('/api/reviews', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newReview),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to create review');
+        }
+        return response.json();
+      })
+      .then(() => {
+        alert('Review Created!');
+        navigate('/'); // Redirect back to the reviews list
+      })
+      .catch((err) => {
+        console.error(err);
+        alert('An error occurred while creating the review.');
+      });
+  };
 
   return (
-    <div className="review-details-container">
-      <h2 className="album-title">{review.album}</h2>
-      <p className="artist-name">{review.artist}</p>
-      <hr />
-      <div className="review-content">
-        <h3>Review</h3>
-        <p>{review.review}</p>
-        <p><strong>Rating:</strong> {review.rating}/5</p>
-        <p><strong>Date:</strong> {review.date}</p>
-      </div>
-      <div className="back-button-container">
-        <button className="btn btn-primary" onClick={() => navigate('/review')}>
-          Back to Reviews
+    <div className="container my-5">
+      <h2>Create a New Review</h2>
+      <form onSubmit={handleSubmit}>
+        {/* Album Input */}
+        <div className="mb-3">
+          <label htmlFor="album" className="form-label">
+            Album
+          </label>
+          <input
+            type="text"
+            id="album"
+            value={album}
+            onChange={(e) => setAlbum(e.target.value)}
+            className="form-control"
+            required
+          />
+        </div>
+
+        {/* Artist Input */}
+        <div className="mb-3">
+          <label htmlFor="artist" className="form-label">
+            Artist
+          </label>
+          <input
+            type="text"
+            id="artist"
+            value={artist}
+            onChange={(e) => setArtist(e.target.value)}
+            className="form-control"
+            required
+          />
+        </div>
+
+        {/* Rating Input */}
+        <div className="mb-3">
+          <label htmlFor="rating" className="form-label">
+            Rating (0 to 5)
+          </label>
+          <input
+            type="number"
+            id="rating"
+            value={rating}
+            onChange={(e) => setRating(e.target.value)}
+            className="form-control"
+            required
+            min="0"
+            max="5"
+          />
+        </div>
+
+        {/* Review Textarea */}
+        <div className="mb-3">
+          <label htmlFor="review" className="form-label">
+            Review
+          </label>
+          <textarea
+            id="review"
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
+            className="form-control"
+            rows="4"
+            required
+          ></textarea>
+        </div>
+
+        {/* Submit Button */}
+        <button type="submit" className="btn btn-primary">
+          Submit Review
         </button>
-      </div>
+      </form>
     </div>
   );
 };
 
-export default ReviewDetail;
+export default CreateReview;
