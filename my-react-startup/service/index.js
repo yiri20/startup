@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
-const bcrypt = require('bcryptjs'); // Replace 'bcrypt' with 'bcryptjs'
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const User = require('./models/User');
@@ -11,7 +11,12 @@ const path = require('path');
 const dotenv = require('dotenv');
 
 // Load environment variables from .env file
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
+// Debug: Log environment variables
+console.log('MONGODB_URI:', process.env.MONGODB_URI);
+console.log('PORT:', process.env.PORT);
+console.log('JWT_SECRET:', process.env.JWT_SECRET);
 
 // Set up Express app
 const app = express();
@@ -25,10 +30,10 @@ app.use(express.json());
 // MongoDB connection
 (async function connectToDatabase() {
   try {
+    console.log('Connecting to MongoDB with URI:', process.env.MONGODB_URI); // Debug log
     await mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true,
     });
     console.log('Connected to MongoDB');
   } catch (error) {
