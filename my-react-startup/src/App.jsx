@@ -7,7 +7,7 @@ import Review from './pages/review/Review';
 import ReviewDetail from './pages/review/ReviewDetail';
 import Schedule from './pages/schedule/Schedule';
 import SignIn from './pages/login/SignIn';
-import Login from './pages/login/Login';
+import Login from './pages/login/LogIn';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import './styles/App.css';
