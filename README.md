@@ -154,7 +154,7 @@ Custom Backend Endpoints:
 
 20% - Your frontend calls your service endpoints
 
-
+#### Start Up Login
 Frontend-Backend Integration:
 - The React frontend communicates with the backend service through API calls:
 Explore Page:
@@ -169,4 +169,24 @@ Schedule Page:
 Authentication:
 - Handles user signup and login through the /api/auth endpoints.
 
+Supports New User Registration (20%):
 
+ - implemented /api/auth/register endpoint for user registration with hashed passwords using bcrypt.
+
+Supports Existing User Authentication and Logout (20%):
+
+ - The /api/auth/login endpoint verifies user credentials, and issues a JWT token.
+ - The /api/auth/logout endpoint simply confirms logout (with a reminder that JWT is stateless).
+
+Stores Application Data in MongoDB (20%):
+
+ - Reviews and schedules are stored using MongoDB. You have used Review and Schedule Mongoose schemas for data storage.
+
+Stores and Retrieves Credentials in MongoDB (20%):
+
+ - You have stored credentials (with hashing) in MongoDB and used JWT for secure session handling.
+
+Restricts Functionality Based on Authentication (20%):
+
+ - The authenticateToken middleware is used for protecting certain routes (/api/reviews, /api/schedules).
+Only authenticated users can create, update, or delete data.
