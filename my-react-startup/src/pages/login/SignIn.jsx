@@ -11,7 +11,7 @@ const SignIn = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch('/api/auth/register', {
+      const response = await fetch('/api/auth/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

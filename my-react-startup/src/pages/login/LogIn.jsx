@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { AuthState } from './authState';
 import './login.css';
 
-export function Login({ userName, authState, onAuthChange }) {
+export default function Login({ userName, authState, onAuthChange }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  console.log('authState:', authState);
 
   async function handleLogin() {
     if (!email || !password) {

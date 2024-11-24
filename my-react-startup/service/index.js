@@ -26,7 +26,13 @@ app.use(cookieParser());
 app.use(cors());
 
 // Serve up the application's static content
-app.use(express.static(path.join(__dirname, '../')));
+app.use(express.static(path.join(__dirname, '../public'), {
+  setHeaders: (res, path) => {
+    if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript');
+    }
+  }
+}));
 
 // Trust headers that are forwarded from the proxy so we can determine IP addresses
 app.set('trust proxy', true);
@@ -131,7 +137,7 @@ app.use(function (err, req, res, next) {
 
 // Return the application's default page if the path is unknown
 app.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname, '../index.html'));
+  res.sendFile(path.join(__dirname, '../index.html')); // Make sure this path is correct for serving your root-level index.html
 });
 
 // setAuthCookie in the HTTP response
