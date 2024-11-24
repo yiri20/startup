@@ -155,19 +155,6 @@ Custom Backend Endpoints:
 20% - Your frontend calls your service endpoints
 
 #### Start Up Login
-Frontend-Backend Integration:
-- The React frontend communicates with the backend service through API calls:
-Explore Page:
-- Fetches trending music data using the /api/explore endpoint.
-
-Review Page:
-- Fetches and posts reviews using the /api/reviews endpoint.
-
-Schedule Page:
-- Fetches, creates, and deletes schedules using the /api/schedules endpoint.
-
-Authentication:
-- Handles user signup and login through the /api/auth endpoints.
 
 Supports New User Registration (20%):
 
