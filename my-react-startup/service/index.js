@@ -49,17 +49,25 @@ apiRouter.post('/auth/create', async (req, res) => {
     return res.status(400).json({ message: 'Email and password are required' });
   }
 
-  if (await DB.getUser(email)) {
-    res.status(409).send({ msg: 'Existing user' });
-  } else {
+  try {
+    // Check if user already exists
+    const existingUser = await DB.getUser(email);
+    if (existingUser) {
+      console.log(`User already exists with email: ${email}`);
+      return res.status(409).json({ message: 'User already exists. Please log in.' });
+    }
+
+    // Create new user
     const user = await DB.createUser(email, password);
+    console.log(`User created with ID: ${user._id}`);
 
     // Set the cookie
     setAuthCookie(res, user.token);
 
-    res.send({
-      id: user._id,
-    });
+    res.status(201).json({ id: user._id });
+  } catch (error) {
+    console.error('Error during user creation:', error);
+    res.status(500).json({ message: 'An error occurred during user creation. Please try again.' });
   }
 });
 
@@ -71,15 +79,20 @@ apiRouter.post('/auth/login', async (req, res) => {
     return res.status(400).json({ message: 'Email and password are required' });
   }
 
-  const user = await DB.getUser(email);
-  if (user) {
-    if (await bcrypt.compare(password, user.password)) {
-      setAuthCookie(res, user.token);
-      res.send({ id: user._id });
-      return;
+  try {
+    const user = await DB.getUser(email);
+    if (user) {
+      if (await bcrypt.compare(password, user.password)) {
+        setAuthCookie(res, user.token);
+        res.send({ id: user._id });
+        return;
+      }
     }
+    res.status(401).send({ msg: 'Unauthorized' });
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ message: 'An error occurred during login. Please try again.' });
   }
-  res.status(401).send({ msg: 'Unauthorized' });
 });
 
 // DeleteAuth token if stored in cookie
@@ -94,38 +107,42 @@ apiRouter.use(secureApiRouter);
 
 secureApiRouter.use(async (req, res, next) => {
   const authToken = req.cookies[authCookieName];
-  const user = await DB.getUserByToken(authToken);
-  if (user) {
-    next();
-  } else {
-    res.status(401).send({ msg: 'Unauthorized' });
+  try {
+    const user = await DB.getUserByToken(authToken);
+    if (user) {
+      next();
+    } else {
+      res.status(401).send({ msg: 'Unauthorized' });
+    }
+  } catch (error) {
+    console.error('Error verifying user token:', error);
+    res.status(500).send({ message: 'Failed to verify authentication.' });
   }
 });
 
-// GetScores
-secureApiRouter.get('/scores', async (req, res) => {
+// Reviews Endpoint
+secureApiRouter.get('/reviews', async (_req, res) => {
   try {
-    const scores = await DB.getHighScores();
-    res.send(scores);
+    const reviews = await DB.getReviews();
+    res.send(reviews);
   } catch (error) {
-    console.error('Error fetching scores:', error);
-    res.status(500).send({ message: 'Failed to fetch scores.' });
+    console.error('Error fetching reviews:', error);
+    res.status(500).send({ message: 'Failed to fetch reviews.' });
   }
 });
 
-// SubmitScore
-secureApiRouter.post('/score', async (req, res) => {
-  const score = { ...req.body, ip: req.ip };
-  if (!score.value) {
-    return res.status(400).send({ message: 'Score value is required' });
+// Submit Review Endpoint
+secureApiRouter.post('/reviews', async (req, res) => {
+  const review = { ...req.body, ip: req.ip };
+  if (!review.album || !review.artist || !review.rating || !review.review) {
+    return res.status(400).send({ message: 'All review fields are required' });
   }
   try {
-    await DB.addScore(score);
-    const scores = await DB.getHighScores();
-    res.send(scores);
+    await DB.addReview(review);
+    res.status(201).send({ message: 'Review added successfully' });
   } catch (error) {
-    console.error('Error submitting score:', error);
-    res.status(500).send({ message: 'Failed to submit score.' });
+    console.error('Error submitting review:', error);
+    res.status(500).send({ message: 'Failed to submit review.' });
   }
 });
 

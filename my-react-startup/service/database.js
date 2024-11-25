@@ -12,7 +12,7 @@ let db;
 (async function connectToDatabase() {
   try {
     await client.connect();
-    db = client.db('plan_your_music'); // Replace 'plan_your_music' with the actual database name
+    db = client.db('plan_your_music');
     console.log('Connected to MongoDB');
   } catch (error) {
     console.error('Error connecting to MongoDB:', error.message);
@@ -54,11 +54,13 @@ async function deleteDocuments(collectionName, query) {
 
 // Specific Methods for "Plan Your Music" Application
 async function getUser(email) {
-  return await readDocuments('user', { email });
+  const users = await readDocuments('users', { email });
+  return users[0];
 }
 
 async function getUserByToken(token) {
-  return await readDocuments('user', { token });
+  const users = await readDocuments('users', { token });
+  return users[0];
 }
 
 async function createUser(email, password) {
@@ -68,30 +70,8 @@ async function createUser(email, password) {
     password: passwordHash,
     token: uuid.v4(),
   };
-  const result = await createDocument('user', user);
-  return result.ops[0]; // Returning the newly created user
-}
-
-async function addSchedule(schedule) {
-  if (!schedule || !schedule.userId || !schedule.genre || !schedule.datetime) {
-    throw new Error('Invalid schedule object');
-  }
-  return await createDocument('schedule', schedule);
-}
-
-async function getSchedules(userId) {
-  return await readDocuments('schedule', { userId });
-}
-
-async function addReview(review) {
-  if (!review || !review.album || !review.artist || !review.rating || !review.review) {
-    throw new Error('Invalid review object');
-  }
-  return await createDocument('review', review);
-}
-
-async function getReviews(albumId) {
-  return await readDocuments('review', { album: albumId });
+  await createDocument('users', user);
+  return user;
 }
 
 module.exports = {
@@ -102,8 +82,4 @@ module.exports = {
   getUser,
   getUserByToken,
   createUser,
-  addSchedule,
-  getSchedules,
-  addReview,
-  getReviews,
 };

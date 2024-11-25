@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import './Login.css';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState(''); // For success or error messages
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,6 +25,7 @@ function Login() {
         console.log('User ID:', data.id); // Example: saving user ID
         setEmail('');
         setPassword('');
+        navigate('/'); // Redirect to home or another page after successful login
       } else if (response.status === 401) {
         setMessage('Invalid credentials. Please try again.');
       } else {
@@ -70,7 +73,7 @@ function Login() {
             Login
           </button>
           <div className="signup-link">
-            <a href="signin">If you don't have an account, sign up here</a>
+            <a href="/signin">If you don't have an account, sign up here</a>
           </div>
         </form>
       </main>
