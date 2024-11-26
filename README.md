@@ -171,7 +171,7 @@ Stores Application Data in MongoDB (20%):
 
 Stores and Retrieves Credentials in MongoDB (20%):
 
- - You have stored credentials (with hashing) in MongoDB and used JWT for secure session handling.
+ - Stores credentials (with hashing) in MongoDB and used JWT for secure session handling.
 
 Restricts Functionality Based on Authentication (20%):
 
