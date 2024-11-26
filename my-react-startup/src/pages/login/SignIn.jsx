@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './SignIn.css';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [promo, setPromo] = useState('yes');
   const [message, setMessage] = useState(''); // To display success or error messages
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log('Attempting to create an account with email:', email); // Debug log
 
     try {
       const response = await fetch('/api/auth/create', {
@@ -17,15 +22,22 @@ const SignIn = () => {
         body: JSON.stringify({ email, password }),
       });
 
+      console.log('Response Status:', response.status); // Debug log
+
       if (response.ok) {
         setMessage('Your account has been created successfully!');
+        login(email)
         setEmail('');
         setPassword('');
         setPromo('yes');
+        navigate('/schedule')
+        console.log('Account created successfully'); // Debug log
       } else if (response.status === 409) {
         setMessage('User already exists. Please log in.');
+        console.log('User already exists'); // Debug log
       } else {
         setMessage('An error occurred. Please try again.');
+        console.log('An error occurred while creating the account'); // Debug log
       }
     } catch (err) {
       console.error('Error during registration:', err);
@@ -93,6 +105,11 @@ const SignIn = () => {
           </fieldset>
           <button type="submit" className="btn btn-primary w-100">Create Account</button>
         </form>
+        <div className="button-container" style={{ textAlign: 'center', marginTop: '20px' }}>
+          <button className="btn btn-secondary" onClick={() => navigate('/login')}>
+            Go back to Login Page
+          </button>
+        </div>
       </div>
     </div>
   );

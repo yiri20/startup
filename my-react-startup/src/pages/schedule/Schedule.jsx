@@ -1,54 +1,150 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 import './Schedule.css';
 
 const Schedule = () => {
-  const [schedules, setSchedules] = useState([]); // For storing schedules from the backend
-  const [newSchedule, setNewSchedule] = useState({
-    genre: 'R&B',
-    datetime: '',
-    notification: true,
-  });
+  const { user } = useContext(AuthContext);
+  const [sessions, setSessions] = useState([]); // Initialize as an empty array
+  const [genre, setGenre] = useState('');
+  const [datetime, setDatetime] = useState('');
+  const [artist, setArtist] = useState('');
+  const [album, setAlbum] = useState('');
+  const [notification, setNotification] = useState(false);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [editingSessionId, setEditingSessionId] = useState(null); // To track which session is being edited
 
-  // Fetch schedules from the backend when the component loads
+  // Fetch existing schedules when the component loads
   useEffect(() => {
-    fetch('/api/schedules')
-      .then((response) => response.json())
-      .then((data) => setSchedules(data.schedules || []))
-      .catch((err) => console.error('Failed to fetch schedules:', err));
-  }, []);
+    if (user) {
+      fetch('/api/schedules', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch sessions');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setSessions(data.schedules || []); // Make sure it is an array
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error('Error fetching sessions:', err);
+          setError('Failed to load sessions. Please try again later.');
+          setLoading(false);
+        });
+    }
+  }, [user]);
 
-  // Handle form inputs
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setNewSchedule((prev) => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
-  };
-
-  // Submit the new schedule to the backend
+  // Handle form submission to save or update a schedule
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('/api/schedules', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newSchedule),
-    })
-      .then((response) => response.json())
-      .then((createdSchedule) => {
-        setSchedules((prev) => [...prev, createdSchedule]); // Add new schedule to the list
-        setNewSchedule({ genre: 'R&B', datetime: '', notification: true }); // Reset the form
+    setError(null);
+
+    if (!genre || !datetime || !artist || !album) {
+      setError('All fields are required.');
+      return;
+    }
+
+    const newSession = {
+      genre,
+      datetime,
+      artist,
+      album,
+      notification,
+      userId: user.email,
+    };
+
+    if (editingSessionId) {
+      // Update existing session
+      fetch(`/api/schedules/${editingSessionId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newSession),
+        credentials: 'include',
       })
-      .catch((err) => console.error('Failed to create schedule:', err));
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to update schedule');
+          }
+          return response.json();
+        })
+        .then((updatedSession) => {
+          setSessions(sessions.map((session) => (session.id === editingSessionId ? updatedSession : session)));
+          resetForm();
+        })
+        .catch((err) => {
+          console.error('Error updating schedule:', err);
+          setError('Failed to update schedule. Please try again later.');
+        });
+    } else {
+      // Save new session to the backend
+      fetch('/api/schedules', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newSession),
+        credentials: 'include',
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to save schedule');
+          }
+          return response.json();
+        })
+        .then((createdSession) => {
+          setSessions([...sessions, createdSession]); // Add new session to existing sessions
+          resetForm();
+        })
+        .catch((err) => {
+          console.error('Error saving schedule:', err);
+          setError('Failed to save schedule. Please try again later.');
+        });
+    }
   };
 
-  // Delete a schedule
+  // Handle deletion of a schedule
   const handleDelete = (id) => {
-    fetch(`/api/schedules/${id}`, { method: 'DELETE' })
-      .then(() => {
-        setSchedules((prev) => prev.filter((schedule) => schedule.id !== id));
+    fetch(`/api/schedules/${id}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    })
+      .then((response) => {
+        console.log('Deleting schedule with ID:', id);
+        if (!response.ok) {
+          throw new Error('Failed to delete schedule');
+        }
+        setSessions(sessions.filter((session) => session._id !== id));
       })
-      .catch((err) => console.error('Failed to delete schedule:', err));
+      .catch((err) => {
+        console.error('Error deleting schedule:', err);
+        setError('Failed to delete schedule. Please try again later.');
+      });
+  };
+
+  // Handle editing of a schedule
+  const handleEdit = (session) => {
+    setEditingSessionId(session.id);
+    setGenre(session.genre);
+    setDatetime(session.datetime);
+    setArtist(session.artist);
+    setAlbum(session.album);
+    setNotification(session.notification);
+  };
+
+  // Reset form after saving or updating
+  const resetForm = () => {
+    setGenre('');
+    setDatetime('');
+    setArtist('');
+    setAlbum('');
+    setNotification(false);
+    setEditingSessionId(null);
   };
 
   return (
@@ -56,25 +152,50 @@ const Schedule = () => {
       <h2 className="schedule-title">Music Scheduler</h2>
       <p className="schedule-description">Plan your music listening sessions here.</p>
 
+      {error && <div className="alert alert-danger">{error}</div>}
+
       <form onSubmit={handleSubmit} className="schedule-form">
         <div className="form-group">
           <label htmlFor="genre" className="form-label">Genre:</label>
           <select
             id="genre"
-            name="genre"
-            value={newSchedule.genre}
-            onChange={handleInputChange}
             className="schedule-select"
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+            required
           >
-            <option value="Pop">Pop</option>
+            <option value="">Select a genre</option>
             <option value="R&B">R&B</option>
-            <option value="Country">Country</option>
+            <option value="Pop">Pop</option>
             <option value="Rock">Rock</option>
-            <option value="Classical">Classical</option>
-            <option value="Hip-Hop">Hip-Hop</option>
-            <option value="EDM">EDM</option>
-            <option value="IDM">IDM</option>
+            <option value="Jazz">Jazz</option>
           </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="artist" className="form-label">Artist:</label>
+          <input
+            type="text"
+            id="artist"
+            className="schedule-input"
+            placeholder="Enter artist name"
+            value={artist}
+            onChange={(e) => setArtist(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="album" className="form-label">Album:</label>
+          <input
+            type="text"
+            id="album"
+            className="schedule-input"
+            placeholder="Enter album name"
+            value={album}
+            onChange={(e) => setAlbum(e.target.value)}
+            required
+          />
         </div>
 
         <div className="form-group">
@@ -82,10 +203,9 @@ const Schedule = () => {
           <input
             type="datetime-local"
             id="datetime"
-            name="datetime"
-            value={newSchedule.datetime}
-            onChange={handleInputChange}
             className="schedule-input"
+            value={datetime}
+            onChange={(e) => setDatetime(e.target.value)}
             required
           />
         </div>
@@ -95,34 +215,42 @@ const Schedule = () => {
           <input
             type="checkbox"
             id="notification"
-            name="notification"
-            checked={newSchedule.notification}
-            onChange={handleInputChange}
+            checked={notification}
+            onChange={(e) => setNotification(e.target.checked)}
           />
         </div>
 
-        <button type="submit" className="schedule-btn schedule-btn-primary">Save</button>
+        <button type="submit" className="schedule-btn schedule-btn-primary">
+          {editingSessionId ? 'Update' : 'Save'}
+        </button>
       </form>
 
       <div className="schedules-list">
         <h3>Scheduled Sessions</h3>
-        {schedules.length > 0 ? (
-          <ul>
-            {schedules.map((schedule) => (
-              <li key={schedule.id}>
-                <strong>{schedule.genre}</strong> on <em>{schedule.datetime}</em>{' '}
-                {schedule.notification && <span>(Notification enabled)</span>}
-                <button
-                  className="schedule-btn schedule-btn-secondary"
-                  onClick={() => handleDelete(schedule.id)}
-                >
-                  Delete
-                </button>
-              </li>
-            ))}
-          </ul>
+        {loading ? (
+          <p>Loading sessions...</p>
         ) : (
-          <p>No scheduled sessions yet. Add one!</p>
+          <ul>
+            {sessions.length > 0 ? (
+              sessions.map((session, index) => (
+                <li key={index}>
+                  <div>
+                    <strong>Genre:</strong> {session.genre}<br />
+                    <strong>Artist:</strong> {session.artist}<br />
+                    <strong>Album:</strong> {session.album}<br />
+                    <strong>Date and Time:</strong> {session.datetime}<br />
+                    <strong>Notification:</strong> {session.notification ? 'Yes' : 'No'}
+                  </div>
+                  <div>
+                    <button className="schedule-btn schedule-btn-secondary" onClick={() => handleEdit(session)}>Edit</button>
+                    <button className="schedule-btn schedule-btn-secondary" onClick={() => handleDelete(session._id)}>Delete</button>
+                  </div>
+                </li>
+              ))
+            ) : (
+              <p>No scheduled sessions yet. Add one!</p>
+            )}
+          </ul>
         )}
       </div>
     </div>
