@@ -42,10 +42,10 @@
 .explore-item-artist {
   font-size: 1rem;
   color: #666;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
-.explore-item-description {
+.explore-item-genre {
   font-size: 0.9rem;
   color: #444;
 }

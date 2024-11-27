@@ -7,6 +7,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { ObjectId } from 'mongodb';
 import * as DB from './database.js';
+import fetch from 'node-fetch';
 
 // Setup __dirname for ES module compatibility
 const __filename = fileURLToPath(import.meta.url);
@@ -303,13 +304,21 @@ secureApiRouter.put('/reviews/:id', async (req, res) => {
 
 // Explore API
 apiRouter.get('/explore', async (req, res) => {
+  const searchTerm = 'top music'; // Adjust the search term as needed
+  const url = `https://itunes.apple.com/search?term=${encodeURIComponent(searchTerm)}&entity=album&limit=10`;
+
   try {
-    const exploreData = await DB.getExploreData();
-    console.log('Fetched explore data:', exploreData); // Add this line to see the data being fetched
-    res.status(200).json({ explore: exploreData });
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch iTunes data');
+    }
+
+    const data = await response.json();
+    res.status(200).json({ explore: data.results });
   } catch (error) {
-    console.error('Error fetching explore data:', error);
-    res.status(500).json({ msg: 'Failed to fetch explore data' });
+    console.error('Error fetching iTunes data:', error);
+    res.status(500).json({ msg: 'Failed to fetch iTunes data' });
   }
 });
 
