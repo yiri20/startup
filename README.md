@@ -158,22 +158,26 @@ Custom Backend Endpoints:
 
 Supports New User Registration (20%):
 
- - implemented /api/auth/register endpoint for user registration with hashed passwords using bcrypt.
+ - Implemented the /api/auth/create endpoint for new user registration.
+ - Passwords are securely hashed using bcrypt before being stored in MongoDB.
 
 Supports Existing User Authentication and Logout (20%):
 
- - The /api/auth/login endpoint verifies user credentials, and issues a JWT token.
- - The /api/auth/logout endpoint simply confirms logout (with a reminder that JWT is stateless).
+ - The /api/auth/login endpoint verifies user credentials by comparing the hashed password stored in the database.
+ - Successfully authenticated users receive a secure cookie containing a session token.
+ - The /api/auth/logout endpoint clears the authentication token to log out the user.
 
 Stores Application Data in MongoDB (20%):
 
- - Reviews and schedules are stored using MongoDB. You have used Review and Schedule Mongoose schemas for data storage.
+ - Reviews and schedules are stored using MongoDB.
+ - Added functionality to create, update, and delete schedules and reviews, ensuring data persistence for each user's planned music sessions and reviews.
 
 Stores and Retrieves Credentials in MongoDB (20%):
 
- - Stores credentials (with hashing) in MongoDB and used JWT for secure session handling.
+ - User credentials (email and hashed password) are securely stored in MongoDB.
+ - Authentication relies on comparing hashed credentials using bcrypt to verify users.
 
 Restricts Functionality Based on Authentication (20%):
 
- - The authenticateToken middleware is used for protecting certain routes (/api/reviews, /api/schedules).
-Only authenticated users can create, update, or delete data.
+ - Implemented middleware to secure application endpoints, such as /api/schedules and /api/reviews.
+ - Only authenticated users can create, update, or delete reviews and schedules.
