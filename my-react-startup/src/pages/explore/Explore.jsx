@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import './Explore.css';
 
@@ -12,7 +11,7 @@ const Explore = () => {
   useEffect(() => {
     const url = '/api/explore'; // Use relative URL for consistency
     console.log('Attempting to fetch data from', url);
-  
+
     fetch(url, {
       method: 'GET',
       headers: {
@@ -26,20 +25,18 @@ const Explore = () => {
           console.error('Error fetching data:', response.status, response.statusText);
           throw new Error('Failed to fetch explore items');
         }
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-          return response.json();
-        } else {
-          throw new Error('Expected JSON but received something else');
-        }
+        return response.json();
       })
       .then((data) => {
         console.log('Fetched explore data:', data);
-        if (data && data.explore && data.explore.length > 0) {
-          setExploreItems(data.explore);
-        } else {
-          setExploreItems([]);
-        }
+        const formattedData = data.explore.map((item) => ({
+          id: item.collectionId,
+          title: item.collectionName,
+          artist: item.artistName,
+          image: item.artworkUrl100,
+          genre: item.primaryGenreName,
+        }));
+        setExploreItems(formattedData);
         setLoading(false);
       })
       .catch((err) => {
@@ -48,7 +45,6 @@ const Explore = () => {
         setLoading(false);
       });
   }, []);
-  
 
   if (loading) {
     return (
@@ -67,11 +63,11 @@ const Explore = () => {
       <div className="explore-grid">
         {exploreItems.length > 0 ? (
           exploreItems.map((item) => (
-            <div key={item._id} className="explore-card">
+            <div key={item.id} className="explore-card">
               <img src={item.image} alt={item.title} className="explore-image" />
               <h3 className="explore-item-title">{item.title}</h3>
               <p className="explore-item-artist">{item.artist}</p>
-              <p className="explore-item-description">{item.description}</p>
+              <p className="explore-item-genre">{item.genre}</p>
             </div>
           ))
         ) : (
