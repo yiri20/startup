@@ -1,85 +1,189 @@
-const { MongoClient } = require('mongodb');
-const bcrypt = require('bcrypt');
-const uuid = require('uuid');
-const config = require('./dbConfig.json');
+import { MongoClient, ObjectId } from 'mongodb';
+import bcrypt from 'bcrypt';
+import { v4 as uuidv4 } from 'uuid';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
+// Setup __dirname for ES module compatibility
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load environment variables from .env file
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
+// MongoDB connection setup
+let db;
+const url = process.env.MONGODB_URI;
+
 const client = new MongoClient(url);
 
-let db;
+// Function to connect to MongoDB
+async function connectDB() {
+  if (db) return db;
 
-// Establish connection to MongoDB
-(async function connectToDatabase() {
   try {
     await client.connect();
-    db = client.db('plan_your_music');
+    db = client.db(process.env.DB_NAME);
     console.log('Connected to MongoDB');
   } catch (error) {
     console.error('Error connecting to MongoDB:', error.message);
     process.exit(1);
   }
-})();
 
-// Generic CRUD Functions
-function getCollection(name) {
-  if (!db) {
-    throw new Error('Database not connected');
+  return db;
+}
+
+// Get collection helper function
+async function getCollection(name) {
+  const database = await connectDB();
+  return database.collection(name);
+}
+
+// Create a new user
+export async function createUser(email, password) {
+  const collection = await getCollection('users');
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const newUser = { email, password: hashedPassword, token: generateToken() };
+  const result = await collection.insertOne(newUser);
+  console.log('User created with ID:', result.insertedId);
+  return await collection.findOne({ _id: result.insertedId });
+}
+
+// Get a user by email
+export async function getUser(email) {
+  const collection = await getCollection('users');
+  return await collection.findOne({ email });
+}
+
+// Get a user by token
+export async function getUserByToken(token) {
+  const collection = await getCollection('users');
+  return await collection.findOne({ token });
+}
+
+// Add a new review
+export async function addReview(review) {
+  if (!review || !review.album || !review.artist || !review.rating || !review.review) {
+    throw new Error('Invalid review object');
   }
-  return db.collection(name);
+  const collection = await getCollection('reviews');
+  const result = await collection.insertOne(review);
+  console.log('Review created with ID:', result.insertedId);
+  return await collection.findOne({ _id: result.insertedId });
 }
 
-async function createDocument(collectionName, document) {
-  const collection = getCollection(collectionName);
-  const result = await collection.insertOne(document);
-  return result;
+// Get all reviews
+export async function getReviews() {
+  const collection = await getCollection('reviews');
+  return await collection.find({}).toArray();
 }
 
-async function readDocuments(collectionName, query = {}, options = {}) {
-  const collection = getCollection(collectionName);
-  const cursor = collection.find(query, options);
-  return cursor.toArray();
+// Delete a review by ID
+export async function deleteReviewById(reviewId) {
+  try {
+    console.log("Attempting to delete review with ID:", reviewId);
+    if (!ObjectId.isValid(reviewId)) {
+      throw new Error("Invalid reviewId");
+    }
+    const collection = await getCollection('reviews');
+    const result = await collection.deleteOne({ _id: new ObjectId(reviewId) });
+    console.log("Delete result:", result);
+    return result;
+  } catch (error) {
+    console.error("Error in deleteReviewById:", error);
+    throw error;
+  }
 }
 
-async function updateDocuments(collectionName, query, update) {
-  const collection = getCollection(collectionName);
-  const result = await collection.updateMany(query, update);
-  return result;
+// Update a review by ID
+export async function updateReviewById(reviewId, updatedReview) {
+  try {
+    console.log("Attempting to update review with ID:", reviewId);
+    if (!ObjectId.isValid(reviewId)) {
+      throw new Error("Invalid reviewId");
+    }
+    const collection = await getCollection('reviews');
+    const result = await collection.updateOne(
+      { _id: new ObjectId(reviewId) },
+      { $set: updatedReview }
+    );
+    console.log("Update result:", result);
+    return result;
+  } catch (error) {
+    console.error("Error in updateReviewById:", error);
+    throw error;
+  }
 }
 
-async function deleteDocuments(collectionName, query) {
-  const collection = getCollection(collectionName);
-  const result = await collection.deleteMany(query);
-  return result;
+// Add a new schedule
+export async function addSchedule(schedule) {
+  if (!schedule || !schedule.userId || !schedule.genre || !schedule.datetime) {
+    throw new Error('Invalid schedule object');
+  }
+  const collection = await getCollection('schedules');
+  const result = await collection.insertOne(schedule);
+  console.log('Schedule created with ID:', result.insertedId);
+  return await collection.findOne({ _id: result.insertedId });
 }
 
-// Specific Methods for "Plan Your Music" Application
-async function getUser(email) {
-  const users = await readDocuments('users', { email });
-  return users[0];
+// Get schedules by user email
+export async function getSchedules(email) {
+  const collection = await getCollection('schedules');
+  return await collection.find({ userId: email }).toArray();
 }
 
-async function getUserByToken(token) {
-  const users = await readDocuments('users', { token });
-  return users[0];
+// Delete documents from a specified collection
+export async function deleteDocuments(collectionName, filter) {
+  try {
+    const collection = await getCollection(collectionName);
+    const result = await collection.deleteOne(filter);
+    console.log('Deleted document:', result);
+    return result;
+  } catch (error) {
+    console.error('Error deleting document:', error);
+    throw error;
+  }
 }
 
-async function createUser(email, password) {
-  const passwordHash = await bcrypt.hash(password, 10);
-  const user = {
-    email,
-    password: passwordHash,
-    token: uuid.v4(),
-  };
-  await createDocument('users', user);
-  return user;
+// Update a schedule by ID
+export async function updateScheduleById(scheduleId, updatedSchedule) {
+  try {
+    console.log("Attempting to update schedule with ID:", scheduleId);
+    if (!ObjectId.isValid(scheduleId)) {
+      throw new Error("Invalid scheduleId");
+    }
+    const collection = await getCollection('schedules');
+    const result = await collection.updateOne(
+      { _id: new ObjectId(scheduleId) },
+      { $set: updatedSchedule }
+    );
+    console.log("Update result:", result);
+    return result;
+  } catch (error) {
+    console.error("Error in updateScheduleById:", error);
+    throw error;
+  }
 }
 
-module.exports = {
-  createDocument,
-  readDocuments,
-  updateDocuments,
-  deleteDocuments,
-  getUser,
-  getUserByToken,
-  createUser,
-};
+// Add explore data
+export async function addExploreData(data) {
+  if (!data || !data.title || !data.artist || !data.image || !data.description) {
+    throw new Error('Invalid explore data object');
+  }
+  const collection = await getCollection('explore');
+  const result = await collection.insertOne(data);
+  console.log('Explore data created with ID:', result.insertedId);
+  return await collection.findOne({ _id: result.insertedId });
+}
+
+// Get explore data
+export async function getExploreData() {
+  const collection = await getCollection('explore');
+  return await collection.find({}).toArray();
+}
+
+// Helper function to generate a token
+function generateToken() {
+  return uuidv4();
+}

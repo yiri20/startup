@@ -7,3 +7,13 @@ export class AuthState {
     this.name = name;
   }
 }
+
+// Adding a function to determine the current state based on user presence
+authState.getCurrentAuthState = (user) => {
+  if (!user) {
+    return AuthState.Unauthenticated;
+  }
+  return AuthState.Authenticated;
+};
+
+export default authState;

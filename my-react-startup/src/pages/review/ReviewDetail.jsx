@@ -1,120 +1,75 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import './ReviewDetail.css';
 
-const CreateReview = () => {
-  const [album, setAlbum] = useState('');
-  const [artist, setArtist] = useState('');
-  const [rating, setRating] = useState('');
-  const [review, setReview] = useState('');
+const ReviewDetail = () => {
+  const { id } = useParams(); // Extract the ID from the URL
+  const [review, setReview] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Create a new review object
-    const newReview = {
-      album,
-      artist,
-      rating,
-      review,
-      date: new Date().toLocaleDateString(), // Add today's date
-    };
-
-    // Send the new review to the backend
-    fetch('/api/reviews', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newReview),
-    })
+  // Fetch review details when component loads
+  useEffect(() => {
+    fetch(`/api/reviews/${id}`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Failed to create review');
+          throw new Error('Failed to fetch review');
         }
         return response.json();
       })
-      .then(() => {
-        alert('Review Created!');
-        navigate('/'); // Redirect back to the reviews list
+      .then((data) => {
+        setReview(data);
+        setLoading(false);
       })
       .catch((err) => {
-        console.error(err);
-        alert('An error occurred while creating the review.');
+        console.error('Error fetching review:', err);
+        setError('Failed to load review. Please try again later.');
+        setLoading(false);
       });
-  };
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="container my-5 text-center">
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div className="container my-5 text-center alert alert-danger">{error}</div>;
+  }
+
+  if (!review) {
+    return (
+      <div className="container my-5 text-center alert alert-warning">
+        Review not found.
+      </div>
+    );
+  }
 
   return (
-    <div className="container my-5">
-      <h2>Create a New Review</h2>
-      <form onSubmit={handleSubmit}>
-        {/* Album Input */}
-        <div className="mb-3">
-          <label htmlFor="album" className="form-label">
-            Album
-          </label>
-          <input
-            type="text"
-            id="album"
-            value={album}
-            onChange={(e) => setAlbum(e.target.value)}
-            className="form-control"
-            required
-          />
-        </div>
+    <div className="review-details-container">
+      <h2>{review.album} - {review.artist}</h2>
+      <hr />
 
-        {/* Artist Input */}
-        <div className="mb-3">
-          <label htmlFor="artist" className="form-label">
-            Artist
-          </label>
-          <input
-            type="text"
-            id="artist"
-            value={artist}
-            onChange={(e) => setArtist(e.target.value)}
-            className="form-control"
-            required
-          />
-        </div>
+      <section className="review-content">
+        <h3>Review</h3>
+        <p>{review.review}</p>
+        <p><strong>Rating:</strong> {review.rating}/5</p>
+        <p><strong>Date:</strong> {new Date(review.date).toLocaleDateString()}</p>
+      </section>
 
-        {/* Rating Input */}
-        <div className="mb-3">
-          <label htmlFor="rating" className="form-label">
-            Rating (0 to 5)
-          </label>
-          <input
-            type="number"
-            id="rating"
-            value={rating}
-            onChange={(e) => setRating(e.target.value)}
-            className="form-control"
-            required
-            min="0"
-            max="5"
-          />
-        </div>
-
-        {/* Review Textarea */}
-        <div className="mb-3">
-          <label htmlFor="review" className="form-label">
-            Review
-          </label>
-          <textarea
-            id="review"
-            value={review}
-            onChange={(e) => setReview(e.target.value)}
-            className="form-control"
-            rows="4"
-            required
-          ></textarea>
-        </div>
-
-        {/* Submit Button */}
-        <button type="submit" className="btn btn-primary">
-          Submit Review
+      <div className="back-button-container">
+        <button className="btn btn-primary" onClick={() => navigate(-1)}>
+          Back to Reviews
         </button>
-      </form>
+      </div>
     </div>
   );
 };
 
-export default CreateReview;
+export default ReviewDetail;
