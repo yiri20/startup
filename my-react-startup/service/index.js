@@ -162,7 +162,6 @@ secureApiRouter.delete('/schedules/:id', async (req, res) => {
   }
 });
 
-
 // Add a new schedule for the authenticated user
 secureApiRouter.post('/schedules', async (req, res) => {
   const authToken = req.cookies[authCookieName];
@@ -191,6 +190,37 @@ secureApiRouter.post('/schedules', async (req, res) => {
   } catch (error) {
     console.error('Error saving schedule:', error);
     res.status(500).send({ msg: 'Failed to save schedule' });
+  }
+});
+
+// Update a schedule by ID
+secureApiRouter.put('/schedules/:id', async (req, res) => {
+  const { id } = req.params;
+  const updatedSchedule = req.body;
+
+  console.log('Updating schedule with ID:', id); // Debugging log
+
+  const authToken = req.cookies[authCookieName];
+  const user = await DB.getUserByToken(authToken);
+  if (!user) {
+    return res.status(401).send({ msg: 'Unauthorized' });
+  }
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).send({ msg: 'Invalid ID format' });
+  }
+
+  try {
+    // Update the schedule by ID
+    const result = await DB.updateScheduleById(id, updatedSchedule);
+    if (result.modifiedCount > 0) {
+      res.status(200).send({ msg: 'Schedule updated successfully' });
+    } else {
+      res.status(404).send({ msg: 'Schedule not found or no changes made' });
+    }
+  } catch (error) {
+    console.error('Error updating schedule:', error);
+    res.status(500).send({ msg: 'Failed to update schedule' });
   }
 });
 
@@ -268,6 +298,18 @@ secureApiRouter.put('/reviews/:id', async (req, res) => {
   } catch (error) {
     console.error('Error updating review:', error);
     res.status(500).send({ msg: 'Failed to update review' });
+  }
+});
+
+// Explore API
+apiRouter.get('/explore', async (req, res) => {
+  try {
+    const exploreData = await DB.getExploreData();
+    console.log('Fetched explore data:', exploreData); // Add this line to see the data being fetched
+    res.status(200).json({ explore: exploreData });
+  } catch (error) {
+    console.error('Error fetching explore data:', error);
+    res.status(500).json({ msg: 'Failed to fetch explore data' });
   }
 });
 

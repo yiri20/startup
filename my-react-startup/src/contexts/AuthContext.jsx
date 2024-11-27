@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 
 export const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children, onLogout }) => {
   const [user, setUser] = useState(null); // Store the authenticated user
 
   // Initialize user from sessionStorage on app load
@@ -23,6 +23,11 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     sessionStorage.removeItem('email'); // Remove email from sessionStorage
     setUser(null); // Clear user in context
+
+    // Execute any passed logout callback (e.g., navigate to main page)
+    if (onLogout) {
+      onLogout();
+    }
   };
 
   return (

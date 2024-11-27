@@ -43,7 +43,8 @@ async function getCollection(name) {
 // Create a new user
 export async function createUser(email, password) {
   const collection = await getCollection('users');
-  const newUser = { email, password, token: generateToken() };
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const newUser = { email, password: hashedPassword, token: generateToken() };
   const result = await collection.insertOne(newUser);
   console.log('User created with ID:', result.insertedId);
   return await collection.findOne({ _id: result.insertedId });
@@ -130,6 +131,56 @@ export async function addSchedule(schedule) {
 export async function getSchedules(email) {
   const collection = await getCollection('schedules');
   return await collection.find({ userId: email }).toArray();
+}
+
+// Delete documents from a specified collection
+export async function deleteDocuments(collectionName, filter) {
+  try {
+    const collection = await getCollection(collectionName);
+    const result = await collection.deleteOne(filter);
+    console.log('Deleted document:', result);
+    return result;
+  } catch (error) {
+    console.error('Error deleting document:', error);
+    throw error;
+  }
+}
+
+// Update a schedule by ID
+export async function updateScheduleById(scheduleId, updatedSchedule) {
+  try {
+    console.log("Attempting to update schedule with ID:", scheduleId);
+    if (!ObjectId.isValid(scheduleId)) {
+      throw new Error("Invalid scheduleId");
+    }
+    const collection = await getCollection('schedules');
+    const result = await collection.updateOne(
+      { _id: new ObjectId(scheduleId) },
+      { $set: updatedSchedule }
+    );
+    console.log("Update result:", result);
+    return result;
+  } catch (error) {
+    console.error("Error in updateScheduleById:", error);
+    throw error;
+  }
+}
+
+// Add explore data
+export async function addExploreData(data) {
+  if (!data || !data.title || !data.artist || !data.image || !data.description) {
+    throw new Error('Invalid explore data object');
+  }
+  const collection = await getCollection('explore');
+  const result = await collection.insertOne(data);
+  console.log('Explore data created with ID:', result.insertedId);
+  return await collection.findOne({ _id: result.insertedId });
+}
+
+// Get explore data
+export async function getExploreData() {
+  const collection = await getCollection('explore');
+  return await collection.find({}).toArray();
 }
 
 // Helper function to generate a token

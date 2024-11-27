@@ -4,7 +4,7 @@ import './Schedule.css';
 
 const Schedule = () => {
   const { user } = useContext(AuthContext);
-  const [sessions, setSessions] = useState([]); // Initialize as an empty array
+  const [sessions, setSessions] = useState([]);
   const [genre, setGenre] = useState('');
   const [datetime, setDatetime] = useState('');
   const [artist, setArtist] = useState('');
@@ -12,7 +12,7 @@ const Schedule = () => {
   const [notification, setNotification] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [editingSessionId, setEditingSessionId] = useState(null); // To track which session is being edited
+  const [editingSessionId, setEditingSessionId] = useState(null);
 
   // Fetch existing schedules when the component loads
   useEffect(() => {
@@ -31,7 +31,7 @@ const Schedule = () => {
           return response.json();
         })
         .then((data) => {
-          setSessions(data.schedules || []); // Make sure it is an array
+          setSessions(data.schedules || []);
           setLoading(false);
         })
         .catch((err) => {
@@ -62,8 +62,24 @@ const Schedule = () => {
     };
 
     if (editingSessionId) {
+      // Short-circuit if no changes are detected
+      const currentSession = sessions.find((session) => session._id === editingSessionId);
+      if (
+        genre === currentSession?.genre &&
+        datetime === currentSession?.datetime &&
+        artist === currentSession?.artist &&
+        album === currentSession?.album &&
+        notification === currentSession?.notification
+      ) {
+        console.log("No changes detected. Skipping update.");
+        resetForm();
+        return;
+      }
+
       // Update existing session
-      fetch(`/api/schedules/${editingSessionId}`, {
+      const endpoint = `/api/schedules/${editingSessionId}`;
+      console.log("Updating schedule with endpoint:", endpoint);
+      fetch(endpoint, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newSession),
@@ -75,8 +91,12 @@ const Schedule = () => {
           }
           return response.json();
         })
-        .then((updatedSession) => {
-          setSessions(sessions.map((session) => (session.id === editingSessionId ? updatedSession : session)));
+        .then(() => {
+          setSessions(
+            sessions.map((session) =>
+              session._id === editingSessionId ? { ...session, ...newSession } : session
+            )
+          );
           resetForm();
         })
         .catch((err) => {
@@ -98,7 +118,7 @@ const Schedule = () => {
           return response.json();
         })
         .then((createdSession) => {
-          setSessions([...sessions, createdSession]); // Add new session to existing sessions
+          setSessions([...sessions, createdSession]);
           resetForm();
         })
         .catch((err) => {
@@ -129,7 +149,7 @@ const Schedule = () => {
 
   // Handle editing of a schedule
   const handleEdit = (session) => {
-    setEditingSessionId(session.id);
+    setEditingSessionId(session._id);
     setGenre(session.genre);
     setDatetime(session.datetime);
     setArtist(session.artist);
@@ -156,7 +176,9 @@ const Schedule = () => {
 
       <form onSubmit={handleSubmit} className="schedule-form">
         <div className="form-group">
-          <label htmlFor="genre" className="form-label">Genre:</label>
+          <label htmlFor="genre" className="form-label">
+            Genre:
+          </label>
           <select
             id="genre"
             className="schedule-select"
@@ -173,7 +195,9 @@ const Schedule = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="artist" className="form-label">Artist:</label>
+          <label htmlFor="artist" className="form-label">
+            Artist:
+          </label>
           <input
             type="text"
             id="artist"
@@ -186,7 +210,9 @@ const Schedule = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="album" className="form-label">Album:</label>
+          <label htmlFor="album" className="form-label">
+            Album:
+          </label>
           <input
             type="text"
             id="album"
@@ -199,7 +225,9 @@ const Schedule = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="datetime" className="form-label">Date and Time:</label>
+          <label htmlFor="datetime" className="form-label">
+            Date and Time:
+          </label>
           <input
             type="datetime-local"
             id="datetime"
@@ -211,7 +239,9 @@ const Schedule = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="notification" className="form-label">Notification:</label>
+          <label htmlFor="notification" className="form-label">
+            Notification:
+          </label>
           <input
             type="checkbox"
             id="notification"
@@ -232,18 +262,32 @@ const Schedule = () => {
         ) : (
           <ul>
             {sessions.length > 0 ? (
-              sessions.map((session, index) => (
-                <li key={index}>
+              sessions.map((session) => (
+                <li key={session._id}>
                   <div>
-                    <strong>Genre:</strong> {session.genre}<br />
-                    <strong>Artist:</strong> {session.artist}<br />
-                    <strong>Album:</strong> {session.album}<br />
-                    <strong>Date and Time:</strong> {session.datetime}<br />
+                    <strong>Genre:</strong> {session.genre}
+                    <br />
+                    <strong>Artist:</strong> {session.artist}
+                    <br />
+                    <strong>Album:</strong> {session.album}
+                    <br />
+                    <strong>Date and Time:</strong> {session.datetime}
+                    <br />
                     <strong>Notification:</strong> {session.notification ? 'Yes' : 'No'}
                   </div>
                   <div>
-                    <button className="schedule-btn schedule-btn-secondary" onClick={() => handleEdit(session)}>Edit</button>
-                    <button className="schedule-btn schedule-btn-secondary" onClick={() => handleDelete(session._id)}>Delete</button>
+                    <button
+                      className="schedule-btn schedule-btn-secondary"
+                      onClick={() => handleEdit(session)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="schedule-btn schedule-btn-secondary"
+                      onClick={() => handleDelete(session._id)}
+                    >
+                      Delete
+                    </button>
                   </div>
                 </li>
               ))

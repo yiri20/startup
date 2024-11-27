@@ -8,6 +8,7 @@ const Navbar = () => {
 
   return (
     <header className="navbar">
+      {/* Main title of the page */}
       <h1>
         <Link to="/">Plan Your Music</Link>
       </h1>
@@ -51,7 +52,20 @@ const Navbar = () => {
           <hr />
         </>
       ) : (
-        <></>
+        <nav>
+          <ul className="nav justify-content-center">
+            <li className="nav-item">
+              <Link to="/login" className="nav-link">
+                Login
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/signin" className="nav-link">
+                Sign Up
+              </Link>
+            </li>
+          </ul>
+        </nav>
       )}
     </header>
   );

@@ -10,18 +10,35 @@ const Explore = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('/api/explore')
+    const url = '/api/explore'; // Use relative URL for consistency
+    console.log('Attempting to fetch data from', url);
+  
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    })
       .then((response) => {
+        console.log('Response status:', response.status);
         if (!response.ok) {
-          throw new Error('Failed to fetch explore data');
+          console.error('Error fetching data:', response.status, response.statusText);
+          throw new Error('Failed to fetch explore items');
         }
-        return response.json();
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          return response.json();
+        } else {
+          throw new Error('Expected JSON but received something else');
+        }
       })
       .then((data) => {
-        if (data && data.explore) {
+        console.log('Fetched explore data:', data);
+        if (data && data.explore && data.explore.length > 0) {
           setExploreItems(data.explore);
         } else {
-          throw new Error('Invalid data format');
+          setExploreItems([]);
         }
         setLoading(false);
       })
@@ -31,6 +48,7 @@ const Explore = () => {
         setLoading(false);
       });
   }, []);
+  
 
   if (loading) {
     return (
@@ -49,7 +67,7 @@ const Explore = () => {
       <div className="explore-grid">
         {exploreItems.length > 0 ? (
           exploreItems.map((item) => (
-            <div key={item.id} className="explore-card">
+            <div key={item._id} className="explore-card">
               <img src={item.image} alt={item.title} className="explore-image" />
               <h3 className="explore-item-title">{item.title}</h3>
               <p className="explore-item-artist">{item.artist}</p>
