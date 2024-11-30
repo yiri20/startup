@@ -14,6 +14,7 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 // MongoDB connection setup
 let db;
+
 const url = process.env.MONGODB_URI;
 
 const client = new MongoClient(url);
@@ -23,6 +24,7 @@ async function connectDB() {
   if (db) return db;
 
   try {
+    console.log('This is working here in connecting to MongoDB')
     await client.connect();
     db = client.db(process.env.DB_NAME);
     console.log('Connected to MongoDB');
@@ -153,7 +155,7 @@ export async function updateScheduleById(scheduleId, updatedSchedule) {
     if (!ObjectId.isValid(scheduleId)) {
       throw new Error("Invalid scheduleId");
     }
-    const collection = await getCollection('schedules');
+    const collection = await getCollection('schedules'); 
     const result = await collection.updateOne(
       { _id: new ObjectId(scheduleId) },
       { $set: updatedSchedule }
