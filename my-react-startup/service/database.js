@@ -12,19 +12,28 @@ const __dirname = path.dirname(__filename);
 // Load environment variables from .env file
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
+// Check if the MONGODB_URI is properly loaded
+console.log("MONGODB_URI:", process.env.MONGODB_URI);
+console.log("DB_NAME:", process.env.DB_NAME);
+
 // MongoDB connection setup
 let db;
 
 const url = process.env.MONGODB_URI;
+if (!url) {
+  console.error("MONGODB_URI is not defined. Please check your .env file.");
+  process.exit(1);
+}
 
-const client = new MongoClient(url);
+// Updated MongoClient initialization with additional options
+const client = new MongoClient(url, { tls: true, serverSelectionTimeoutMS: 3000, autoSelectFamily: false, });
 
 // Function to connect to MongoDB
 async function connectDB() {
   if (db) return db;
 
   try {
-    console.log('This is working here in connecting to MongoDB')
+    console.log('Attempting to connect to MongoDB...');
     await client.connect();
     db = client.db(process.env.DB_NAME);
     console.log('Connected to MongoDB');

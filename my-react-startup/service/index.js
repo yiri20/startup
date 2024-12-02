@@ -17,7 +17,7 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 console.log('__dirname:', __dirname);
 console.log('MongoDB URI:', process.env.MONGODB_URI);
-
+    
 const app = express();
 const authCookieName = 'token';
 
