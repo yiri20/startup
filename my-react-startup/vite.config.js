@@ -13,11 +13,16 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:4000',
+        target: 'http://localhost:4000', // Proxy backend API requests
         changeOrigin: true,
         secure: false,
       },
+      '/ws': {
+        target: 'ws://localhost:4000', // Proxy WebSocket requests
+        ws: true,
+        changeOrigin: true,
+      },
     },
   },
-  historyApiFallback: true, // Add this line
+  historyApiFallback: true, // Ensure React Router works
 });
