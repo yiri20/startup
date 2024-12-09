@@ -2,7 +2,6 @@ import cookieParser from 'cookie-parser';
 import bcrypt from 'bcrypt';
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { ObjectId } from 'mongodb';
@@ -13,16 +12,21 @@ import fetch from 'node-fetch';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Load environment variables from .env file
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
+// Configuration settings
+const config = {
+  mongoURI: 'mongodb+srv://yiri20:qowjddlf98@cs260.nycqv.mongodb.net/plan_your_music?retryWrites=true&w=majority', // Replace with your MongoDB URI
+  port: 4000, // Default port for the server
+};
+
+// Log configuration settings
 console.log('__dirname:', __dirname);
-console.log('MongoDB URI:', process.env.MONGODB_URI);
-    
+console.log('MongoDB URI:', config.mongoURI);
+
 const app = express();
 const authCookieName = 'token';
 
 // The service port may be set on the command line
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || config.port;
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
@@ -34,13 +38,12 @@ app.use(cookieParser());
 app.use(cors());
 
 // Serve static files from the public directory
-// Update the public path
 app.use(express.static(path.join(__dirname, 'public'), {
   setHeaders: (res, filePath) => {
     if (filePath.endsWith('.js')) {
       res.setHeader('Content-Type', 'application/javascript');
     }
-  }
+  },
 }));
 
 // Trust headers that are forwarded from the proxy
@@ -281,6 +284,6 @@ function setAuthCookie(res, authToken) {
 }
 
 // Start the server
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+app.listen(config.port, () => {
+  console.log(`Listening on port ${config.port}`);
 });

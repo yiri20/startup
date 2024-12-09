@@ -16,18 +16,8 @@ export default defineConfig({
         target: 'http://localhost:4000',
         changeOrigin: true,
         secure: false,
-        ws: true, // proxy websockets if necessary
-        onProxyReq: (proxyReq, req, res) => {
-          console.log(`Proxying request to: ${req.url}`);
-        },
-        onError: (err, req, res) => {
-          console.error(`Error in proxy: ${err.message}`);
-          res.writeHead(500, {
-            'Content-Type': 'text/plain'
-          });
-          res.end('Something went wrong with the proxy server.');
-        },
       },
     },
   },
+  historyApiFallback: true, // Add this line
 });

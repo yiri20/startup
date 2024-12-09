@@ -9,8 +9,8 @@ dist/
 .vite/
 
 # Environment variables
-.env
-.env.local
+# .env
+# .env.local
 
 # Log files
 npm-debug.log*
@@ -25,4 +25,3 @@ yarn-error.log*
 *.log
 
 /service/dbConfig.json
-*.zip
