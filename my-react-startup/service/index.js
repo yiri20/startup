@@ -33,6 +33,9 @@ const authCookieName = 'token';
 // Create HTTP server
 const server = http.createServer(app);
 
+peerProxy(server);
+
+
 // WebSocket setup
 const wss = new WebSocketServer({ server });
 
