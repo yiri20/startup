@@ -8,9 +8,7 @@ const DB_NAME = 'plan_your_music'; // Replace with your actual database name
 
 // MongoDB connection setup
 let db;
-const client = new MongoClient(MONGODB_URI, {
-  serverSelectionTimeoutMS: 3000, // Connection timeout
-});
+const client = new MongoClient(MONGODB_URI);
 
 // Function to connect to MongoDB
 async function connectDB() {

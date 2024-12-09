@@ -13,6 +13,36 @@ const Schedule = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editingSessionId, setEditingSessionId] = useState(null);
+  const [ws, setWs] = useState(null);
+
+  // Establish WebSocket connection
+  useEffect(() => {
+    const websocket = new WebSocket('ws://localhost:4000'); // Update to production WebSocket URL in deployment
+    setWs(websocket);
+
+    websocket.onopen = () => {
+      console.log('WebSocket connection established');
+    };
+
+    websocket.onmessage = (event) => {
+      console.log('WebSocket message received:', event.data);
+      const updatedSessions = JSON.parse(event.data);
+      setSessions(updatedSessions);
+    };
+
+    websocket.onclose = () => {
+      console.log('WebSocket connection closed');
+    };
+
+    websocket.onerror = (error) => {
+      console.error('WebSocket error:', error);
+    };
+
+    // Cleanup WebSocket on component unmount
+    return () => {
+      websocket.close();
+    };
+  }, []);
 
   // Fetch existing schedules when the component loads
   useEffect(() => {
@@ -62,19 +92,6 @@ const Schedule = () => {
     };
 
     if (editingSessionId) {
-      const currentSession = sessions.find((session) => session._id === editingSessionId);
-      if (
-        genre === currentSession?.genre &&
-        datetime === currentSession?.datetime &&
-        artist === currentSession?.artist &&
-        album === currentSession?.album &&
-        notification === currentSession?.notification
-      ) {
-        console.log('No changes detected. Skipping update.');
-        resetForm();
-        return;
-      }
-
       fetch(`/api/schedules/${editingSessionId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -88,11 +105,6 @@ const Schedule = () => {
           return response.json();
         })
         .then(() => {
-          setSessions(
-            sessions.map((session) =>
-              session._id === editingSessionId ? { ...session, ...newSession } : session
-            )
-          );
           resetForm();
         })
         .catch((err) => {
@@ -112,8 +124,7 @@ const Schedule = () => {
           }
           return response.json();
         })
-        .then((createdSession) => {
-          setSessions([...sessions, createdSession]);
+        .then(() => {
           resetForm();
         })
         .catch((err) => {
@@ -130,11 +141,9 @@ const Schedule = () => {
       credentials: 'include',
     })
       .then((response) => {
-        console.log('Deleting schedule with ID:', id);
         if (!response.ok) {
           throw new Error('Failed to delete schedule');
         }
-        setSessions(sessions.filter((session) => session._id !== id));
       })
       .catch((err) => {
         console.error('Error deleting schedule:', err);
@@ -183,7 +192,10 @@ const Schedule = () => {
             <option value="R&B">R&B</option>
             <option value="Pop">Pop</option>
             <option value="Rock">Rock</option>
-            <option value="Jazz">Jazz</option>
+            <option value="Jazz">EDM</option>
+            <option value="Jazz">IDM</option>
+            <option value="Jazz">Classical</option>
+            <option value="Jazz">Funk</option>
           </select>
         </div>
 

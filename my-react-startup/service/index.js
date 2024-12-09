@@ -3,11 +3,15 @@ import bcrypt from 'bcrypt';
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
-import { WebSocketServer } from 'ws';
 import { fileURLToPath } from 'url';
 import { ObjectId } from 'mongodb';
 import * as DB from './database.js';
 import fetch from 'node-fetch';
+import { peerProxy } from './peerProxy.js'; // Import peerProxy module
+import { WebSocketServer } from 'ws';
+import http from 'http'; // Ensure this import is present
+
+
 
 // Setup __dirname for ES module compatibility
 const __filename = fileURLToPath(import.meta.url);
@@ -25,6 +29,30 @@ console.log('MongoDB URI:', config.mongoURI);
 
 const app = express();
 const authCookieName = 'token';
+
+// Create HTTP server
+const server = http.createServer(app);
+
+// WebSocket setup
+const wss = new WebSocketServer({ server });
+
+wss.on('connection', (ws) => {
+  console.log('WebSocket connection established');
+
+  ws.on('message', (message) => {
+    console.log('Received:', message);
+    // Broadcast the message to all connected clients
+    wss.clients.forEach((client) => {
+      if (client.readyState === WebSocketServer.OPEN) {
+        client.send(message);
+      }
+    });
+  });
+
+  ws.on('close', () => {
+    console.log('WebSocket connection closed');
+  });
+});
 
 // The service port may be set on the command line
 const port = process.env.PORT || config.port;
@@ -53,31 +81,6 @@ app.set('trust proxy', true);
 // Router for service endpoints
 const apiRouter = express.Router();
 app.use('/api', apiRouter);
-
-// WebSocket Setup
-const server = app.listen(config.port, () => {
-  console.log(`Listening on port ${config.port}`);
-});
-
-const wss = new WebSocketServer({ server });
-
-wss.on('connection', (ws) => {
-  console.log('WebSocket connection established');
-
-  ws.on('message', (message) => {
-    console.log('Received:', message);
-    // Broadcast the received message to all connected clients
-    wss.clients.forEach((client) => {
-      if (client.readyState === ws.OPEN) {
-        client.send(message);
-      }
-    });
-  });
-
-  ws.on('close', () => {
-    console.log('WebSocket connection closed');
-  });
-});
 
 // Authentication Routes
 
@@ -297,7 +300,7 @@ app.use((err, _req, res, _next) => {
 
 // Default page handler
 app.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, '../index.html'));
 });
 
 // Set the authentication cookie
