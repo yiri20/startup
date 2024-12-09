@@ -40,7 +40,7 @@ I will use the required technologies in the following ways:
   - Retrieving album data and suggestions via a third-party API such as Spotify’s Web API.
 - **Authentication**: Users will be able to sign up and log in. Their credentials will be securely stored, and reviews and plans will be tied to their account.
 - **Database**: User data, including music plans and reviews, will be stored in a database.
-- **WebSocket**: Real-time updates will show user activity, like when someone posts a new review.
+- **WebSocket**: Real-time updates will show user activity, like when someone posts a new schedule.
 >>>>>>> origin/main
 #### HTML Start Up
 20% HTML pages for each component of your application
@@ -177,7 +177,26 @@ Stores and Retrieves Credentials in MongoDB (20%):
  - User credentials (email and hashed password) are securely stored in MongoDB.
  - Authentication relies on comparing hashed credentials using bcrypt to verify users.
 
-Restricts Functionality Based on Authentication (20%):
+#### Start Up Websocket
+
+20% - Backend listens for WebSocket connection
+ - A WebSocket server is set up using the ws library.
+ - Backend listens for WebSocket connections and logs connection events.
+ - Handles incoming messages and broadcasts updates to all connected clients.
+
+20% - Frontend makes WebSocket connection
+ - Frontend establishes a WebSocket connection to the backend.
+ - Connection status (open, close) is logged in the browser console.
+
+20% - Data sent over WebSocket connection
+ - Frontend sends messages (e.g., client status) to the WebSocket server.
+ - Backend processes messages and sends appropriate responses.
+
+20% - WebSocket data displayed in the application interface
+ - Incoming WebSocket messages are displayed dynamically in the application.
+ - Real-time updates (e.g., new schedules) are shown in the schedule list.
+
+20% - All visible elements are working :
 
  - Implemented middleware to secure application endpoints, such as /api/schedules and /api/reviews.
  - Only authenticated users can create, update, or delete reviews and schedules.
