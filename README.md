@@ -177,7 +177,7 @@ Stores and Retrieves Credentials in MongoDB (20%):
  - User credentials (email and hashed password) are securely stored in MongoDB.
  - Authentication relies on comparing hashed credentials using bcrypt to verify users.
 
- - #### Start Up Websocket
+#### Start Up Websocket
 
 20% - Backend listens for WebSocket connection
  - A WebSocket server is set up using the ws library.
