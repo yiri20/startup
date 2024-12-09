@@ -146,7 +146,12 @@ secureApiRouter.get('/schedules', async (req, res) => {
 
   try {
     const schedules = await DB.getSchedules(user.email);
-    res.status(200).json({ schedules });
+    // Include user email in each schedule
+    const schedulesWithUser = schedules.map(schedule => ({
+      ...schedule,
+      user: user.email,
+    }));
+    res.status(200).json({ schedules: schedulesWithUser });
   } catch (error) {
     console.error('Error fetching schedules:', error);
     res.status(500).send({ message: 'Failed to fetch schedules' });

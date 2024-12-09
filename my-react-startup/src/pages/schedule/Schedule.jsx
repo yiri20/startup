@@ -262,6 +262,7 @@ const Schedule = () => {
               sessions.map((session) => (
                 <li key={session._id}>
                   <div>
+                    <strong>User:</strong> {session.user}<br />
                     <strong>Genre:</strong> {session.genre}<br />
                     <strong>Artist:</strong> {session.artist}<br />
                     <strong>Album:</strong> {session.album}<br />
