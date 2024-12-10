@@ -38,6 +38,9 @@ const Navbar = () => {
                   About
                 </Link>
               </li>
+              <li>
+                <Link to="/chat">Chat</Link> {/* Add Chat option */}
+              </li>
               <li className="nav-item">
                 <span
                   className="nav-link logout-text"

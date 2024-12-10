@@ -35,28 +35,6 @@ const server = http.createServer(app);
 
 peerProxy(server);
 
-
-// WebSocket setup
-const wss = new WebSocketServer({ server });
-
-wss.on('connection', (ws) => {
-  console.log('WebSocket connection established');
-
-  ws.on('message', (message) => {
-    console.log('Received:', message);
-    // Broadcast the message to all connected clients
-    wss.clients.forEach((client) => {
-      if (client.readyState === WebSocketServer.OPEN) {
-        client.send(message);
-      }
-    });
-  });
-
-  ws.on('close', () => {
-    console.log('WebSocket connection closed');
-  });
-});
-
 // The service port may be set on the command line
 const port = process.env.PORT || config.port;
 
@@ -308,7 +286,7 @@ app.use((err, _req, res, _next) => {
 
 // Default page handler
 app.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname, '../index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Set the authentication cookie

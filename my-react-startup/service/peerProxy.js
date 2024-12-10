@@ -1,22 +1,32 @@
 import { WebSocketServer } from 'ws';
 import { v4 as uuid } from 'uuid';
 
-export function peerProxy(httpServer) {
+export function peerProxy(server) {
   const wss = new WebSocketServer({ noServer: true });
 
-  httpServer.on('upgrade', (request, socket, head) => {
-    wss.handleUpgrade(request, socket, head, function done(ws) {
-      wss.emit('connection', ws, request);
-    });
+  server.on('upgrade', (request, socket, head) => {
+    console.log('Upgrade request URL:', request.url);
+    if (request.url === '/ws') {
+      wss.handleUpgrade(request, socket, head, (ws) => {
+        console.log('WebSocket connection upgraded');
+        wss.emit('connection', ws, request);
+      });
+    } else {
+      console.log('Invalid WebSocket path:', request.url);
+      socket.write('HTTP/1.1 404 Not Found\r\n\r\n');
+      socket.destroy();
+    }
   });
 
-  let connections = [];
+  const connections = [];
 
   wss.on('connection', (ws) => {
-    const connection = { id: uuid(), alive: true, ws: ws };
+    const connection = { id: uuid(), alive: true, ws };
     connections.push(connection);
 
-    ws.on('message', function message(data) {
+    console.log('New WebSocket connection established');
+    ws.on('message', (data) => {
+      console.log('Message received:', data);
       connections.forEach((c) => {
         if (c.id !== connection.id) {
           c.ws.send(data);
@@ -25,9 +35,10 @@ export function peerProxy(httpServer) {
     });
 
     ws.on('close', () => {
-      const pos = connections.findIndex((o) => o.id === connection.id);
-      if (pos >= 0) {
-        connections.splice(pos, 1);
+      console.log('WebSocket connection closed');
+      const index = connections.findIndex((c) => c.id === connection.id);
+      if (index !== -1) {
+        connections.splice(index, 1);
       }
     });
 
@@ -37,12 +48,12 @@ export function peerProxy(httpServer) {
   });
 
   setInterval(() => {
-    connections.forEach((c) => {
-      if (!c.alive) {
-        c.ws.terminate();
+    connections.forEach((connection) => {
+      if (!connection.alive) {
+        connection.ws.terminate();
       } else {
-        c.alive = false;
-        c.ws.ping();
+        connection.alive = false;
+        connection.ws.ping();
       }
     });
   }, 10000);

@@ -1,59 +1,113 @@
 import React, { useState, useEffect } from 'react';
+import { EventTypes, MusicNotifier } from '@components/MusicNotifier';
 
 const Chat = () => {
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState('');
-  const ws = React.useRef(null);
+  const [messages, setMessages] = useState([]); // Stores chat messages
+  const [input, setInput] = useState(''); // Stores user input
+  const [status, setStatus] = useState('Disconnected'); // Connection status
+  const [error, setError] = useState(null); // For handling errors
 
   useEffect(() => {
-    // Connect to the WebSocket server
-    ws.current = new WebSocket('ws://localhost:4000');
-
-    // Listen for messages
-    ws.current.onmessage = (event) => {
-      const newMessage = JSON.parse(event.data);
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
+    const handleEvent = (event) => {
+      if (event.type === EventTypes.Chat) {
+        setMessages((prev) => [...prev, event.value]); // Append new messages
+      }
     };
 
+    const handleSystemEvent = (event) => {
+      if (event.type === EventTypes.System) {
+        const message = event.value.msg;
+        if (message === 'connected') {
+          setStatus('Connected');
+          setError(null); // Clear errors on successful connection
+        } else if (message === 'disconnected') {
+          setStatus('Disconnected');
+        }
+      }
+    };
+
+    // Register WebSocket event handlers
+    MusicNotifier.addHandler(handleEvent);
+    MusicNotifier.addHandler(handleSystemEvent);
+
+    // Cleanup when component unmounts
     return () => {
-      // Clean up on component unmount
-      ws.current.close();
+      MusicNotifier.removeHandler(handleEvent);
+      MusicNotifier.removeHandler(handleSystemEvent);
     };
   }, []);
 
   const sendMessage = () => {
     if (input.trim()) {
-      const message = { user: 'Anonymous', text: input }; // Replace 'Anonymous' with the actual user's name if available
-      ws.current.send(JSON.stringify(message));
-      setInput(''); // Clear input after sending
+      try {
+        const message = { user: 'Anonymous', text: input };
+        MusicNotifier.broadcastEvent('User', EventTypes.Chat, message);
+        setInput(''); // Clear the input field
+      } catch (e) {
+        console.error('Error sending message:', e);
+        setError('Failed to send message. Please try again.');
+      }
     }
   };
 
   return (
-    <div style={{ border: '1px solid #ccc', padding: '10px', marginTop: '20px' }}>
-      <h3>Live Chat</h3>
+    <div
+      style={{
+        border: '1px solid #ddd',
+        padding: '10px',
+        borderRadius: '5px',
+        marginTop: '20px',
+        backgroundColor: '#f8f9fa',
+      }}
+    >
+      <h3 style={{ marginBottom: '10px', color: '#0454a8' }}>Live Chat</h3>
+      <div style={{ marginBottom: '10px', color: status === 'Connected' ? 'green' : 'red' }}>
+        {status === 'Connected' ? 'Connected to chat' : 'Disconnected from chat'}
+      </div>
+      {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
       <div
         style={{
           maxHeight: '200px',
           overflowY: 'auto',
           border: '1px solid #ddd',
-          padding: '5px',
+          padding: '10px',
           marginBottom: '10px',
+          backgroundColor: '#fff',
         }}
       >
         {messages.map((msg, index) => (
-          <p key={index}>
-            <strong>{msg.user}:</strong> {msg.text}
-          </p>
+          <div key={index} style={{ marginBottom: '5px' }}>
+            <strong style={{ color: '#333' }}>{msg.user}:</strong> {msg.text}
+          </div>
         ))}
       </div>
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        style={{ width: '80%', marginRight: '10px' }}
-      />
-      <button onClick={sendMessage}>Send</button>
+      <div style={{ display: 'flex', gap: '10px' }}>
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Type a message"
+          style={{
+            flex: 1,
+            padding: '10px',
+            border: '1px solid #ddd',
+            borderRadius: '4px',
+          }}
+        />
+        <button
+          onClick={sendMessage}
+          style={{
+            padding: '10px 15px',
+            backgroundColor: '#0454a8',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+          }}
+        >
+          Send
+        </button>
+      </div>
     </div>
   );
 };

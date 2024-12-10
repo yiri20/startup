@@ -20,7 +20,7 @@ const Schedule = () => {
     const websocket = new WebSocket('ws://localhost:4000'); // Update to production WebSocket URL in deployment
     setWs(websocket);
 
-    websocket.onopen = () => {
+    websocket.onopen = () => {  
       console.log('WebSocket connection established');
     };
 

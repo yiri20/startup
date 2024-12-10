@@ -13,13 +13,13 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:4000', // Proxy backend API requests
+        target: 'http://localhost:4000',
         changeOrigin: true,
         secure: false,
       },
       '/ws': {
         target: 'ws://localhost:4000', // Proxy WebSocket requests
-        ws: true,
+        ws: true, // Enable WebSocket proxying
         changeOrigin: true,
       },
     },

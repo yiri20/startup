@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/home/Home';
 import About from './pages/about/About';
 import Explore from './pages/explore/Explore';
@@ -8,6 +9,7 @@ import ReviewDetail from './pages/review/ReviewDetail';
 import Schedule from './pages/schedule/Schedule';
 import SignIn from './pages/login/SignIn';
 import Login from './pages/login/LogIn';
+import Chat from './components/Chat';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -50,6 +52,7 @@ function AppWithRouter() {
           <Route path="/schedule" element={<ProtectedRoute><Schedule /></ProtectedRoute>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/chat" element={<Chat />} /> {/* Add Chat Route */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
