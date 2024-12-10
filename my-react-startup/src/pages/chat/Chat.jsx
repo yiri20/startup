@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
+  const [username, setUsername] = useState('');
   const [status, setStatus] = useState('Disconnected');
   const [socket, setSocket] = useState(null);
 
@@ -40,10 +41,16 @@ const Chat = () => {
   }, []);
 
   const sendMessage = () => {
-    if (input.trim() && socket && socket.readyState === WebSocket.OPEN) {
-      const message = { user: 'Anonymous', text: input };
+    if (input.trim() && username.trim() && socket && socket.readyState === WebSocket.OPEN) {
+      const message = { user: username, text: input };
       socket.send(JSON.stringify(message));
       setInput(''); // Clear the input field
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      sendMessage();
     }
   };
 
@@ -52,6 +59,15 @@ const Chat = () => {
       <h3 style={{ marginBottom: '10px', color: '#0454a8' }}>Live Chat</h3>
       <div style={{ marginBottom: '10px', color: status === 'Connected' ? 'green' : 'red' }}>
         {status === 'Connected' ? 'Connected to chat' : 'Disconnected from chat'}
+      </div>
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Enter your name"
+          style={{ flex: 1, padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}
+        />
       </div>
       <div style={{ maxHeight: '200px', overflowY: 'auto', border: '1px solid #ddd', padding: '10px', marginBottom: '10px', backgroundColor: '#fff' }}>
         {messages.map((msg, index) => (
@@ -65,6 +81,7 @@ const Chat = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown} // Added event listener for Enter key
           placeholder="Type a message"
           style={{ flex: 1, padding: '10px', border: '1px solid #ddd', borderRadius: '4px' }}
         />
