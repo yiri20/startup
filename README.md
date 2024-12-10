@@ -180,21 +180,21 @@ Stores and Retrieves Credentials in MongoDB (20%):
 #### Start Up Websocket
 
 20% - Backend listens for WebSocket connection
- - A WebSocket server is set up using the ws library.
- - Backend listens for WebSocket connections and logs connection events.
- - Handles incoming messages and broadcasts updates to all connected clients.
+ - A WebSocket server is implemented using the ws library.
+ - The backend establishes WebSocket connections and logs connection events (e.g., when a client connects or disconnects).
+ - The backend processes incoming WebSocket messages and broadcasts them to all connected clients.
 
 20% - Frontend makes WebSocket connection
- - Frontend establishes a WebSocket connection to the backend.
- - Connection status (open, close) is logged in the browser console.
+ - The frontend successfully creates a WebSocket connection to the backend server.
+ - Connection events (e.g., connection opened, connection closed) are logged to the browser console for debugging.
 
 20% - Data sent over WebSocket connection
  - Frontend sends messages (e.g., client status) to the WebSocket server.
  - Backend processes messages and sends appropriate responses.
 
 20% - WebSocket data displayed in the application interface
- - Incoming WebSocket messages are displayed dynamically in the application.
- - Real-time updates (e.g., new schedules) are shown in the schedule list.
+ - Incoming WebSocket messages are dynamically rendered in the application interface (e.g., live chat or notifications).
+ - The application updates in real time to reflect WebSocket communication (e.g., new messages or schedules appearing instantly).
 
 20% - All visible elements are working :
 
