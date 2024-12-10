@@ -4,3 +4,4 @@ build/
 .vscode/
 *.log
 *.sh
+my-react-startup/package-lock.json
