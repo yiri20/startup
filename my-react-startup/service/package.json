@@ -9,7 +9,7 @@
     "dev:backend": "nodemon service/index.js",
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     "build": "vite build",
-    "start": "node service/index.js",
+    "start": "node index.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },

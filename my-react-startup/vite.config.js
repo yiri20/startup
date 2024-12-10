@@ -18,11 +18,19 @@ export default defineConfig({
         secure: false,
       },
       '/ws': {
-        target: 'ws://localhost:4000', // Proxy WebSocket requests
+        target: 'ws://localhost:4000',
         ws: true, // Enable WebSocket proxying
-        changeOrigin: true,
       },
     },
   },
-  historyApiFallback: true, // Ensure React Router works
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: undefined, // Ensure chunks are handled automatically
+      },
+    },
+  },
+  define: {
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'), // Compatibility with some dependencies
+  },
 });

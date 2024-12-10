@@ -9,7 +9,7 @@ import ReviewDetail from './pages/review/ReviewDetail';
 import Schedule from './pages/schedule/Schedule';
 import SignIn from './pages/login/SignIn';
 import Login from './pages/login/LogIn';
-import Chat from './components/Chat';
+import Chat from './pages/chat/Chat';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ProtectedRoute from './components/ProtectedRoute';

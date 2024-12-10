@@ -7,11 +7,7 @@ import { fileURLToPath } from 'url';
 import { ObjectId } from 'mongodb';
 import * as DB from './database.js';
 import fetch from 'node-fetch';
-import { peerProxy } from './peerProxy.js'; // Import peerProxy module
 import { WebSocketServer } from 'ws';
-import http from 'http'; // Ensure this import is present
-
-
 
 // Setup __dirname for ES module compatibility
 const __filename = fileURLToPath(import.meta.url);
@@ -30,11 +26,6 @@ console.log('MongoDB URI:', config.mongoURI);
 const app = express();
 const authCookieName = 'token';
 
-// Create HTTP server
-const server = http.createServer(app);
-
-peerProxy(server);
-
 // The service port may be set on the command line
 const port = process.env.PORT || config.port;
 
@@ -48,7 +39,7 @@ app.use(cookieParser());
 app.use(cors());
 
 // Serve static files from the public directory
-app.use(express.static(path.join(__dirname, 'public'), {
+app.use(express.static(path.join(__dirname, '../dist'), {
   setHeaders: (res, filePath) => {
     if (filePath.endsWith('.js')) {
       res.setHeader('Content-Type', 'application/javascript');
@@ -117,6 +108,38 @@ secureApiRouter.use(async (req, res, next) => {
   }
 });
 
+const server = app.listen(config.port, () => {
+  console.log(`Listening on port ${config.port}`);
+});
+
+const wss = new WebSocketServer({ server });
+
+wss.on('connection', (ws) => {
+  console.log('New WebSocket connection established.');
+
+  ws.on('message', (message) => {
+    try {
+      // Parse the incoming message
+      const parsedMessage = JSON.parse(message);
+      console.log('Received message:', parsedMessage);
+
+      // Broadcast the parsed message to all connected clients
+      wss.clients.forEach((client) => {
+        if (client.readyState === client.OPEN) {
+          client.send(JSON.stringify(parsedMessage));
+        }
+      });
+    } catch (error) {
+      console.error('Error processing message:', error);
+    }
+  });
+
+  ws.on('close', () => {
+    console.log('WebSocket connection closed.');
+  });
+});
+
+
 // Schedule Routes
 
 // Get all schedules for the authenticated user
@@ -127,12 +150,7 @@ secureApiRouter.get('/schedules', async (req, res) => {
 
   try {
     const schedules = await DB.getSchedules(user.email);
-    // Include user email in each schedule
-    const schedulesWithUser = schedules.map(schedule => ({
-      ...schedule,
-      user: user.email,
-    }));
-    res.status(200).json({ schedules: schedulesWithUser });
+    res.status(200).json({ schedules });
   } catch (error) {
     console.error('Error fetching schedules:', error);
     res.status(500).send({ message: 'Failed to fetch schedules' });
@@ -286,7 +304,7 @@ app.use((err, _req, res, _next) => {
 
 // Default page handler
 app.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
 // Set the authentication cookie
@@ -298,7 +316,3 @@ function setAuthCookie(res, authToken) {
   });
 }
 
-// Start the server
-app.listen(config.port, () => {
-  console.log(`Listening on port ${config.port}`);
-});
