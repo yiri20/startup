@@ -39,7 +39,7 @@ app.use(cookieParser());
 app.use(cors());
 
 // Serve static files from the public directory
-app.use(express.static(path.join(__dirname, '../dist'), {
+app.use(express.static(path.join(__dirname, 'public'), {
   setHeaders: (res, filePath) => {
     if (filePath.endsWith('.js')) {
       res.setHeader('Content-Type', 'application/javascript');
@@ -303,8 +303,8 @@ app.use((err, _req, res, _next) => {
 });
 
 // Default page handler
-app.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public' });
 });
 
 // Set the authentication cookie

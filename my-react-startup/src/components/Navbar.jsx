@@ -38,8 +38,10 @@ const Navbar = () => {
                   About
                 </Link>
               </li>
-              <li>
-                <Link to="/chat">Chat</Link> {/* Add Chat option */}
+              <li className="nav-item">
+                <Link to="/chat" className="nav-link">
+                  Chat
+                </Link>
               </li>
               <li className="nav-item">
                 <span
